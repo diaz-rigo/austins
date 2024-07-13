@@ -19,9 +19,12 @@ import { UnknownView } from './views/unknown/unknown.view';
 import { PreguntasFreqView } from './views/preguntas-freq/preguntas-freq.view';
 
 import { FieldsetModule } from 'primeng/fieldset';
+import { ProfileComponent } from './views/profile/profile.component';
+import { DefaultImgModule } from 'src/app/shared/pipes/default-img/default-img.module';
 @NgModule({
-  declarations: [HomeViews, NotFondViews, DetailViews, AboutViews, PortalComponent, PoliticaPrivView, AcercaDeView, PoliticaCookiesView, TerminosCondicionesView, UnknownView,PreguntasFreqView],
-  imports: [HttpClientModule,CommonModule, PortalRoutingModule, PortalCommonsModule,FieldsetModule],
+  declarations: [HomeViews, NotFondViews, DetailViews, AboutViews, PortalComponent, PoliticaPrivView, AcercaDeView, PoliticaCookiesView, TerminosCondicionesView, UnknownView,PreguntasFreqView, ProfileComponent],
+  imports: [DefaultImgModule,HttpClientModule,CommonModule, PortalRoutingModule, PortalCommonsModule,FieldsetModule],
+  exports:[ProfileComponent],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],

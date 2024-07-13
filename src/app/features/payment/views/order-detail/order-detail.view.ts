@@ -264,10 +264,10 @@ export class OrderDetailView implements OnInit {
           this.stripeService.createCheckoutSession(purchaseData).subscribe(
             (response) => {
               console.log(
-                'Respuesta del servidor (pago con tarjeta):',
+              'Respuesta del servidor (pago con tarjeta):',
                 response
               );
-              // Redireccionar a la URL de pago proporcionada por Stripe
+                // Redireccionar a la URL de pago proporcionada por Stripe
               window.location.href = response.url;
             },
             (error) => {

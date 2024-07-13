@@ -312,6 +312,7 @@ export class OrderComponent {
                     summary: 'Error',
                     detail: error.error.message,
                   });
+                  // this.dialogRefService.closeDialog(); // Cerrar el modal usando el servicio
                 }
                 this.ngxLoader.stop();
                 return throwError(error);

@@ -23,6 +23,9 @@
 // import { ConfirmationService, MessageService } from 'primeng/api';
 // import { PedidoviewService } from 'src/app/shared/services/pedidoview.service';
 // import { OrderService } from 'src/app/features/payment/commons/services/order.service';
+// import { ActivateCountComponent } from 'src/app/features/auth/views/activate-count/activate-count.component';
+// import { ActivateCountByHomeComponent } from 'src/app/features/auth/views/activate-count-by-home/activate-count-by-home.component';
+// import { DialogRefService } from 'src/app/shared/services/dialog-ref.service';
 // interface EventItem {
 //   status?: string;
 //   date?: string;
@@ -142,11 +145,11 @@
 //     private confirmationService: ConfirmationService,
 //     private messageService: MessageService,
 //     private route: ActivatedRoute,
-//     private orderService: OrderService
+//     private orderService: OrderService, private dialogRefService: DialogRefService
 //   ) {
 //     router.events.subscribe((event) => {
 //       if (event instanceof NavigationEnd) {
-//         console.log('Ruta actual:', event.url);
+//         // console.log('Ruta actual:', event.url);
 //         this.currentRoute = event.url;
 //       }
 //     });
@@ -166,12 +169,12 @@
 //   }
 
 //   consultarPedido() {
-//     console.log(this.codigoPedido)
+//     // console.log(this.codigoPedido)
 //     if (this.codigoPedido.trim() !== '') {
 //       this.orderService.consultarPedido(this.codigoPedido).subscribe(
 //         (response) => {
 
-//           console.log(response);
+//           // console.log(response);
 
 //           // Verificar la estructura de la respuesta
 //           if ('resultado' in response && 'codigoPedido' in response.resultado) {
@@ -287,7 +290,7 @@
 //     this.router.navigate(['/admin', route]); // Utiliza la navegación de Angular
 //   }
 //   redirectTo_Auth(route: string): void {
-   
+
 //     this.router.navigate(['/auth', route]); // Utiliza la navegación de Angular
 //   }
 
@@ -347,21 +350,24 @@
 //   //     this.currentRoute === '/auth/sign-up' ||  this.currentRoute === '/portal/detail'||  this.currentRoute === '/portal/detail/:id'
 //   //   );
 //   // }
-//   isRUTA_DISTINTE_ahome(): boolean {
-//     // Utiliza el evento de cambio de ruta para actualizar 'currentRoute'
-//     this.router.events.subscribe((event) => {
-//       if (event instanceof NavigationEnd) {
-//         this.currentRoute = event.url;
-//         // Llamamos a la función que manejará la visibilidad de la sección de filtros
-//         this.handleFilterSectionVisibility();
-//       }
-//     });
+//   // isRUTA_DISTINTE_ahome(): boolean {
+//   //   // Utiliza el evento de cambio de ruta para actualizar 'currentRoute'
+//   //   this.router.events.subscribe((event) => {
+//   //     if (event instanceof NavigationEnd) {
+//   //       this.currentRoute = event.url;
+//   //       // Llamamos a la función que manejará la visibilidad de la sección de filtros
+//   //       this.handleFilterSectionVisibility();
+//   //     }
+//   //   });
 
-//     // Ahora verifica si la ruta actual es '/portal/home'
-//     return (
-//       this.currentRoute === '/portal/home' ||
-//       this.currentRoute === '/auth/sign-up'
-//     );
+//   //   // Ahora verifica si la ruta actual es '/portal/home'
+//   //   return (
+//   //     this.currentRoute === '/portal/home' ||
+//   //     this.currentRoute === '/auth/sign-up'
+//   //   );
+//   // }
+//   isRUTA_DISTINTE_ahome(): boolean {
+//     return this.currentRoute === '/portal/home';
 //   }
 //   isruta_orderdetail(): boolean {
 //     this.currentRoute = this.router.url;
@@ -413,6 +419,28 @@
 
 //       data: {},
 //     });
+//   }
+
+//   openActivateCount(): void {
+//     this.sidebarVisible = false;
+//     const isMobile = window.innerWidth < 480;
+//     this.dialogRefService.setDialogRef(
+//     this.ref = this.dialogService.open(ActivateCountByHomeComponent, {
+//       height: isMobile ? 'auto' : 'auto',
+//       style: {
+//         'max-width': isMobile ? '110vw' : 'auto',
+//         'max-height': isMobile ? 'auto' : '100vh',
+//         padding: '0', // Aquí estableces el padding a 0
+//       },
+//       modal: true,
+//       breakpoints: {
+//         '960px': '75vw',
+//         '640px': '100vw',
+//       },
+
+//       data: {},
+//     })
+//   )
 //   }
 
 //   get cartItem(): CartItem {

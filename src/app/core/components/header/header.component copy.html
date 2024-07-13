@@ -306,6 +306,9 @@
     <div *ngIf="!userName" class="mobile-menu-item" (click)="openSignInModal()">
       <span class="pi pi-sign-in"></span> Sign In
     </div>
+    <div *ngIf="!userName" class="mobile-menu-item" (click)="openActivateCount()">
+      <span class="pi pi-verified"></span> Activar *cuenta
+    </div>
     <div *ngIf="userName" class="mobile-menu-item" (click)="logout()">
       <span class="pi pi-sign-out"></span> Logout
     </div>
@@ -557,7 +560,9 @@
       <button *ngIf="!userName" class="menu-btn" (click)="openSignInModal()">
         <mat-icon class="material-icons2 primary">account_circle</mat-icon>
       </button> -->
-
+      <button class="menu-btn" *ngIf="!userName" (click)="openActivateCount()">
+        <span class="pi pi-verified"></span> Activar *cuenta
+      </button>
       <button *ngIf="!userName" class="menu-btn" (click)="openSignInModal()">
         <mat-icon class="material-icons2 primary">
           <i class="pi pi-user"></i>
@@ -639,5 +644,4 @@
     </select>
   </div>
 
-  <!-- Nueva sección de filtrado -->
 </div>

@@ -46,6 +46,8 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
 import { InputTextModule } from 'primeng/inputtext';
 import { TimelineModule } from 'primeng/timeline';
 import { PdfGenerateComponent } from './pdf-generate/pdf-generate.component';
+import { ProfileComponent } from 'src/app/features/portal/views/profile/profile.component';
+import { PortalModule } from 'src/app/features/portal/portal.module';
 @NgModule({
   declarations: [
     ChatComponent,
@@ -83,7 +85,7 @@ import { PdfGenerateComponent } from './pdf-generate/pdf-generate.component';
     InputTextModule,
     InputGroupModule,
     InputGroupAddonModule,
-
+    PortalModule,
     ToastModule,
     // BrowserModule,
     CalendarModule,

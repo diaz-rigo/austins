@@ -1,3 +1,5 @@
+// default-img.pipe.ts
+
 import { Pipe, PipeTransform } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
@@ -6,8 +8,12 @@ import { environment } from 'src/environments/environment';
 })
 export class DefaultImgPipe implements PipeTransform {
 
-  transform(value: string ): string {
-    return value?`${environment.api}/${value}`:'assets/img/default.jpg';
+  transform(value: string | undefined): string {
+    if (!value) {
+      return 'assets/img/default.jpg'; // Devuelve la imagen predeterminada si value es undefined
+    } else {
+      return `${environment.api}/${value}`; // Construye la URL completa si value tiene un valor
+    }
   }
 
 }

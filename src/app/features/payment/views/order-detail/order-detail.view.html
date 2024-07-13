@@ -315,9 +315,9 @@
                   placeholder="EJ:juanPerez@gmail.com"
                   (keyup)="validateEmail()"
                 />
-                
-                
-                
+
+
+
                   <label>Email</label>
                   <span class="p-input-icon-right">
                     <!-- <mat-icon>email</mat-icon> -->
@@ -329,7 +329,7 @@
                 </small> -->
                 <small *ngIf="paymentForm.get('email')?.invalid && (paymentForm.get('email')?.dirty || paymentForm.get('email')?.touched)" style="color: rgb(196, 2, 2);">
                   El correo electrónico es inválido.
-                </small>  
+                </small>
               </div>
               <div style="margin: 1cap">
                 <span class="p-float-label">
@@ -346,11 +346,11 @@
                     maxlength="10"
                     placeholder="123-456-7890"
                     formControlName="phone"
-                    
+
                     />
                     <!-- (blur)="validatePhone(paymentForm.get('phone')?.value)" -->
-         
-                
+
+
                   <label for="phone">Teléfono</label>
                 </span>
                 <small *ngIf="phoneError" class="text-danger"  style="color: rgb(196, 2, 2);">
@@ -416,7 +416,7 @@
               "
               ></p-button>
             </div>
-            <div class="card flex" style="margin: 1cap">
+            <!-- <div class="card flex" style="margin: 1cap">
               <p-button
                 class="p-ripple"
                 label="Pago con PayPal"
@@ -425,8 +425,8 @@
                 icon="pi pi-paypal
               "
               ></p-button>
-            </div>
-            <div class="card flex" style="margin: 1cap">
+            </div> -->
+            <!-- <div class="card flex" style="margin: 1cap">
               <p-button
                 class="p-ripple"
                 label=" Mercado pago"
@@ -436,8 +436,8 @@
                 icon="pi pi-money-bill
               "
               ></p-button>
-            </div>
-            <div class="card flex" style="margin: 1cap">
+            </div> -->
+            <!-- <div class="card flex" style="margin: 1cap">
               <p-button
                 class="p-ripple"
                 label="Transferencia Bancaria"
@@ -448,7 +448,7 @@
                 pi-arrow-
               "
               ></p-button>
-            </div>
+            </div> -->
           </p-card>
         </div>
 

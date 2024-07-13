@@ -1,0 +1,28 @@
+<div *ngIf="user" class="profile-container">
+  <!-- Profile Header -->
+  <div class="profile-header p-card p-shadow-3 p-mb-3">
+    <!-- Profile Picture -->
+    <img [src]="user.profilePhoto | defaultImg" alt="Profile Picture" class="profile-picture">
+
+    <div class="profile-info">
+      <h2>{{ user.name }}</h2>
+      <p><i class="pi pi-envelope"></i> Email: {{ user.email }}</p>
+      <p><i class="pi pi-phone"></i> Teléfono: {{ user.phone }}</p>
+      <!-- Otros datos del perfil -->
+    </div>
+  </div>
+
+  <!-- Más detalles de la cuenta -->
+  <div class="account-details p-card p-shadow-3">
+    <h3>Más detalles de la cuenta</h3>
+    <ul>
+      <li><strong>Nombre:</strong> {{ user.name }}</li>
+      <li><strong>Dirección:</strong> {{ user.address }}, {{ user.city }}, {{ user.country }}</li>
+      <!-- Otros detalles de la cuenta -->
+    </ul>
+  </div>
+</div>
+
+<div *ngIf="!user">
+  <p>Cargando datos del usuario...</p>
+</div>

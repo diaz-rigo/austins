@@ -21,7 +21,7 @@ export class ErrorInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     // console.log(request);
     if (this.activeRequests === 0) {
-      this.ngxService.start(); // Inicia el spinner solo si no hay solicitudes activas
+      // this.ngxService.start(); // Inicia el spinner solo si no hay solicitudes activas
     }
     this.activeRequests++; // Incrementa el contador de solicitudes activas
 
@@ -48,7 +48,7 @@ export class ErrorInterceptor implements HttpInterceptor {
   private stopLoader() {
     this.activeRequests--; // Decrementa el contador de solicitudes activas
     if (this.activeRequests === 0) {
-      this.ngxService.stop(); // Detiene el spinner cuando no hay más solicitudes activas
+      // this.ngxService.stop(); // Detiene el spinner cuando no hay más solicitudes activas
     }
   }
 }

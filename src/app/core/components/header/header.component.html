@@ -231,7 +231,7 @@
   >
     <span class="pi pi-book"></span> Seguimiento -pedidos
   </div>
-  <div class="mobile-menu-item" (click)="redirectTo('perfil')" *ngIf="userName">
+  <div class="mobile-menu-item" (click)="abreperil()" *ngIf="userName">
     <span class="pi pi-user"></span> Perfil
   </div>
   <div
@@ -584,7 +584,7 @@
         #userOption="matMenu"
         yPosition="below"
       >
-        <div mat-menu-item class="mobile-menu-item_b1">perfil</div>
+        <div mat-menu-item class="mobile-menu-item_b1" (click)="abreperil()">perfil</div>
         <div
           mat-menu-item
           class="mobile-menu-item_b1"
@@ -645,3 +645,15 @@
   </div>
 
 </div>
+
+<p-sidebar [(visible)]="perfil" [fullScreen]="true">
+  <ng-template pTemplate="header">
+      <span class="font-semibold text-xl">
+          Perfil
+      </span>
+    </ng-template>
+    <app-profile></app-profile>
+    <!-- <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+    </p> -->
+  </p-sidebar>
