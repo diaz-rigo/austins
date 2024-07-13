@@ -251,61 +251,49 @@
           class="card flex justify-content-center gap-3"
           style="border: none"
         >
-          <form *ngIf="formviww" [formGroup]="paymentForm">
-            <p-card header="Datos cliente">
-              <div style="margin: 1cap">
-                <span class="p-float-label">
-                  <input
-                    id="disabled-input"
-                    [disabled]="inputsDisable"
-                    pInputText
-                    id="username"
-                    formControlName="name"
-                  />
-                  <label>Username</label>
-                </span>
-              </div>
-              <div style="margin: 1cap">
-                <span class="p-float-label">
-                  <input
-                    id="disabled-input"
-                    [disabled]="inputsDisable"
-                    type="text"
-                    pInputText
-                    id="paternalLastname"
-                    formControlName="maternalLastname"
-                  />
-
-                  <label for="maternalLastname">Apellido Materno</label>
-                </span>
-              </div>
-              <div style="margin: 1cap">
-                <span class="p-float-label">
-                  <input
-                    id="disabled-input"
-                    [disabled]="inputsDisable"
-                    type="text"
-                    pInputText
-                    id="paternalLastname"
-                    formControlName="paternalLastname"
-                  />
-
-                  <label for="paternalLastname">Apellido Paterno</label>
-                </span>
-              </div>
-              <div style="margin: 1cap">
-                <span class="p-float-label">
-                  <!-- <input
-                    id="disabled-input"
-                    [disabled]="inputsDisable"
-                    pInputText
-                    type="email"
-                    pTooltip="Gmail valido para el seguimiento"
-                    tooltipPosition="bottom"
-                    formControlName="email"
-                    placeholder="EJ:juanPerez@gmail.com"
-                  /> -->
-                  <input
+        <form *ngIf="formviww" [formGroup]="paymentForm">
+          <p-card header="Datos cliente">
+            <div style="margin: 1cap">
+              <span class="p-float-label">
+                <input
+                  id="disabled-input"
+                  [disabled]="inputsDisable"
+                  pInputText
+                  id="username"
+                  formControlName="name"
+                />
+                <label>Username</label>
+              </span>
+            </div>
+            <div style="margin: 1cap">
+              <span class="p-float-label">
+                <input
+                  id="disabled-input"
+                  [disabled]="inputsDisable"
+                  type="text"
+                  pInputText
+                  id="maternalLastname"
+                  formControlName="maternalLastname"
+                />
+                <label for="maternalLastname">Apellido Materno</label>
+              </span>
+            </div>
+            <div style="margin: 1cap">
+              <span class="p-float-label">
+                <input
+                  id="disabled-input"
+                  [disabled]="inputsDisable"
+                  type="text"
+                  pInputText
+                  id="paternalLastname"
+                  formControlName="paternalLastname"
+                />
+                <label for="paternalLastname">Apellido Paterno</label>
+              </span>
+            </div>
+            <div style="margin: 1cap">
+              <span class="p-float-label">
+                <input
                   id="disabled-input"
                   [disabled]="inputsDisable"
                   pInputText
@@ -315,70 +303,58 @@
                   placeholder="EJ:juanPerez@gmail.com"
                   (keyup)="validateEmail()"
                 />
-
-
-
-                  <label>Email</label>
-                  <span class="p-input-icon-right">
-                    <!-- <mat-icon>email</mat-icon> -->
-                    <i class="pi pi-envelope"></i>
-                  </span>
+                <label>Email</label>
+                <span class="p-input-icon-right">
+                  <i class="pi pi-envelope"></i>
                 </span>
-                <!-- <small *ngIf="paymentForm.get('email')?.invalid && (paymentForm.get('email')?.dirty || paymentForm.get('email')?.touched)" class="text-danger">
-                  El correo electrónico es inválido.
-                </small> -->
-                <small *ngIf="paymentForm.get('email')?.invalid && (paymentForm.get('email')?.dirty || paymentForm.get('email')?.touched)" style="color: rgb(196, 2, 2);">
-                  El correo electrónico es inválido.
-                </small>
-              </div>
-              <div style="margin: 1cap">
-                <span class="p-float-label">
-                  <input
-                    id="disabled-input"
-                    [disabled]="inputsDisable"
-                    pTooltip="nos comunicaremos mediante este numero"
-                    tooltipPosition="bottom"
-                    pInputText
-                    autocomplete="false"
-                    type="tel"
-                    pKeyFilter="int"
-                    pattern="[0-9]*"
-                    maxlength="10"
-                    placeholder="123-456-7890"
-                    formControlName="phone"
-
-                    />
-                    <!-- (blur)="validatePhone(paymentForm.get('phone')?.value)" -->
-
-
-                  <label for="phone">Teléfono</label>
-                </span>
-                <small *ngIf="phoneError" class="text-danger"  style="color: rgb(196, 2, 2);">
-                  {{ phoneError }}
-                </small>
-              </div>
-              <p-toast position="top-center"></p-toast>
-              <p-confirmDialog
-                key="positionDialog"
-                [position]="position"
-                rejectButtonStyleClass="p-button-outlined"
-              ></p-confirmDialog>
-
-              <div class="btn">
-                <button
-                  type="button"
-                  pButton
-                  class="btn-finish"
-                  (click)="confirm3()"
-                  styleClass="p-button-success"
-                >
-                  confirmar datos
-                </button>
-              </div>
-
-              <!-- ?formulario? -->
-            </p-card>
-          </form>
+              </span>
+              <small *ngIf="paymentForm.get('email')?.invalid && (paymentForm.get('email')?.dirty || paymentForm.get('email')?.touched)" style="color: rgb(196, 2, 2);">
+                El correo electrónico es inválido.
+              </small>
+            </div>
+            <div style="margin: 1cap">
+              <span class="p-float-label">
+                <input
+                  id="disabled-input"
+                  [disabled]="inputsDisable"
+                  pTooltip="nos comunicaremos mediante este numero"
+                  tooltipPosition="bottom"
+                  pInputText
+                  autocomplete="false"
+                  type="tel"
+                  pKeyFilter="int"
+                  pattern="[0-9]*"
+                  maxlength="10"
+                  placeholder="123-456-7890"
+                  formControlName="phone"
+                />
+                <label for="phone">Teléfono</label>
+              </span>
+              <small *ngIf="phoneError" class="text-danger" style="color: rgb(196, 2, 2);">
+                {{ phoneError }}
+              </small>
+            </div>
+            <p-toast position="top-center"></p-toast>
+            <p-confirmDialog
+              key="positionDialog"
+              [position]="position"
+              rejectButtonStyleClass="p-button-outlined"
+            ></p-confirmDialog>
+        
+            <div class="btn">
+              <button
+                type="button"
+                pButton
+                class="btn-finish"
+                (click)="confirm3()"
+                styleClass="p-button-success"
+              >
+                confirmar datos
+              </button>
+            </div>
+          </p-card>
+        </form>
+        
         </div>
 
         <p-card header="Direccion" *ngIf="getDeliveryOptionLabel() === 'Envío'">

@@ -1,9 +1,11 @@
 <div class="card">
-  <!-- TabView con dos pestañas -->
   <p-tabView [(activeIndex)]="activeIndex">
-    <!-- TODO: 1: Carrito de Compras -->
     <p-tabPanel>
+      <p-breadcrumb [model]="items" [home]="home"></p-breadcrumb>
       <div class="container">
+        <!-- <div class="card flex justify-content-center"> -->
+        <!-- <p-breadcrumb [model]="items" [home]="home"></p-breadcrumb> -->
+        <!-- </div> -->
         <div class="table-container">
           <div class="card">
             <!-- Tabla para mostrar los artículos en el carrito -->
@@ -56,32 +58,13 @@
                       <p-confirmPopup></p-confirmPopup>
 
                       <button
-                        pButton
                         type="button"
+                        pButton
                         icon="pi pi-trash"
                         class="btn-delete"
                         (click)="confirm2($event, item)"
                       ></button>
                     </div>
-                    <input
-                      type="hidden"
-                      [value]="item.id"
-                      formControlName="productId{{ i }}"
-                    />
-                    <div class="textare">
-                      <span class="p-float-label">
-                        <textarea
-                          rows="2"
-                          cols="20"
-                          pInputTextarea
-                          formControlName="specialInstructions{{ i }}"
-                        ></textarea>
-                        <label>Instrucciones Especiales</label>
-                      </span>
-                    </div>
-                 
-
-                  
                   </td>
                 </tr>
               </ng-template>
@@ -102,6 +85,24 @@
                 >{{ getTotalAmount() | currency }}</span
               >
             </div>
+          </div>
+
+          <!--  -->
+          <div class="card flex justify-content-center">
+            <span class="p-float-label">
+              <textarea
+                pTooltip="es opcional"
+                tooltipPosition="right"
+                class="textarea"
+                id="float-input"
+                rows="2"
+                style="width: 100%"
+                pInputTextarea
+                [(ngModel)]="instrucion"
+                placeholder="Ejemplo: Nombre y edad, o felicitación corta (máx 3 palabras)"
+              ></textarea>
+              <label for="float-input">Instrucciones especiales</label>
+            </span>
           </div>
         </div>
 
@@ -193,94 +194,82 @@
 
     <!-- TODO: 2: Detalles del Pedido -->
     <p-tabPanel>
-      <form (ngSubmit)="submitForm()" [formGroup]="paymentForm">
-        <div class="container">
-          <div class="table-container">
-            <div class="card">
-              <div class="total-section">
-                <span class="total-label"
-                  >total Neto mas envio {{ getDeliveryOptionLabel() }}:</span
+      <p-breadcrumb [model]="items2" [home]="home"></p-breadcrumb>
+      <!-- <form (ngSubmit)="submitForm()" [formGroup]="paymentForm"> -->
+      <div class="container">
+        <div class="table-container">
+          <div class="card">
+            <div class="total-section">
+              <span class="total-label"
+                >total Neto mas envio {{ getDeliveryOptionLabel() }}:</span
+              >
+              <ng-container *ngIf="getDeliveryOptionLabel() === 'Envío'">
+                <span class="total-amount"
+                  >{{getTotalAmount() }}+200 = {{ getTotalAmount() + 200 |
+                  currency }}</span
                 >
-                <ng-container *ngIf="getDeliveryOptionLabel() === 'Envío'">
-                  <span class="total-amount"
-                    >{{getTotalAmount() }}+200 = {{ getTotalAmount() + 200 |
-                    currency }}</span
-                  >
-                </ng-container>
-                <ng-container *ngIf="getDeliveryOptionLabel() === 'En tienda'">
-                  <span class="total-amount"
-                    >{{getTotalAmount()}} + 0 ={{ getTotalAmount() | currency
-                    }}</span
-                  >
-                </ng-container>
-              </div>
+              </ng-container>
+              <ng-container *ngIf="getDeliveryOptionLabel() === 'En tienda'">
+                <span class="total-amount"
+                  >{{getTotalAmount()}} + 0 ={{ getTotalAmount() | currency
+                  }}</span
+                >
+              </ng-container>
+            </div>
 
-              <div class="form-group">
-                <p-table
-                  [value]="carData"
-                  [tableStyle]="{'min-width': '20rem'}"
-                >
-                  <!-- Template para el encabezado de la tabla -->
-                  <ng-template pTemplate="header">
-                    <tr>
-                      <th style="width: 20%">Artículo</th>
-                    </tr>
-                    <div
-                      class="flex align-items-center justify-content-between"
+            <div class="form-group">
+              <p-table [value]="carData" [tableStyle]="{'min-width': '20rem'}">
+                <!-- Template para el encabezado de la tabla -->
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th style="width: 20%">Artículo</th>
+                  </tr>
+                  <div class="flex align-items-center justify-content-between">
+                    En total hay {{carData ? carData.length : 0 }} artículos en
+                    el carrito.
+                  </div>
+                </ng-template>
+                <ng-template pTemplate="summary">
+                  <div class="card flex justify-content-center">
+                    <!-- <div class="flex flex-column gap-2"> -->
+                    <label style="color: rgb(246, 88, 20)" for="Entrega"
+                      >Tipo de Entrega {{getDeliveryOptionLabel()}}</label
                     >
-                      En total hay {{carData ? carData.length : 0 }} artículos
-                      en el carrito.
-                    </div>
-                  </ng-template>
-                  <ng-template pTemplate="summary">
-                    <div class="card flex justify-content-center">
-                      <!-- <div class="flex flex-column gap-2"> -->
-                      <label style="color: rgb(246, 88, 20)" for="Entrega"
-                        >Tipo de Entrega {{getDeliveryOptionLabel()}}</label
-                      >
 
-                      <label style="color: brown">
-                        Fecha Seleccionada: {{ date }}
-                      </label>
-                    </div>
-                  </ng-template>
-                </p-table>
-              </div>
+                    <label style="color: brown">
+                      Fecha Seleccionada: {{ date }}
+                    </label>
+                  </div>
+                </ng-template>
+              </p-table>
             </div>
           </div>
-          <!-- <form (ngSubmit)="submitForm()" [formGroup]="paymentForm"> -->
-          <!-- ?formulario? -->
-          <div class="card flex justify-content-center">
+        </div>
+
+        <!-- <div class="payment-details"> -->
+        <div
+          class="card flex justify-content-center gap-3"
+          style="border: none"
+        >
+          <form *ngIf="formviww" [formGroup]="paymentForm">
             <p-card header="Datos cliente">
-              <input
-                pInputText
-                type="hidden"
-                formControlName="Entrega"
-                value="{{getDeliveryOptionLabel()}}"
-              />
-              <input
-                pInputText
-                type="hidden"
-                formControlName="date"
-                value="{{ date }}"
-              />
-
-              <input
-                pInputText
-                type="hidden"
-                formControlName="totalneto"
-                [value]="getTotalNetoValue()"
-              />
-
-              <div class="card flex" style="margin: 1cap">
+              <div style="margin: 1cap">
                 <span class="p-float-label">
-                  <input pInputText id="username" formControlName="name" />
+                  <input
+                    id="disabled-input"
+                    [disabled]="inputsDisable"
+                    pInputText
+                    id="username"
+                    formControlName="name"
+                  />
                   <label>Username</label>
                 </span>
               </div>
-              <div class="card flex">
+              <div style="margin: 1cap">
                 <span class="p-float-label">
                   <input
+                    id="disabled-input"
+                    [disabled]="inputsDisable"
                     type="text"
                     pInputText
                     id="paternalLastname"
@@ -290,9 +279,11 @@
                   <label for="maternalLastname">Apellido Materno</label>
                 </span>
               </div>
-              <div class="card flex">
+              <div style="margin: 1cap">
                 <span class="p-float-label">
                   <input
+                    id="disabled-input"
+                    [disabled]="inputsDisable"
                     type="text"
                     pInputText
                     id="paternalLastname"
@@ -302,14 +293,30 @@
                   <label for="paternalLastname">Apellido Paterno</label>
                 </span>
               </div>
-              <div class="card flex email-input" style="margin: 1cap">
+              <div style="margin: 1cap">
                 <span class="p-float-label">
-                  <input
+                  <!-- <input
+                    id="disabled-input"
+                    [disabled]="inputsDisable"
                     pInputText
                     type="email"
+                    pTooltip="Gmail valido para el seguimiento"
+                    tooltipPosition="bottom"
                     formControlName="email"
                     placeholder="EJ:juanPerez@gmail.com"
-                  />
+                  /> -->
+                  <input
+                  id="disabled-input"
+                  [disabled]="inputsDisable"
+                  pInputText
+                  type="email"
+                  id="email"
+                  formControlName="email"
+                  placeholder="EJ:juanPerez@gmail.com"
+                  (keyup)="validateEmail()"
+                />
+
+
 
                   <label>Email</label>
                   <span class="p-input-icon-right">
@@ -317,10 +324,20 @@
                     <i class="pi pi-envelope"></i>
                   </span>
                 </span>
+                <!-- <small *ngIf="paymentForm.get('email')?.invalid && (paymentForm.get('email')?.dirty || paymentForm.get('email')?.touched)" class="text-danger">
+                  El correo electrónico es inválido.
+                </small> -->
+                <small *ngIf="paymentForm.get('email')?.invalid && (paymentForm.get('email')?.dirty || paymentForm.get('email')?.touched)" style="color: rgb(196, 2, 2);">
+                  El correo electrónico es inválido.
+                </small>
               </div>
-              <div class="card flex" style="margin: 1cap">
+              <div style="margin: 1cap">
                 <span class="p-float-label">
                   <input
+                    id="disabled-input"
+                    [disabled]="inputsDisable"
+                    pTooltip="nos comunicaremos mediante este numero"
+                    tooltipPosition="bottom"
                     pInputText
                     autocomplete="false"
                     type="tel"
@@ -329,35 +346,140 @@
                     maxlength="10"
                     placeholder="123-456-7890"
                     formControlName="phone"
-                  />
-                  <!-- <input pInputText pKeyFilter="int" placeholder="Integers" [(ngModel)]="value" /> -->
+
+                    />
+                    <!-- (blur)="validatePhone(paymentForm.get('phone')?.value)" -->
+
+
                   <label for="phone">Teléfono</label>
                 </span>
+                <small *ngIf="phoneError" class="text-danger"  style="color: rgb(196, 2, 2);">
+                  {{ phoneError }}
+                </small>
               </div>
-              <button class="next-button" (click)="submitForm()">
-                Registrarse
-              </button>
+              <p-toast position="top-center"></p-toast>
+              <p-confirmDialog
+                key="positionDialog"
+                [position]="position"
+                rejectButtonStyleClass="p-button-outlined"
+              ></p-confirmDialog>
+
+              <div class="btn">
+                <button
+                  type="button"
+                  pButton
+                  class="btn-finish"
+                  (click)="confirm3()"
+                  styleClass="p-button-success"
+                >
+                  confirmar datos
+                </button>
+              </div>
 
               <!-- ?formulario? -->
             </p-card>
+          </form>
+        </div>
+
+        <p-card header="Direccion" *ngIf="getDeliveryOptionLabel() === 'Envío'">
+          <div class="card flex justify-content-center">
+            <p-dropdown
+              [options]="municipios"
+              [(ngModel)]="selectedCity"
+              optionLabel="name"
+              [showClear]="true"
+              placeholder="Select a municipio"
+            ></p-dropdown>
           </div>
+          <div class="card flex justify-content-center">
+            <p-dropdown
+              [options]="localidades"
+              [(ngModel)]="selectedLocal"
+              optionLabel="name"
+              [showClear]="true"
+              placeholder="Select a colonia"
+            ></p-dropdown>
+          </div>
+        </p-card>
 
-          <div class="payment-details">
-            <div class="card flex justify-content-center gap-3">
-              <!-- Campo para mostrar el tipo de entrega seleccionado -->
+        <div *ngIf="inputsDisable" class="card flex justify-content-center">
+          <!-- <div class="card flex justify-content-center formula"> -->
+          <p-card header="Formas de Pago">
+            <div class="card flex" style="margin: 1cap">
+              <p-button
+                class="p-ripple"
+                label=" Pago con Tarjeta"
+                [text]="true"
+                severity="help"
+                (click)="selectPaymentMethod('tarjeta')"
+                icon="pi pi-credit-card
+              "
+              ></p-button>
+            </div>
+            <!-- <div class="card flex" style="margin: 1cap">
+              <p-button
+                class="p-ripple"
+                label="Pago con PayPal"
+                [text]="true"
+                (click)="selectPaymentMethod('paypal')"
+                icon="pi pi-paypal
+              "
+              ></p-button>
+            </div> -->
+            <!-- <div class="card flex" style="margin: 1cap">
+              <p-button
+                class="p-ripple"
+                label=" Mercado pago"
+                [text]="true"
+                severity="warning"
+                (click)="selectPaymentMethod('mercado')"
+                icon="pi pi-money-bill
+              "
+              ></p-button>
+            </div> -->
+            <!-- <div class="card flex" style="margin: 1cap">
+              <p-button
+                class="p-ripple"
+                label="Transferencia Bancaria"
+                [text]="true"
+                severity="success"
+                (click)="selectPaymentMethod('transferencia')"
+                icon="pi pi-arrow-right-arrow-left
+                pi-arrow-
+              "
+              ></p-button>
+            </div> -->
+          </p-card>
+        </div>
 
-              <div class="btn">
-                <button class="btn-finish" (click)="activeIndex = 0">
-                  Regresar
-                </button>
-                <button class="btn-continue-shopping" (click)="activeIndex = 1">
-                  Continuar
-                </button>
-              </div>
+        <div
+          class="payment-details"
+          data-aos="fade-right"
+          data-aos-duration="2000"
+        >
+          <div class="card flex justify-content-center gap-3">
+            <div class="btn">
+              <button class="btn-finish" (click)="activeIndex = 0">
+                Regresar
+              </button>
+              <span class="total-label"> total : </span>
+
+              <ng-container *ngIf="getDeliveryOptionLabel() === 'Envío'">
+                <span class="total-amount">
+                  {{ getTotalAmount() + 200 | currency }}</span
+                >
+              </ng-container>
+              <ng-container *ngIf="getDeliveryOptionLabel() === 'En tienda'">
+                <span class="total-amount"
+                  >{{ getTotalAmount() | currency }}</span
+                >
+              </ng-container>
             </div>
           </div>
         </div>
-      </form>
+        <!-- </div> -->
+      </div>
+      <!-- </form> -->
     </p-tabPanel>
   </p-tabView>
 </div>

@@ -29,6 +29,9 @@ import { StripeService } from '../../commons/services/stripe.service';
 import { PaypalService } from '../../commons/services/paypal.service';
 import { MercadoPagoService } from '../../commons/services/mercado-pago.service';
 import { HttpClient } from '@angular/common/http';
+import { SessionService } from 'src/app/core/services/session.service';
+import { ProfileService } from 'src/app/shared/services/profile.service';
+import { User } from 'src/app/shared/models/user.model';
 
 interface City {
   name: string;
@@ -105,6 +108,14 @@ export class OrderDetailView implements OnInit {
 
   // constructor(private confirmationService: confirmationService, private messageService: MessageService) {}
   // constructor(private http: HttpClient) {}
+//**  USUARIO EN LA SESSION  */
+// name: string = '';
+// maternalLastname: string = '';
+// paternalLastname: string = '';
+// email: string = '';
+// phone: string = '';
+userId: string = ''; // Corrige el tipo de dato aquí
+user: User | undefined;
 
   constructor(
     private http: HttpClient,
@@ -119,7 +130,8 @@ export class OrderDetailView implements OnInit {
     private stripeService: StripeService,
     private paypalService: PaypalService,
     private mercadoPagoService: MercadoPagoService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,    private sessionService: SessionService,private profileService: ProfileService,  
+
   ) {
     this.paymentForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -128,7 +140,10 @@ export class OrderDetailView implements OnInit {
       phone: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
     });
-
+    const userData = this.sessionService.getUserData()
+    console.log("---->",userData)
+    this.userId =userData?.id|| '';
+    this.fetchUserData();
     // Obtén los datos del formulario del almacenamiento
     const formDataFromStorage = this.getFormDataFromStorage();
 
@@ -151,7 +166,33 @@ export class OrderDetailView implements OnInit {
 
     // Aquí puedes asignar los valores adicionales al formulario paymentForm
   }
+  fetchUserData() {
+    this.profileService.getUserById(this.userId).subscribe(
+      (data: User) => {
+        this.user = data; // Asigna los datos del usuario obtenidos del servicio
+        console.log(this.user)
+        // console.log(this.user.address)
+        this.fillFormWithUserData();  // Llama al método para llenar el formulario con los datos del usuario
 
+      },
+      error => {
+        console.error('Error al obtener datos del usuario:', error);
+      }
+    );
+  }
+  fillFormWithUserData(): void {
+    if (this.user) {
+      this.paymentForm.patchValue({
+        name: this.user.name,
+        maternalLastname: this.user.maternalLastname,
+        paternalLastname: this.user.paternalLastname,
+        phone: this.user.phone,
+        email: this.user.email
+      });
+    }
+    this.confirm3()
+    this.inputsDisable = true; // Deshabilitar campos si hay datos del usuario
+  }
   ngOnInit(): void {
     this.items = [{ label: 'Carrito', routerLink: '/payment/order-detail' }];
     this.items2 = [
@@ -283,7 +324,6 @@ export class OrderDetailView implements OnInit {
                 'Respuesta del servidor (pago con PayPal):',
                 response
               );
-
               // Redireccionar a la URL de aprobación proporcionada por PayPal
               const approvalLink = response.data.links.find(
                 (link: Link) => link.rel === 'approve'

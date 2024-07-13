@@ -36,45 +36,28 @@ export class SuccessComponent {
     });
 
   }
-  // ngOnInit(): void {
-  //   // Verificar si la URL actual es la de éxito
-  //   console.log('url:', window.location.pathname);
-  //   if (window.location.pathname === '/payment/order-success') {
-  //     this.token = this.route.snapshot.queryParamMap.get('token') || '';
-  //     console.log(this.token)
-  //     // Llamar al servici  o para actualizar el estado del pedido
-  //     this.orderService.updateOrderStatus(this.token).subscribe(
-  //       (response) => {
-  //         console.log('Respuesta del servidor:', response);
-  //         // Realizar cualquier otra acción necesaria después de actualizar el estado del pedido
-  //       },
-  //       (error) => {
-  //         console.error('Error al actualizar el estado del pedido:', error);
-  //       }
-  //     );
-  //   }
-  // }
+
   ngOnInit(): void {
     // Verificar si la URL actual es la de éxito
     // console.log('url:', window.location.pathname);
     if (window.location.pathname === '/payment/order-success') {
       this.token = this.route.snapshot.queryParamMap.get('token') || '';
       // console.log(this.token);
-  // 
+  //
       // Obtener la suscripción y enviarla junto con el token del pedido
       navigator.serviceWorker.ready.then((registration) => {
         registration.pushManager.getSubscription().then((subscription) => {
           if (subscription) {
             const p256dhKey = subscription.getKey('p256dh');
             const authKey = subscription.getKey('auth');
-  
+
             if (!p256dhKey || !authKey) {
               console.error(
                 'Las claves p256dh o auth están ausentes en la suscripción.'
               );
               return;
             }
-  
+
             // Convertir las claves a formato base64
             const subObj = {
               endpoint: subscription.endpoint,
@@ -89,6 +72,12 @@ export class SuccessComponent {
             this.orderService.updateOrderStatus(this.token, subObj).subscribe(
               (response) => {
                 console.log('Respuesta del servidor:', response);
+                              // Vaciar el carrito y los datos de compra en el localStorage
+              localStorage.removeItem('carrito');
+              localStorage.removeItem('purchaseData');
+              console.log('Carrito y datos de compra vaciados.');
+
+
                 // Realizar cualquier otra acción necesaria después de actualizar el estado del pedido
               },
               (error) => {
