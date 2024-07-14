@@ -143,7 +143,9 @@ user: User | undefined;
     const userData = this.sessionService.getUserData()
     console.log("---->",userData)
     this.userId =userData?.id|| '';
-    this.fetchUserData();
+    if (userData) {
+      this.fetchUserData();
+    }
     // Obtén los datos del formulario del almacenamiento
     const formDataFromStorage = this.getFormDataFromStorage();
 
@@ -189,8 +191,8 @@ user: User | undefined;
         phone: this.user.phone,
         email: this.user.email
       });
+      this.confirm3()
     }
-    this.confirm3()
     this.inputsDisable = true; // Deshabilitar campos si hay datos del usuario
   }
   ngOnInit(): void {
