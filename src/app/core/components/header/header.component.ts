@@ -26,7 +26,7 @@ import { OrderService } from 'src/app/features/payment/commons/services/order.se
 import { ActivateCountComponent } from 'src/app/features/auth/views/activate-count/activate-count.component'
 import { ActivateCountByHomeComponent } from 'src/app/features/auth/views/activate-count-by-home/activate-count-by-home.component'
 import { DialogRefService } from 'src/app/shared/services/dialog-ref.service'
-import { ProfileComponent } from 'src/app/features/portal/views/profile/profile.component'
+import { ProfileComponent } from 'src/app/core/components/profile/profile.component'
 interface EventItem {
   status?: string
   date?: string
