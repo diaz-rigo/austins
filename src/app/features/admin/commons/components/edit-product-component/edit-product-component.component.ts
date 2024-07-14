@@ -85,8 +85,8 @@ export class EditProductComponentComponent {
   }
 
   saveChanges(): void {
-    console.log('Save Changes button clicked');
-    console.log('Product Image:', this.selectedImages);
+    // console.log('Save Changes button clicked');
+    // console.log('Product Image:', this.selectedImages);
 
     if (this.editForm.valid) {
       const editedProduct: Product = {

@@ -215,7 +215,7 @@ export class DataGraficaView implements OnInit {
         tiempoTranscurrido / (1000 * 60 * 60 * 24),
       )
       this.diasHastaFechaFutura = diasHastaFechaFutura
-      console.log('diasHastaFechaFutura:', diasHastaFechaFutura)
+      // console.log('diasHastaFechaFutura:', diasHastaFechaFutura)
 
       if (diasHastaFechaFutura > 0) {
         // Calcular la tasa de crecimiento (k)
@@ -237,7 +237,7 @@ export class DataGraficaView implements OnInit {
         )
         this.predictedSales = Math.round(this.predictedSales)
 
-        console.log('predictedSales:', this.predictedSales)
+        // console.log('predictedSales:', this.predictedSales)
       } else {
         this.predictedSales = null
       }
@@ -257,8 +257,8 @@ export class DataGraficaView implements OnInit {
         maintainAspectRatio: false,
       }
 
-      console.log('chartData:', this.chartData)
-      console.log('chartOptions:', this.chartOptions)
+      // console.log('chartData:', this.chartData)
+      // console.log('chartOptions:', this.chartOptions)
     }
   }
 

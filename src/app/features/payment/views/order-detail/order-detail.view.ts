@@ -102,7 +102,7 @@ export class OrderDetailView implements OnInit {
   values: string[] | null = null;
 
   onChanges(values: string[]): void {
-    console.log(values, this.values);
+    // console.log(values, this.values);
   }
   position: string = 'center';
 
@@ -141,7 +141,7 @@ user: User | undefined;
       email: ['', [Validators.required, Validators.email]],
     });
     const userData = this.sessionService.getUserData()
-    console.log("---->",userData)
+    // console.log("---->",userData)
     this.userId =userData?.id|| '';
     if (userData) {
       this.fetchUserData();
@@ -172,7 +172,7 @@ user: User | undefined;
     this.profileService.getUserById(this.userId).subscribe(
       (data: User) => {
         this.user = data; // Asigna los datos del usuario obtenidos del servicio
-        console.log(this.user)
+        // console.log(this.user)
         // console.log(this.user.address)
         this.fillFormWithUserData();  // Llama al método para llenar el formulario con los datos del usuario
 
@@ -306,10 +306,10 @@ user: User | undefined;
           // Llamar al servicio específico para el pago con tarjeta
           this.stripeService.createCheckoutSession(purchaseData).subscribe(
             (response) => {
-              console.log(
-              'Respuesta del servidor (pago con tarjeta):',
-                response
-              );
+              // console.log(
+              // 'Respuesta del servidor (pago con tarjeta):',
+              //   response
+              // );
                 // Redireccionar a la URL de pago proporcionada por Stripe
               window.location.href = response.url;
             },

@@ -71,11 +71,11 @@ export class SuccessComponent {
             // Llamar al servicio para actualizar el estado del pedido y enviar la suscripción
             this.orderService.updateOrderStatus(this.token, subObj).subscribe(
               (response) => {
-                console.log('Respuesta del servidor:', response);
+                // console.log('Respuesta del servidor:', response);
                               // Vaciar el carrito y los datos de compra en el localStorage
               localStorage.removeItem('carrito');
               localStorage.removeItem('purchaseData');
-              console.log('Carrito y datos de compra vaciados.');
+              // console.log('Carrito y datos de compra vaciados.');
 
 
                 // Realizar cualquier otra acción necesaria después de actualizar el estado del pedido

@@ -57,7 +57,7 @@ export class ChatComponent {
     this.tokenService.getAll().subscribe(
       (response) => {
         const firstToken = response[0];
-        console.log(firstToken);
+        // console.log(firstToken);
         if (firstToken) {
           this.openaiInstance = new OpenAI({
             apiKey: firstToken.apiToken,

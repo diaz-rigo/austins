@@ -200,7 +200,7 @@ export class SignUpFormComponent implements OnInit {
         // this.isSubmitting = true;
 
         this.group.markAllAsTouched()
-        console.log('reCAPTCHA success:', controlErrors)
+        // console.log('reCAPTCHA success:', controlErrors)
         if (controlErrors['required'] != true) {
           this.messageService.add({
             severity: 'error',
@@ -436,7 +436,7 @@ export class SignUpFormComponent implements OnInit {
           controlErrors['invalidDate'] ||
           controlErrors['invalidLastName'] ||
           controlErrors['invalidName']
-        console.log(controlErrors)
+        // console.log(controlErrors)
         // this.showError(`Error en el campo ${key}: ${errorMessage}`);
       }
     })

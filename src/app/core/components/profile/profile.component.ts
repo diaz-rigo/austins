@@ -20,10 +20,12 @@ export class ProfileComponent {
     private profileService: ProfileService,    private sessionService: SessionService,
   ) {
     const userData = this.sessionService.getUserData()
-    console.log(userData)
+    // console.log(userData)
     // this.userId = this.route.snapshot.paramMap.get('id') || ''; // Obtiene el ID del usuario de los parámetros de la ruta
     this.userId =userData?.id|| '';
-    this.fetchUserData();
+    if (this.userId) {
+      this.fetchUserData();
+    }
    }
 
   // ngOnInit(): void {
@@ -34,8 +36,8 @@ export class ProfileComponent {
     this.profileService.getUserById(this.userId).subscribe(
       (data: User) => {
         this.user = data; // Asigna los datos del usuario obtenidos del servicio
-        console.log(this.user)
-        console.log(this.user.address)
+        // console.log(this.user)
+        // console.log(this.user.address)
       },
       error => {
         console.error('Error al obtener datos del usuario:', error);

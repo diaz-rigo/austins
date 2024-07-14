@@ -131,7 +131,7 @@ export class OrderComponent {
 
   modoChanged(): void {
     if (this.selectedModosabor === 'otrosabor') {
-      console.log('Se seleccionó otro sabor');
+      // console.log('Se seleccionó otro sabor');
       this.selectedFlavor = undefined; // Limpiar el select de sabores
     }
     if (this.selectedModo !== 'otro') {
@@ -155,7 +155,7 @@ export class OrderComponent {
 
   handleFileInput(event: { files: File[] }): void {
     this.selectedFile = event.files[0];
-    console.log(this.selectedFile);
+    // console.log(this.selectedFile);
   }
 
   enviarPedido() {
@@ -263,7 +263,7 @@ export class OrderComponent {
               auth: this.arrayBufferToBase64(authKey),
             },
           };
-          console.log(subObj);
+          // console.log(subObj);
 
           const datosSuscripcion = {
             endpoint: subscription.endpoint,
@@ -319,7 +319,7 @@ export class OrderComponent {
               }),
             )
             .subscribe((response: any) => {
-              console.log('Pedido enviado con éxito');
+              // console.log('Pedido enviado con éxito');
               this.messageService.add({
                 severity: 'success',
                 summary: 'Éxito',
@@ -329,8 +329,8 @@ export class OrderComponent {
               const pedidoId = response.pedido._id; // Obtener el ID del pedido
               const detallePedidoId = response.pedido.detallePedido[0]._id; // Obtener el ID del detalle del pedido
               this.actualizarImagenPedido(detallePedidoId, response.pedido.codigoPedido); // Llamar a la función para actualizar la imagen del pedido}
-              console.log(response.pedido.codigoPedido);
-              console.log(response);
+              // console.log(response.pedido.codigoPedido);
+              // console.log(response);
 
             });
 
@@ -350,7 +350,7 @@ export class OrderComponent {
       formData.append('imagen', this.selectedFile);
       this.pedidoService.actualizarImagenPedido(pedidoId, formData).subscribe(
         (response: any) => {
-          console.log('Imagen del pedido actualizada:', response);
+          // console.log('Imagen del pedido actualizada:', response);
           this.messageService.add({
             severity: 'success',
             summary: 'Éxito',

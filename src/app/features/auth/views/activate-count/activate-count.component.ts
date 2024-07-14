@@ -41,9 +41,9 @@ export class ActivateCountComponent implements OnInit {
       const token = params.get('token');
       if (token) {
         this.token = token;
-        console.log('Token recibido:', this.token);
+        // console.log('Token recibido:', this.token);
       } else {
-        console.log('No se recibió token');
+        // console.log('No se recibió token');
       }
     });
   }
