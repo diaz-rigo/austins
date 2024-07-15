@@ -17,4 +17,9 @@ export class ProfileService {
     const url = `${environment.api}/user/${userId}`; // Ajusta la URL según tu estructura de ruta en el backend
     return this.http.get<User>(url);
   }
+
+  updateProfilePhoto(userId: string, imageUrl: string): Observable<any> {
+    const url = `${environment.api}/perfil/${userId}/update-photo`;
+    return this.http.put(url, { imageUrl });
+  }
 }

@@ -569,15 +569,17 @@
         </mat-icon>
       </button>
 
-      <button
-        *ngIf="userName"
-        [matMenuTriggerFor]="userOption"
-        class="menu-btn"
-      >
-        <span class="pi pi-user"></span>
+      <button *ngIf="userName" [matMenuTriggerFor]="userOption" class="menu-btn">
+        <span class="pi pi-user" *ngIf="!foto"></span>
+        <!-- HTML -->
+<div class="profile-picture">
+  <!-- <img src="ruta/a/tu/foto-de-perfil.jpg" alt="Profile Picture"> -->
+  <img *ngIf="foto" [src]="foto" alt="Profile Picture" class="profile-picture">
+</div>
 
         {{ userName }}
       </button>
+      
       <mat-menu
         style="background-color: transparent"
         class="menuweb"
@@ -646,7 +648,7 @@
 
 </div>
 
-<p-sidebar [(visible)]="perfil" [fullScreen]="true">
+<p-sidebar [(visible)]="perfil" [fullScreen]="true" styleClass="perfi">
   <ng-template pTemplate="header">
       <span class="font-semibold text-xl">
           Perfil

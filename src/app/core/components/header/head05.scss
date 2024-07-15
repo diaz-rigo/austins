@@ -63,3 +63,44 @@
     top: 85px; /* Ajusta según la altura del encabezado */
   }
 }
+
+
+.perfi {
+  width: 100%;
+  padding: 20px;
+  background-color: #f4f4f9;
+  box-sizing: border-box;
+  background-image: url('https://static.wixstatic.com/media/64de7c_bd452d768bdf43498f0e94694ddc7040~mv2.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.perfi::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: inherit;
+  background-size: inherit;
+  background-position: inherit;
+  filter: blur(5px);
+  opacity: 0.5;
+  z-index: 1;
+}
+/* CSS */
+.profile-picture {
+  width: 30px; /* Tamaño deseado para la miniatura */
+  height: 30px;
+  border-radius: 50%; /* Para hacerla circular */
+  overflow: hidden; /* Oculta cualquier parte de la imagen que sobresalga del círculo */
+}
+
+.profile-picture img {
+  width: 100%; /* Ajusta la imagen al tamaño del contenedor */
+  height: auto; /* Mantiene la proporción de la imagen */
+  display: block; /* Elimina cualquier espacio adicional alrededor de la imagen */
+}

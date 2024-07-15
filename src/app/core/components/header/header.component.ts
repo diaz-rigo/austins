@@ -27,6 +27,8 @@ import { ActivateCountComponent } from 'src/app/features/auth/views/activate-cou
 import { ActivateCountByHomeComponent } from 'src/app/features/auth/views/activate-count-by-home/activate-count-by-home.component'
 import { DialogRefService } from 'src/app/shared/services/dialog-ref.service'
 import { ProfileComponent } from 'src/app/core/components/profile/profile.component'
+import { UserProfile } from 'src/app/shared/models/userPROFILE.model'
+import { ProfileService } from 'src/app/shared/services/profile.service'
 interface EventItem {
   status?: string
   date?: string
@@ -87,6 +89,7 @@ interface EventItem {
 })
 export class HeaderComponent implements OnInit {
   userName: string | undefined
+  foto: string | undefined
   isHeaderScrolled = false
   searchQuery: string = ''
   badge: number = 0
@@ -129,6 +132,7 @@ export class HeaderComponent implements OnInit {
   events: EventItem[]
 
   codigoPedido: string = ''
+  user: UserProfile | undefined;
   constructor(
     private pedidoviewService: PedidoviewService,
     public dialog: MatDialog,
@@ -144,7 +148,7 @@ export class HeaderComponent implements OnInit {
     private messageService: MessageService,
     private route: ActivatedRoute,
     private orderService: OrderService,
-    private dialogRefService: DialogRefService,
+    private dialogRefService: DialogRefService,    private profileService: ProfileService,
   ) {
     router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
@@ -236,6 +240,17 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  fetchUserData(userId: string) {
+    this.profileService.getUserById(userId).subscribe(
+      (data: UserProfile) => {
+        this.user = data;
+        this.foto=this.user.profilePhoto
+      },
+      (error) => {
+        console.error('Error al obtener datos del usuario:', error);
+      }
+    );
+  }
   ngOnInit(): void {
     const userData = this.sessionService.getUserData()
     // const carData = this.storageService.getCarrito();
@@ -245,6 +260,7 @@ export class HeaderComponent implements OnInit {
     // console.log(this.sidebarVisible2);
     if (userData) {
       this.userName = userData.name
+      this.fetchUserData(userData.id);
       // console.log( userData)
     }
     this.cartService.itemsInCart.subscribe((value) => {
