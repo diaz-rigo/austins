@@ -11,6 +11,7 @@ import { ConfirmationService, MessageService } from 'primeng/api'
 import { OrderviewView } from './features/payment/views/orderview/orderview.view'
 import { CartService } from './core/services/cart.service'
 import { DialogRefService } from './shared/services/dialog-ref.service'
+import { SessionService } from './core/services/session.service'
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -46,7 +47,26 @@ export class AppComponent implements OnInit {
         console.error('Could not subscribe to notifications', err),
       )
   }
+  subscribeToNotifications2(userId: string) {
+    this.swPush
+      .requestSubscription({
+        serverPublicKey: this.VAPID_PUBLIC_KEY,
+      })
+      .then((sub) => {
+        // console.log('Token de suscripción:', sub.toJSON())
+        // Enviar la suscripción al backend
+        this.pushNotificationService.sendSubscription2(sub.toJSON() ,userId).subscribe(
+          (res) => console.log('Suscripción enviada al servidor:', res),
+          (error) =>
+            console.error('Error al enviar la suscripción al servidor:', error),
+        )
+      })
+      .catch((err) =>
+        console.error('Could not subscribe to notifications', err),
+      )
+  }
   constructor(
+    private sessionService: SessionService,
     private pedidoviewService: PedidoviewService,
     private pushNotificationService: NotificService,
     private swPush: SwPush,
@@ -59,6 +79,10 @@ export class AppComponent implements OnInit {
     private cartService: CartService,    private dialogRefService: DialogRefService // Inyectar el servicio
 
   ) {
+    const userData = this.sessionService.getUserData()
+    if (userData) {
+      this.subscribeToNotifications2(userData.id)
+    }
     this.subscribeToNotifications()
     // Suscribirse a los cambios de la ruta y redirigir en caso de rutas no válidas
     this.router.events.subscribe((event) => {
