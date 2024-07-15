@@ -4,7 +4,8 @@ import { SuccessComponent } from './success/success.component';
 import { OrderComponent } from './order/order.component';
 import { DividerModule } from 'primeng/divider';
 import { MaterialModule } from '../material/material.module';
-const COMPONENTES = [SuccessComponent,OrderComponent];
+import { OrderOnSessionComponent } from './order-on-session/order-on-session.component';
+const COMPONENTES = [SuccessComponent,OrderComponent,OrderOnSessionComponent];
 
 @NgModule({
   declarations: [...COMPONENTES],

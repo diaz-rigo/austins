@@ -20,6 +20,10 @@ export class OrderService {
     const url =`${environment.api}/order/solicitarPedido`; // Ruta a la que enviar la solicitud POST
     return this.http.post<any>(url, datosPedido);
   }
+  enviarPedido2(datosPedido: any): Observable<any> {
+    const url =`${environment.api}/order/solicitarPedido2`; // Ruta a la que enviar la solicitud POST
+    return this.http.post<any>(url, datosPedido);
+  }
   consultarPedido(code: string): Observable<any> {
     const url = `${environment.api}/publicR`;
     // Se pasan los parámetros de consulta utilizando la opción 'params' del objeto de opciones.

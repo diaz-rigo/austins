@@ -1,29 +1,32 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { ConfirmationService, MessageService } from 'primeng/api';
-import { DialogService } from 'primeng/dynamicdialog';
-import { OrderService } from '../../services/order.service';
-import { catchError, throwError } from 'rxjs';
-import { NotificService } from 'src/app/shared/services/notific.service';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { SwPush } from '@angular/service-worker';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
-import { Router } from '@angular/router';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
+import { NotificService } from 'src/app/shared/services/notific.service';
+import { OrderService } from '../../services/order.service';
+import { catchError, throwError } from 'rxjs';
+import { SessionService } from 'src/app/core/services/session.service';
+import { User } from 'src/app/shared/models/user.model';
+import { ProfileService } from 'src/app/shared/services/profile.service';
 
 interface PasteleriaFlavor {
   name: string;
   code: string;
   precioPorKilo: number; // Agrega el precio por kilo para cada sabor
 }
-
 @Component({
-  selector: 'app-order',
-  templateUrl: './order.component.html',
-  styleUrls: ['./order.component.scss'],
-  providers: [DialogService, ConfirmationService, MessageService],
+  selector: 'app-order-on-session',
+  templateUrl: './order-on-session.component.html',
+  styleUrl: './order-on-session.component.scss',  providers: [DialogService, ConfirmationService, MessageService],
+
 })
-export class OrderComponent {
-  
+export class OrderOnSessionComponent {
+
   // Datos del Cliente
   nombre: string | undefined;
+  nombre_completo: string | undefined;
   apellido1: string | undefined;
   apellido2: string | undefined;
   correo: string | undefined;
@@ -82,6 +85,8 @@ export class OrderComponent {
         console.error('Could not subscribe to notifications', err),
       );
   }
+  userId: string = ''; // Corrige el tipo de dato aquí
+  user: User | undefined;
 
   constructor(
     private router: Router,
@@ -89,9 +94,31 @@ export class OrderComponent {
     private pushNotificationService: NotificService,
     private swPush: SwPush,
     private pedidoService: OrderService,
-    private messageService: MessageService,
-  ) {}
+    private messageService: MessageService,private sessionService: SessionService,  private profileService: ProfileService, 
+  ) {
 
+    const userData = this.sessionService.getUserData()
+
+    this.userId =userData?.id|| '';
+    if (this.userId) {
+      this.fetchUserData();
+    }
+
+  }
+  fetchUserData() {
+    this.profileService.getUserById(this.userId).subscribe(
+      (data: User) => {
+        this.user = data; // Asigna los datos del usuario obtenidos del servicio
+        console.log("----*", this.user)
+        this.nombre_completo=`${this.user.name} ${this.user.paternalLastname} ${this.user.maternalLastname}`;
+        // this.nombre = `${userData.firstName} ${userData.lastName}`;
+
+      },
+      error => {
+        console.error('Error al obtener datos del usuario:', error);
+      }
+    );
+  }
   ngOnInit() {
     this.flavors = [
       { name: 'Chocolate', code: 'choco', precioPorKilo: 580 }, // Define el precio por kilo para cada sabor
@@ -162,11 +189,11 @@ export class OrderComponent {
   enviarPedido() {
     // Validar todos los campos obligatorios
     const camposObligatorios = [
-      { campo: this.nombre, mensaje: 'Nombre' },
-      { campo: this.apellido1, mensaje: 'Apellido 1' },
-      { campo: this.apellido2, mensaje: 'Apellido 2' },
-      { campo: this.correo, mensaje: 'Correo' },
-      { campo: this.telefono, mensaje: 'Teléfono' },
+      // { campo: this.nombre, mensaje: 'Nombre' },
+      // { campo: this.apellido1, mensaje: 'Apellido 1' },
+      // { campo: this.apellido2, mensaje: 'Apellido 2' },
+      // { campo: this.correo, mensaje: 'Correo' },
+      // { campo: this.telefono, mensaje: 'Teléfono' },
       { campo: this.selectedQuantity, mensaje: 'Cantidad' },
       { campo: this.dia, mensaje: 'Día' },
       { campo: this.hora, mensaje: 'Hora' },
@@ -275,11 +302,11 @@ export class OrderComponent {
           };
 
           const datosPedido = {
-            nombre: this.nombre,
-            apellido1: this.apellido1,
-            apellido2: this.apellido2,
-            correo: this.correo,
-            telefono: this.telefono,
+            nombre: this.user?.name,
+            apellido1: this.user?.paternalLastname,
+            apellido2: this.user?.maternalLastname,
+            correo: this.user?.email,
+            telefono: this.user?.phone,
             sabor: this.selectedFlavor,
             cantidad: this.selectedQuantity,
             modo: this.selectedModo,
@@ -296,7 +323,7 @@ export class OrderComponent {
           this.ngxLoader.start();
 
           this.pedidoService
-            .enviarPedido(datosPedido)
+            .enviarPedido2(datosPedido)
             .pipe(
               catchError((error) => {
                 if (error.status === 409) {

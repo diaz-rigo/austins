@@ -1,13 +1,23 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
+import { SessionService } from 'src/app/core/services/session.service';
 
 @Component({
   selector: 'app-orderview',
   templateUrl: './orderview.view.html',
-  styleUrl: './orderview.view.scss',
+  styleUrls: ['./orderview.view.scss'],
   providers: [DialogService, ConfirmationService, MessageService],
 })
-export class OrderviewView {
+export class OrderviewView implements OnInit {
+  sessionInit = false;
 
+  constructor(private sessionService: SessionService) {}
+
+  ngOnInit(): void {
+    const userData = this.sessionService.getUserData();
+    if (userData) {
+      this.sessionInit = true;
+    }
+  }
 }
