@@ -96,7 +96,7 @@ export class SignInView implements OnInit {
           this.storageService.setToken(response.token)
           const userData = this.sessionService.getUserData()
           if (userData) {
-            this.subscribeToNotifications(userData.id)
+            // this.subscribeToNotifications(userData.id)
             this.userROL = userData.rol
             if (this.userROL === ERol.ADMIN) {
               this.router.navigateByUrl('/admin')
