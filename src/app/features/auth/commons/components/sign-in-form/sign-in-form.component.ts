@@ -17,6 +17,8 @@ import { NgxUiLoaderService } from 'ngx-ui-loader'
 import { ConfirmPopup } from 'primeng/confirmpopup'
 import { ConfirmDialog } from 'primeng/confirmdialog'
 import { GoogleLoginProvider, SocialAuthService } from '@abacritt/angularx-social-login'
+import { NotificService } from 'src/app/shared/services/notific.service'
+import { SwPush } from '@angular/service-worker'
 // import { ConfirmationService, ConfirmPopup } from 'primeng/api';
 
 
@@ -42,49 +44,10 @@ export class SignInFormComponent implements OnInit {
   @Output() formData: EventEmitter<ISingInRequest> = new EventEmitter<
     ISingInRequest
   >()
-  // constructor(private ngxService: NgxUiLoaderService) {}
 
-  // constructor() {}
-
-  // @ViewChild(ConfirmPopup) confirmPopup!: ConfirmPopup
-
-
-
-  // constructor(private authService: SocialAuthService) { }
-
-  // refreshToken(): void {
-  //   this.authService.refreshAccessToken(GoogleLoginProvider.PROVIDER_ID);
-  // }
-  // signInWithGoogle(): void {
-  //   this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then((userData) => {
-  //     // Aquí puedes manejar los datos del usuario devueltos por Google después de iniciar sesión
-  //     const signInRequest: ISingInRequest = {
-  //       email: userData.email || '', // Si userData.email no está disponible, se asignará una cadena vacía
-  //       password: '', // Aquí puedes dejar la contraseña vacía ya que no la necesitas para el inicio de sesión con Google
-  //     };
-  //     this.formData.emit(signInRequest);
-  //   }).catch((error) => {
-  //     // Manejo de errores
-  //     console.error('Error al iniciar sesión con Google:', error);
-  //   });
-  // }
-  
-  // signInWithGoogle(): void {
-  //   this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then((userData) => {
-  //     // Aquí puedes manejar los datos del usuario devueltos por Google después de iniciar sesión
-  //     const signInRequest: ISingInRequest = {
-  //       // Aquí puedes construir el objeto ISingInRequest con los datos del usuario si es necesario
-  //       // Por ejemplo:
-  //       // username: userData.email,
-  //       // password: '', // No necesitas la contraseña si estás usando OAuth para iniciar sesión
-  //     };
-  //     this.formData.emit(signInRequest);
-  //   }).catch((error) => {
-  //     // Manejo de errores
-  //     console.error('Error al iniciar sesión con Google:', error);
-  //   });
-  // }
   constructor(
+    private pushNotificationService: NotificService,
+    private swPush: SwPush,
     private authService: SocialAuthService,
     private ngxService: NgxUiLoaderService,
     private confirmationService: ConfirmationService,
@@ -202,6 +165,8 @@ export class SignInFormComponent implements OnInit {
   }
   send(): void {
     const formData = this.group.value
+    // this.subscribeToNotifications()
+
     if (formData.password != '' && formData.password != '') {
       this.formData.emit(formData)
     }
