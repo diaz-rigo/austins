@@ -1,0 +1,222 @@
+.full-width-container {
+  width: 100%;
+  padding: 20px;
+  background-color: #f4f4f9;
+  box-sizing: border-box;
+  background-image: url('https://static.wixstatic.com/media/64de7c_bd452d768bdf43498f0e94694ddc7040~mv2.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.full-width-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+  filter: blur(10px) brightness(0.5);
+  z-index: 1;
+}
+
+.profile-container, .compra-container {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header, .compra-container h3 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #f6ae65 0%, #f86941 100%);
+  color: white;
+  text-align: center;
+  border-radius: 8px 8px 0 0;
+}
+
+@media (min-width: 600px) {
+  .profile-header, .compra-container h3 {
+    flex-direction: row;
+    text-align: left;
+  }
+}
+
+.profile-picture-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.profile-picture {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ffffff;
+  margin-right: 20px;
+}
+
+.online-indicator {
+  position: absolute;
+  top: 75px;
+  right: 120px;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+}
+
+.online-indicator.online {
+  background-color: #00ff00;
+}
+
+.online-indicator.offline {
+  background-color: #ff0000;
+}
+
+.edit-info-container {
+  margin-top: 10px;
+  text-align: center;
+  gap: 3rem;
+}
+
+.edit-info {
+  margin-top: 10px;
+  display: block;
+  font-size: 12px;
+  color: #ffffff;
+}
+
+.profile-info {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.profile-info h2 {
+  margin: 10px 0 0 0;
+  font-size: 24px;
+}
+
+.profile-info p {
+  margin: 5px 0;
+  font-size: 16px;
+}
+
+.profile-info i {
+  margin-right: 10px;
+  color: #ffd700;
+}
+
+.account-details {
+  padding: 20px;
+}
+
+.account-details h3 {
+  margin-top: 0;
+  font-size: 20px;
+  color: #fda085;
+}
+
+.account-details ul {
+  list-style: none;
+  padding: 0;
+}
+
+.account-details ul li {
+  margin: 10px 0;
+}
+
+.edit-fields {
+  padding: 20px;
+}
+
+.edit-fields h3 {
+  margin-top: 0;
+  font-size: 20px;
+}
+
+.edit-fields form {
+  margin-top: 10px;
+}
+
+.loading-indicator {
+  text-align: center;
+  font-size: 18px;
+  color: #777;
+}
+
+.hidden {
+  display: none;
+}
+
+.file-input-label {
+  cursor: pointer;
+  color: #f86941;
+  margin-bottom: 10px;
+}
+
+.profile-picture-container input[type="file"] {
+  display: none;
+}
+
+.profile-picture-container label[for="fileInput"] {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.profile-picture-container label[for="fileInput"]:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.compra-container {
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.compra-container h4 {
+  margin-top: 10px;
+  font-size: 18px;
+  color: #333;
+}
+
+.compra-container p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.compra-container .detail-container {
+  margin-top: 15px;
+  padding: 15px;
+  border-top: 1px solid #ddd;
+}
+
+.compra-container .detail-container .product-container {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+}

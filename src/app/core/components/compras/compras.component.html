@@ -1,0 +1,28 @@
+<div class="full-width-container">
+  <div *ngIf="compras.length > 0; else noCompras">
+    <div *ngFor="let compra of compras" class="compra-container p-card p-shadow-3 p-mb-3">
+      <h3>Compra ID: {{ compra._id }}</h3>
+      <p><strong>Usuario ID:</strong> {{ compra.user }}</p>
+      <p><strong>Total Amount:</strong> {{ compra.totalAmount }}</p>
+      <p><strong>Stripe Session ID:</strong> {{ compra.stripeSessionID }}</p>
+      <p><strong>Tracking Number:</strong> {{ compra.trackingNumber }}</p>
+      <p><strong>Created At:</strong> {{ compra.createdAt | date:'short' }}</p>
+
+      <div *ngFor="let detail of compra.details" class="detail-container">
+        <h4>Detalle ID: {{ detail._id }}</h4>
+        <p><strong>Total Amount:</strong> {{ detail.totalAmount }}</p>
+        <p><strong>Delivery Type:</strong> {{ detail.deliveryType }}</p>
+        <p><strong>Delivery Date:</strong> {{ detail.deliveryDate | date:'short' }}</p>
+        <p><strong>Status:</strong> {{ detail.status }}</p>
+
+        <div *ngFor="let product of detail.products" class="product-container">
+          <p><strong>Product ID:</strong> {{ product.product }}</p>
+          <p><strong>Quantity:</strong> {{ product.quantity }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #noCompras>
+    <p>No se encontraron compras para este usuario.</p>
+  </ng-template>
+</div>

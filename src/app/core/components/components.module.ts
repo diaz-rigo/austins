@@ -48,6 +48,8 @@ import { TimelineModule } from 'primeng/timeline';
 import { PdfGenerateComponent } from './pdf-generate/pdf-generate.component';
 import { ProfileComponent } from 'src/app/core/components/profile/profile.component';
 import { PortalModule } from 'src/app/features/portal/portal.module';
+import { ComprasComponent } from './compras/compras.component';
+import { PedidosComponent } from './pedidos/pedidos.component';
 @NgModule({
   declarations: [
     ChatComponent,
@@ -59,7 +61,7 @@ import { PortalModule } from 'src/app/features/portal/portal.module';
     StepsComponent,
     ProgressBarComponent,
     PedidoFloatComponent,
-    PdfGenerateComponent,ProfileComponent
+    PdfGenerateComponent,ProfileComponent, ComprasComponent, PedidosComponent
   ],
   exports: [
     TimelineModule ,

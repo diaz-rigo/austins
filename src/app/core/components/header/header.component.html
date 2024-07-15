@@ -93,15 +93,17 @@
 
         <div class="card">
           <p-timeline [value]="events">
-              <ng-template pTemplate="content" let-event>
-                  <!-- <small class="p-text-secondary">{{ event.date }}</small> -->
-                  <small class="p-text-secondary">{{ pedidoInfo.resultado.createdAt}}</small>
-              </ng-template>
-              <ng-template pTemplate="opposite" let-event>
-                  {{ event.status }}
-              </ng-template>
+            <ng-template pTemplate="content" let-event>
+              <!-- <small class="p-text-secondary">{{ event.date }}</small> -->
+              <small class="p-text-secondary">{{
+                pedidoInfo.resultado.createdAt
+              }}</small>
+            </ng-template>
+            <ng-template pTemplate="opposite" let-event>
+              {{ event.status }}
+            </ng-template>
           </p-timeline>
-      </div>
+        </div>
       </div>
     </div>
   </div>
@@ -205,6 +207,16 @@
 <!-- HTML -->
 
 <p-sidebar [(visible)]="sidebarVisible" class="mobile-sidebar">
+  <!-- <span class="pi pi-user" *ngIf="!foto"></span>
+  <div class="profile-picture">
+    <img
+      *ngIf="foto"
+      [src]="foto"
+      alt="Profile Picture"
+      class="profile-picture"
+    />
+  </div> -->
+
   <div
     pAnimateOnScroll
     enterClass="scalein"
@@ -215,8 +227,24 @@
     data-aos-offset="500"
     data-aos-duration="500"
   >
-    <span class="pi pi-user"></span>
-    <span class="user-name">{{ userName }}</span>
+    <div class="flex flex-column h-full">
+      <div class="mt-auto">
+        <!-- <hr class="mb-3 mx-3 border-top-1 border-none surface-border" /> -->
+        <a
+          pRipple
+          class="m-3 flex align-items-center cursor-pointer p-3 gap-2 border-round text-700 hover:surface-100 transition-duration-150 transition-colors p-ripple"
+        >
+          <span class="pi pi-user" *ngIf="!foto"></span>
+
+          <p-avatar *ngIf="foto" image="{{ foto }}"  styleClass="mr-2"
+          size="large"
+          shape="circle" />
+
+        </a>
+      </div>
+      <span class="user-name">{{ userName }}</span>
+    </div>
+    <!-- <span class="pi pi-user"></span> -->
   </div>
   <!-- <hr class="sidebar-divider" /> -->
   <div class="mobile-menu-item" (click)="redirectTo('home')">
@@ -227,16 +255,22 @@
   </div>
   <div
     class="mobile-menu-item"
-    (click)="sidebarVisible4 = true; sidebarVisible = false"
+    (click)="sidebarVisible4 = true; sidebarVisible = false" *ngIf="!userName"
   >
-    <span class="pi pi-book"></span> Seguimiento -pedidos
+    <span class="pi pi-book" ></span> Seguimiento -pedidos
+  </div>
+  <div
+    class="mobile-menu-item"
+(click)="abrePedido()"
+  >
+    <span class="pi pi-book" *ngIf="userName" ></span> pedidos
   </div>
   <div class="mobile-menu-item" (click)="abreperil()" *ngIf="userName">
     <span class="pi pi-user"></span> Perfil
   </div>
   <div
     class="mobile-menu-item"
-    (click)="redirectTo('miscompras')"
+    (click)="abreCompra()"
     *ngIf="userName"
     data-aos="zoom-out-left"
   >
@@ -306,7 +340,11 @@
     <div *ngIf="!userName" class="mobile-menu-item" (click)="openSignInModal()">
       <span class="pi pi-sign-in"></span> Sign In
     </div>
-    <div *ngIf="!userName" class="mobile-menu-item" (click)="openActivateCount()">
+    <div
+      *ngIf="!userName"
+      class="mobile-menu-item"
+      (click)="openActivateCount()"
+    >
       <span class="pi pi-verified"></span> Activar *cuenta
     </div>
     <div *ngIf="userName" class="mobile-menu-item" (click)="logout()">
@@ -528,8 +566,11 @@
       <button class="menu-btn" (click)="redirectTo('home')">home</button>
 
       <!-- <button class="menu-btn" >cotizar otro diseño</button> -->
-      <button class="menu-btn" (click)="sidebarVisible4 = true">
+      <button class="menu-btn" (click)="sidebarVisible4 = true"  *ngIf="!userName">
         Seguimiento -pedidos
+      </button>
+      <button class="menu-btn" (click)="abrePedido()"  *ngIf="userName">
+         pedidos
       </button>
       <button [matMenuTriggerFor]="productsMenu" class="menu-btn">
         catalogo
@@ -569,24 +610,35 @@
         </mat-icon>
       </button>
 
-      <button *ngIf="userName" [matMenuTriggerFor]="userOption" class="menu-btn">
+      <button
+        *ngIf="userName"
+        [matMenuTriggerFor]="userOption"
+        class="menu-btn"
+      >
         <span class="pi pi-user" *ngIf="!foto"></span>
         <!-- HTML -->
-<div class="profile-picture">
-  <!-- <img src="ruta/a/tu/foto-de-perfil.jpg" alt="Profile Picture"> -->
-  <img *ngIf="foto" [src]="foto" alt="Profile Picture" class="profile-picture">
-</div>
+        <div class="profile-picture">
+          <!-- <img src="ruta/a/tu/foto-de-perfil.jpg" alt="Profile Picture"> -->
+          <img
+            *ngIf="foto"
+            [src]="foto"
+            alt="Profile Picture"
+            class="profile-picture"
+          />
+        </div>
 
         {{ userName }}
       </button>
-      
+
       <mat-menu
         style="background-color: transparent"
         class="menuweb"
         #userOption="matMenu"
         yPosition="below"
       >
-        <div mat-menu-item class="mobile-menu-item_b1" (click)="abreperil()">perfil</div>
+        <div mat-menu-item class="mobile-menu-item_b1" (click)="abreperil()">
+          perfil
+        </div>
         <div
           mat-menu-item
           class="mobile-menu-item_b1"
@@ -594,7 +646,7 @@
           data-aos-anchor-placement="bottom-center"
           data-aos-duration="900"
         >
-          <span class="pi pi-shopping-bag"></span> mis compras
+          <span class="pi pi-shopping-bag" (click)="abreCompra()"></span> mis compras
         </div>
         <div mat-menu-item class="mobile-menu-item_b1" (click)="logout()">
           <span><span class="pi pi-sign-out"></span> Cerrar sesión</span>
@@ -645,17 +697,23 @@
       <option value="popular">Popular</option>
     </select>
   </div>
-
 </div>
 
 <p-sidebar [(visible)]="perfil" [fullScreen]="true" styleClass="perfi">
   <ng-template pTemplate="header">
-      <span class="font-semibold text-xl">
-          Perfil
-      </span>
-    </ng-template>
-    <app-profile></app-profile>
-    <!-- <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit...
-    </p> -->
-  </p-sidebar>
+    <span class="font-semibold text-xl"> Perfil </span>
+  </ng-template>
+  <app-profile></app-profile>
+</p-sidebar>
+<p-sidebar [(visible)]="compras" [fullScreen]="true" styleClass="perfi">
+  <ng-template pTemplate="header">
+    <span class="font-semibold text-xl">Mis Compras </span>
+  </ng-template>
+  <app-compras></app-compras>
+</p-sidebar>
+<p-sidebar [(visible)]="pedidos" [fullScreen]="true" styleClass="perfi">
+  <ng-template pTemplate="header">
+    <span class="font-semibold text-xl"> Mis pedidos </span>
+  </ng-template>
+  <app-pedidos></app-pedidos>
+</p-sidebar>

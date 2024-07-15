@@ -13,6 +13,13 @@ export class ProfileService {
 
   constructor(private http: HttpClient) { }
 
+  getCompras(userId: string): Observable<any> {
+    return this.http.get(`${environment.api}/publicR/compras/${userId}`);
+  }
+  getPedidos(userId: string): Observable<any> {
+    return this.http.get(`${environment.api}/publicR/pedidos/${userId}`);
+  }
+
   getUserById(userId: string): Observable<User> {
     const url = `${environment.api}/user/${userId}`; // Ajusta la URL según tu estructura de ruta en el backend
     return this.http.get<User>(url);

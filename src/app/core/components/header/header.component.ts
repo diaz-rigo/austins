@@ -118,6 +118,8 @@ export class HeaderComponent implements OnInit {
   mostrardatos: boolean = false
   mostrardatos2: boolean = false
   perfil: boolean = false
+  compras: boolean = false
+  pedidos: boolean = false
 
   selectedCategory: string = 'pasteleria'
   selectedColor: string = '#ffffff' // Color inicial
@@ -630,6 +632,12 @@ export class HeaderComponent implements OnInit {
   // }
   abreperil() {
     this.perfil = true
+  }
+  abreCompra() {
+    this.compras = true
+  }
+  abrePedido() {
+    this.pedidos = true
   }
   // abreperil() {
   //   // this.perfil = true

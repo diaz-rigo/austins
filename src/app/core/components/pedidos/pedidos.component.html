@@ -1,0 +1,27 @@
+<div class="full-width-container">
+  <div *ngIf="pedidos.length > 0; else noPedidos">
+    <div *ngFor="let pedido of pedidos" class="compra-container p-card p-shadow-3 p-mb-3">
+      <h3>Pedido Código: {{ pedido.codigoPedido }}</h3>
+      <p><strong>Usuario ID:</strong> {{ pedido.usuario }}</p>
+      <p><strong>Estado del Pedido:</strong> {{ pedido.estadoPedido }}</p>
+      <p><strong>Fecha de Creación:</strong> {{ pedido.createdAt | date:'short' }}</p>
+
+      <div *ngFor="let detalle of pedido.detallePedido" class="detail-container">
+        <h4>Detalle ID: {{ detalle._id }}</h4>
+        <p><strong>Cantidad:</strong> {{ detalle.cantidad }}</p>
+        <p><strong>Día:</strong> {{ detalle.dia | date:'shortDate' }}</p>
+        <p><strong>Hora:</strong> {{ detalle.hora }}</p>
+        <p><strong>Modo:</strong> {{ detalle.modo }}</p>
+        <p *ngIf="detalle.modoPersonalizado"><strong>Modo Personalizado:</strong> {{ detalle.modoPersonalizado }}</p>
+        <p><strong>Sabor:</strong> {{ detalle.sabor }}</p>
+        <p *ngIf="detalle.saborPersonalizado"><strong>Sabor Personalizado:</strong> {{ detalle.saborPersonalizado }}</p>
+        <p *ngIf="detalle.decoracion"><strong>Decoración:</strong> {{ detalle.decoracion }}</p>
+        <p *ngIf="detalle.mensajePersonalizado"><strong>Mensaje Personalizado:</strong> {{ detalle.mensajePersonalizado }}</p>
+        <p><strong>Precio Total:</strong> {{ detalle.precioTotal }}</p>
+      </div>
+    </div>
+  </div>
+  <ng-template #noPedidos>
+    <p>No se encontraron pedidos para este usuario.</p>
+  </ng-template>
+</div>
