@@ -50,6 +50,7 @@ import { ProfileComponent } from 'src/app/core/components/profile/profile.compon
 import { PortalModule } from 'src/app/features/portal/portal.module';
 import { ComprasComponent } from './compras/compras.component';
 import { PedidosComponent } from './pedidos/pedidos.component';
+
 @NgModule({
   declarations: [
     ChatComponent,
