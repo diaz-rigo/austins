@@ -1,0 +1,25 @@
+<div class="post-container">
+  <div class="background-image" [ngClass]="{'hidden-background': isScrolled, 'visible-background': showBackground}"></div>
+  <div class="content">
+    <div class="poster" [ngClass]="{'reverse': i % 2 !== 0}" *ngFor="let poster of posters; let i = index">
+      <img [src]="poster.img" [alt]="poster.alt">
+      <div class="text" data-aos="fade-down-left">
+        <h1>{{ poster.title }}</h1>
+        <p>{{ poster.description }}</p>
+        <button class="cta-button">Ver Más</button>
+      </div>
+    </div>
+  </div>
+  <div class="special-events">
+    <h2>Para Eventos Especiales</h2>
+    <div class="event" *ngFor="let event of specialEvents">
+      <div class="event-background" [style.background-image]="'url(' + event.img + ')'" [style.backgroundColor]="event.backgroundColor">
+        <div class="event-description" data-aos="zoom-in">
+          <h3>{{ event.title }}</h3>
+          <p>{{ event.description }}</p>
+          <button class="cta-button">Descubre Más</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

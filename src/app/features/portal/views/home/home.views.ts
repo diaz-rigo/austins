@@ -145,7 +145,7 @@ export class HomeViews implements OnInit {
         setTimeout(() => {
           this.originalProducts = response;
           if (this.originalProducts.length < 0) {
-            this.reloadPage() 
+            this.reloadPage()
           }
             this.loadingProducts = false; // Establece loadingProducts en false una vez que los productos se han cargado
 
@@ -210,5 +210,10 @@ export class HomeViews implements OnInit {
       }, this.autoplayInterval);
     }
 
-
+    scrollToProducts() {
+      const productsSection = document.getElementById('products-section');
+      if (productsSection) {
+        productsSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
 }

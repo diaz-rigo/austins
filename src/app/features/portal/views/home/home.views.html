@@ -35,13 +35,17 @@
       </p>
     </div>
     <div class="owner">
+      <button class="contact-owner" (click)="scrollToProducts()"> <i class="pi pi-chevron-circle-down"></i>
+        Ir a Productos</button>
+    </div>
+    <!-- <div class="owner">
       <h2>Propiedad de Graham Austin</h2>
       <button class="contact-owner">Contactar al Propietario</button>
-    </div>
+    </div> -->
   </div>
 </div>
 
-<div data-aos="fade-up" data-aos-anchor-placement="bottom-bottom">
+<div data-aos="fade-up" data-aos-anchor-placement="bottom-bottom" class="fnd">
   <h1
     style="
       color: rgb(255, 140, 25);
@@ -74,9 +78,9 @@
   </div>
 </div>
 
-<app-catalogo-vista2 *ngIf="!loadingProducts"></app-catalogo-vista2>
+<app-catalogo-vista2 *ngIf="!loadingProducts" id="products-section"></app-catalogo-vista2>
 
-<div data-aos="fade-up" data-aos-anchor-placement="bottom-bottom">
+<div data-aos="fade-up" data-aos-anchor-placement="bottom-bottom" >
   <h1
     style="
       color: rgb(255, 140, 25);
@@ -84,7 +88,7 @@
       text-align: center;
       margin-bottom: 20px;
     "
-  >
+    >
     Lo más reciente
   </h1>
 </div>
@@ -111,8 +115,8 @@
   </div>
 </div>
 
-<div *ngIf="!loadingProducts">
-  <div *ngIf="hasSearchResults; else noResults">
+<div *ngIf="!loadingProducts"  >
+  <div *ngIf="hasSearchResults; else noResults" >
     <div class="card">
       <p-carousel
         [value]="filteredProducts"
@@ -141,3 +145,5 @@
     <!-- <img src="assets/no-results-image.png" alt="No Results" class="no-results-image" /> -->
   </div>
 </ng-template>
+
+<app-post></app-post>

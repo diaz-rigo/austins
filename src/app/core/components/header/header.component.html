@@ -564,7 +564,7 @@
       data-aos-anchor-placement="bottom-center"
       data-aos-duration="900"
     >
-      <button class="menu-btn" (click)="redirectTo('home')">home</button>
+      <button class="menu-btn" (click)="redirectTo('home')"><span class="pi pi-home"></span> home</button>
 
       <!-- <button class="menu-btn" >cotizar otro diseño</button> -->
       <button
@@ -572,13 +572,13 @@
         (click)="sidebarVisible4 = true"
         *ngIf="!userName"
       >
-        Seguimiento -pedidos
+      <span class="pi pi-book"></span>  Seguimiento -pedidos
       </button>
       <button class="menu-btn" (click)="abrePedido()" *ngIf="userName">
         pedidos
       </button>
       <button [matMenuTriggerFor]="productsMenu" class="menu-btn">
-        catalogo
+        <span class="pi pi-gift"></span>  catalogo
       </button>
       <mat-menu
         style="background-color: transparent"
@@ -634,7 +634,7 @@
           *ngIf="foto"
           image="{{ foto }}"
           styleClass="mr-2"
-   
+
           shape="circle"
         />
         <div *ngIf="!foto"><i class="pi pi-user"></i> {{ userName }}</div>

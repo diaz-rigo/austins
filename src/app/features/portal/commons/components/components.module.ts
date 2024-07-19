@@ -15,10 +15,12 @@ import { FilterPipe } from 'src/app/shared/pipes/filter.pipe';
 import { DefaultImgModule } from 'src/app/shared/pipes/default-img/default-img.module';
 import { CatalogoComponent } from './catalogo/catalogo.component';
 import { CatalogoVista2Component } from './catalogo-vista2/catalogo-vista2.component';
-const COMPONENTS = [ProductComponent,DetailImgComponent, DetailInfoComponent,CatalogoComponent,CatalogoVista2Component]; // Agrega los componentes
+import { PostComponent } from './post/post.component';
+import { ProductReviewComponent } from './product-review/product-review.component';
+const COMPONENTS = [ProductComponent,DetailImgComponent, DetailInfoComponent,CatalogoComponent,CatalogoVista2Component,PostComponent]; // Agrega los componentes
 
 @NgModule({
-  declarations: [...COMPONENTS,FilterPipe],
+  declarations: [...COMPONENTS,FilterPipe, ProductReviewComponent, ],
   exports: [...COMPONENTS],
   imports: [
     FormsModule,
@@ -26,7 +28,7 @@ const COMPONENTS = [ProductComponent,DetailImgComponent, DetailInfoComponent,Cat
     MaterialModule,
     ReactiveFormsModule,
     DefaultImgModule,
-    
+
     // Agrega aquí otros módulos compartidos si es necesario
   ]
 })
