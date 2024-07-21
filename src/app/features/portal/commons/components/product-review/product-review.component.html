@@ -44,13 +44,18 @@
   </form>
 </div>
 
-<p-splitter *ngIf="totalReviews > 0" [panelSizes]="[65, 53]" [style]="{ height: 'auto' }" styleClass="mb-5">
+<p-splitter
+  *ngIf="totalReviews > 0"
+  [panelSizes]="[45, 55]"
+  [style]="{ height: 'auto' }"
+  styleClass="mb-5"
+>
   <ng-template pTemplate>
     <div class="col flex align-items-center justify-content-center">
       <div header="Estadísticas de Reseñas" class="form-container">
         <div class="row">
           <strong>Calificación Promedio:</strong>
-          {{ averageRating | number:'1.2-2' }} / 5
+          {{ averageRating | number : "1.2-2" }} / 5
         </div>
         <div class="row">
           <strong>Total de Reseñas:</strong>
@@ -75,7 +80,7 @@
   <ng-template pTemplate>
     <ul class="review-list">
       <li *ngFor="let review of reviews" class="review">
-        <div class="user-info">
+        <div class="user-info" data-aos="zoom-in-down">
           <ng-container *ngIf="review.userDetails?.profilePhoto; else noPhoto">
             <img
               [src]="review.userDetails?.profilePhoto"
@@ -93,12 +98,16 @@
           </ng-template>
           <div class="user-details">
             <p>
-              <strong>{{ review.userDetails?.name }} {{ review.userDetails?.paternalLastname }} {{ review.userDetails?.maternalLastname }}</strong>
+              <strong
+                >{{ review.userDetails?.name }}
+                {{ review.userDetails?.paternalLastname }}
+                {{ review.userDetails?.maternalLastname }}</strong
+              >
             </p>
           </div>
         </div>
         <p>{{ review.comment }}</p>
-        <div class="rating">
+        <div class="rating" data-aos="zoom-out-left">
           <p-rating
             [(ngModel)]="review.rating"
             [readonly]="true"
@@ -106,7 +115,7 @@
             [cancel]="false"
           ></p-rating>
         </div>
-        <div class="review-date">
+        <div class="review-date" data-aos="zoom-out-left">
           <span>{{ formatDate(review.date) }}</span>
         </div>
       </li>
