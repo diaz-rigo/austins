@@ -80,7 +80,9 @@
   <ng-template pTemplate>
     <ul class="review-list">
       <li *ngFor="let review of reviews" class="review">
-        <div class="user-info" data-aos="zoom-in-down">
+        <div class="user-info" data-aos="fade-right"
+        data-aos-offset="300"
+        data-aos-easing="ease-in-sine">
           <ng-container *ngIf="review.userDetails?.profilePhoto; else noPhoto">
             <img
               [src]="review.userDetails?.profilePhoto"
@@ -107,7 +109,8 @@
           </div>
         </div>
         <p>{{ review.comment }}</p>
-        <div class="rating" data-aos="zoom-out-left">
+        <div class="rating" data-aos="fade-up"
+        data-aos-anchor-placement="bottom-bottom">
           <p-rating
             [(ngModel)]="review.rating"
             [readonly]="true"
@@ -115,7 +118,8 @@
             [cancel]="false"
           ></p-rating>
         </div>
-        <div class="review-date" data-aos="zoom-out-left">
+        <div class="review-date"   data-aos="fade-up"
+        data-aos-anchor-placement="bottom-bottom">
           <span>{{ formatDate(review.date) }}</span>
         </div>
       </li>

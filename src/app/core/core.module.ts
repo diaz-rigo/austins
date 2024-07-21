@@ -12,6 +12,7 @@ import { PortalModule } from '@angular/cdk/portal';
   //   PoliticaComponent
   // ],
   imports: [
+
     CommonModule,DefaultImgModule,
   ]
 })

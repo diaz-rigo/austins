@@ -11,7 +11,7 @@ import { RouterModule } from '@angular/router';
 import { MatBadgeModule } from '@angular/material/badge';
 import { PoliticaComponent } from './politica/politica.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SignInService } from 'src/app/features/auth/commons/services/sign-in.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CookiesComponent } from './cookies/cookies.component';
@@ -50,7 +50,7 @@ import { ProfileComponent } from 'src/app/core/components/profile/profile.compon
 import { PortalModule } from 'src/app/features/portal/portal.module';
 import { ComprasComponent } from './compras/compras.component';
 import { PedidosComponent } from './pedidos/pedidos.component';
-
+import { InputNumberModule } from 'primeng/inputnumber';
 @NgModule({
   declarations: [
     ChatComponent,
@@ -84,11 +84,12 @@ import { PedidosComponent } from './pedidos/pedidos.component';
     PdfGenerateComponent
   ],
   imports: [
+    InputNumberModule,
     TimelineModule,
     InputTextModule,
     InputGroupModule,
     InputGroupAddonModule,
-
+    ReactiveFormsModule,
     ToastModule,
     // BrowserModule,
     CalendarModule,

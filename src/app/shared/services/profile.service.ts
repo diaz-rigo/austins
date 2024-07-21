@@ -29,4 +29,8 @@ export class ProfileService {
     const url = `${environment.api}/perfil/${userId}/update-photo`;
     return this.http.put(url, { imageUrl });
   }
+  updateUserProfile(userId: string, updatedData: Partial<User>): Observable<any> {
+    const url = `${environment.api}/user/${userId}`;
+    return this.http.put(url, updatedData);
+  }
 }

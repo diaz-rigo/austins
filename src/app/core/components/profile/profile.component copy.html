@@ -1,32 +1,26 @@
-<!-- HTML -->
 <div class="full-width-container">
   <div *ngIf="user" class="profile-container">
     <!-- Profile Header -->
     <div class="profile-header p-card p-shadow-3 p-mb-3">
       <div class="profile-picture-container">
-        <img [src]="user.profilePhoto ? user.profilePhoto : 'defaultImg'" 
+        <img [src]="user.profilePhoto ? user.profilePhoto : 'defaultImg'"
              alt="Profile Picture" class="profile-picture">
+                   <!-- Indicador de estado -->
+        <span [ngClass]="{'online': true, 'offline': !user}" class="online-indicator"
+        aria-label="Usuario en línea"></span>
         <!-- Input de tipo file con control de visibilidad -->
-        <input type="file" (change)="canEditProfile() ? onFileSelected($event) : null" accept="image/*"
-               [class.hidden]="!canEditProfile()" id="fileInput">
+        <input type="file" (change)="canEditProfile() ? onFileSelected($event) : null" accept="image/*" id="fileInput" class="hidden">
         <label for="fileInput" [class.hidden]="!canEditProfile()" class="file-input-label">
           <i class="pi pi-camera"></i> Cambiar Foto
         </label>
-        <!-- Indicador de estado -->
-        <span [ngClass]="{'online': true, 'offline': !user}" class="online-indicator" 
-              aria-label="Usuario en línea"></span>
+
         <!-- Mensaje de edición -->
         <div class="edit-info-container">
           <span *ngIf="canEditProfile()" class="edit-info">Puedes editar la foto de perfil.</span>
           <span *ngIf="!canEditProfile()" class="edit-info">No puedes editar la foto de perfil hasta dentro de {{ 60 - getDaysSinceLastUpdate() }} días.</span>
         </div>
       </div>
-      <div class="profile-info">
-        <h2>{{ user.name }}</h2>
-        <p><i class="pi pi-envelope"></i> Email: {{ user.email }}</p>
-        <p><i class="pi pi-phone"></i> Teléfono: {{ user.phone }}</p>
-        <p><i class="pi pi-map-marker"></i> Dirección: {{ user.address }}, {{ user.city }}, {{ user.country }}</p>
-      </div>
+
     </div>
 
     <!-- Más detalles de la cuenta -->

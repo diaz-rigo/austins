@@ -3,26 +3,42 @@
     <!-- Profile Header -->
     <div class="profile-header p-card p-shadow-3 p-mb-3">
       <div class="profile-picture-container">
-        <img [src]="user.profilePhoto ? user.profilePhoto : 'defaultImg'" 
-             alt="Profile Picture" class="profile-picture">
-                   <!-- Indicador de estado -->
-        <span [ngClass]="{'online': true, 'offline': !user}" class="online-indicator" 
-        aria-label="Usuario en línea"></span>
-        <!-- Input de tipo file con control de visibilidad -->
-        <input type="file" (change)="canEditProfile() ? onFileSelected($event) : null" accept="image/*" id="fileInput" class="hidden">
-        <label for="fileInput" [class.hidden]="!canEditProfile()" class="file-input-label">
+        <img
+          [src]="user.profilePhoto ? user.profilePhoto : 'defaultImg'"
+          alt="Profile Picture"
+          class="profile-picture"
+        />
+        <span
+          [ngClass]="{ online: true, offline: !user }"
+          class="online-indicator"
+          aria-label="Usuario en línea"
+        ></span>
+        <input
+          type="file"
+          (change)="canEditProfile() ? onFileSelected($event) : null"
+          accept="image/*"
+          id="fileInput"
+          class="hidden"
+        />
+        <label
+          for="fileInput"
+          [class.hidden]="!canEditProfile()"
+          class="file-input-label"
+        >
           <i class="pi pi-camera"></i> Cambiar Foto
         </label>
-  
-        <!-- Mensaje de edición -->
         <div class="edit-info-container">
-          <span *ngIf="canEditProfile()" class="edit-info">Puedes editar la foto de perfil.</span>
-          <span *ngIf="!canEditProfile()" class="edit-info">No puedes editar la foto de perfil hasta dentro de {{ 60 - getDaysSinceLastUpdate() }} días.</span>
+          <span *ngIf="canEditProfile()" class="edit-info"
+            >Puedes editar la foto de perfil.</span
+          >
+          <span *ngIf="!canEditProfile()" class="edit-info"
+            >No puedes editar la foto de perfil hasta dentro de
+            {{ 60 - getDaysSinceLastUpdate() }} días.</span
+          >
         </div>
       </div>
       <div class="profile-info">
-        <!-- <h2>{{ user.name }}</h2> -->
-
+        <h2>{{ user.name }}</h2>
       </div>
     </div>
 
@@ -30,40 +46,164 @@
     <div class="account-details p-card p-shadow-3">
       <h3>Más detalles de la cuenta</h3>
       <ul>
-        <li><strong>Nombre:</strong> {{ user.name }} {{ user.paternalLastname }} {{ user.maternalLastname }}</li>
+        <li>
+          <strong>Nombre:</strong> {{ user.name }} {{ user.paternalLastname }}
+          {{ user.maternalLastname }}
+        </li>
         <li><strong>Email:</strong> {{ user.email }}</li>
-        <li><strong>Teléfono:</strong> {{ user.phone }}</li>
-        <li><strong>Dirección:</strong> {{ user.address }}, {{ user.city }}, {{ user.country }}</li>
-        <li><strong>Código Postal:</strong> {{ user.postalCode }}</li>
+        <li *ngIf="user.phone && !isEditing.phone">
+          <strong>Teléfono:</strong> {{ user.phone }}
+        </li>
+        <li *ngIf="user.address && !isEditing.address">
+          <strong>Dirección:</strong> {{ user.address }}, {{ user.city }},
+          {{ user.country }}
+        </li>
+        <li *ngIf="user.postalCode && !isEditing.postalCode">
+          <strong>Código Postal:</strong> {{ user.postalCode }}
+        </li>
+
+        <li *ngIf="user.dateOfBirth">
+          <strong>Fecha de Nacimiento:</strong>
+          {{ user.dateOfBirth | date : "dd/MM/yyyy" }}
+        </li>
+        <li><strong>Estado:</strong> {{ user.status }}</li>
       </ul>
     </div>
 
     <!-- Inputs para los campos faltantes -->
-    <div class="edit-fields p-card p-shadow-3 p-mt-3">
+    <div class="edit-fields p-card p-shadow-3 p-mt-3" *ngIf="showForm">
       <h3>Actualizar Información del Usuario</h3>
-      <form (ngSubmit)="updateUserData()">
-        <div class="p-field p-grid">
+      <form [formGroup]="profileForm" (ngSubmit)="updateUserData()">
+        <!-- Código Postal -->
+        <div class="p-field p-grid" *ngIf="!mostrarpostalCode">
           <label class="p-col-12 p-md-2" for="postalCode">Código Postal</label>
           <div class="p-col-12 p-md-10">
-            <input id="postalCode" type="text" pInputText [(ngModel)]="user.postalCode" name="postalCode">
+            <p-inputNumber
+              id="postalCode"
+              formControlName="postalCode"
+              mode="decimal"
+              [maxlength]="5"
+              [useGrouping]="false"
+            ></p-inputNumber>
+            <div
+              *ngIf="
+                profileForm.controls['postalCode'].invalid &&
+                (profileForm.controls['postalCode'].dirty ||
+                  profileForm.controls['postalCode'].touched)
+              "
+            >
+              <small
+                *ngIf="profileForm.controls['postalCode'].errors?.['required']"
+                class="p-error"
+                >El código postal es requerido.</small
+              >
+              <small
+                *ngIf="profileForm.controls['postalCode'].errors?.['pattern']"
+                class="p-error"
+                >El código postal debe ser numérico y de 5 dígitos.</small
+              >
+            </div>
           </div>
         </div>
-        <div class="p-field p-grid">
-          <label class="p-col-12 p-md-2" for="securityQuestion">Pregunta de Seguridad</label>
+
+        <!-- Nombre -->
+        <div class="p-field p-grid" *ngIf="!mostrarnombre">
+          <label class="p-col-12 p-md-2" for="name">Nombre</label>
           <div class="p-col-12 p-md-10">
-            <input id="securityQuestion" type="text" pInputText [(ngModel)]="user.securityQuestion" name="securityQuestion">
+            <input id="name" type="text" pInputText formControlName="name" />
           </div>
         </div>
-        <div class="p-field p-grid">
-          <label class="p-col-12 p-md-2" for="securityAnswer">Respuesta de Seguridad</label>
+
+        <!-- Apellido Paterno -->
+        <div class="p-field p-grid" *ngIf="!mostrarpaternalLastname">
+          <label class="p-col-12 p-md-2" for="paternalLastname"
+            >Apellido Paterno</label
+          >
           <div class="p-col-12 p-md-10">
-            <input id="securityAnswer" type="text" pInputText [(ngModel)]="user.securityAnswer" name="securityAnswer">
+            <input
+              id="paternalLastname"
+              type="text"
+              pInputText
+              formControlName="paternalLastname"
+            />
           </div>
         </div>
-        <!-- Agrega más campos según sea necesario -->
-        <button type="submit" pButton label="Actualizar" [disabled]="!canEditProfile()"></button>
+
+        <!-- Apellido Materno -->
+        <div class="p-field p-grid" *ngIf="!mostrarmaternalLastname">
+          <label class="p-col-12 p-md-2" for="maternalLastname"
+            >Apellido Materno</label
+          >
+          <div class="p-col-12 p-md-10">
+            <input
+              id="maternalLastname"
+              type="text"
+              pInputText
+              formControlName="maternalLastname"
+            />
+          </div>
+        </div>
+
+        <!-- Teléfono -->
+        <div class="p-field p-grid" *ngIf="!mostrarphone">
+          <label class="p-col-12 p-md-2" for="phone">Teléfono</label>
+          <div class="p-col-12 p-md-10">
+            <input id="phone" type="text" pInputText formControlName="phone" />
+          </div>
+        </div>
+        <!-- País -->
+        <div class="p-field p-grid" *ngIf="!mostrarcountry">
+          <label class="p-col-12 p-md-2" for="country">País</label>
+          <div class="p-col-12 p-md-10">
+            <input
+              id="country"
+              type="text"
+              pInputText
+              formControlName="country"
+            />
+          </div>
+        </div>
+        <!-- Ciudad -->
+        <div class="p-field p-grid" *ngIf="!mostrarcity">
+          <label class="p-col-12 p-md-2" for="city">Ciudad</label>
+          <div class="p-col-12 p-md-10">
+            <input id="city" type="text" pInputText formControlName="city" />
+          </div>
+        </div>
+        <!-- Dirección -->
+        <div class="p-field p-grid" *ngIf="!mostraraddress">
+          <label class="p-col-12 p-md-2" for="address">Dirección</label>
+          <div class="p-col-12 p-md-10">
+            <input
+              id="address"
+              type="text"
+              pInputText
+              formControlName="address"
+            />
+          </div>
+        </div>
+
+        <div class="p-field p-grid" *ngIf="!mostrardateOfBirth">
+          <label class="p-col-12 p-md-2" for="dateOfBirth"
+            >Fecha de Nacimiento</label
+          >
+          <div class="p-col-12 p-md-10">
+            <input
+              id="dateOfBirth"
+              type="date"
+              pInputText
+              formControlName="dateOfBirth"
+            />
+          </div>
+        </div>
+        <p-button label="Guardar"  type="submit" [outlined]="true" severity="success"  [disabled]="profileForm.invalid" />
+
       </form>
     </div>
+    <p-button icon="pi pi-pencil"    label="Editar"    (onClick)="editar()" [outlined]="true" severity="info" />
+
+
+    <!-- <button type="submit" pButton label="Actualizar"></button> -->
   </div>
 
   <div *ngIf="!user" class="loading-indicator">
