@@ -5,25 +5,42 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-// import { BrowserModule } from '@angular/platform-browser';
-//
-// import { FormsModule } from '@angular/forms';
-//
-// import { SkeletonModule } from 'primeng/skeleton';
 import { CarouselModule } from 'primeng/carousel';
 import { Tag } from 'primeng/tag';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-// import { InputTextModule } from 'primeng/inputtext';
-// import { ButtonModule } from 'primeng/button';
 import { InputNumberModule } from 'primeng/inputnumber';
-// import { ButtonModule } from 'primeng/button';
 import { SplitterModule } from 'primeng/splitter';
 import { CardModule } from 'primeng/card';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
-
 import { SkeletonModule } from 'primeng/skeleton';
+import { AvatarModule } from 'primeng/avatar';
+import { AvatarGroupModule } from 'primeng/avatargroup';
+import { RatingModule } from 'primeng/rating';
+import { DividerModule } from 'primeng/divider';
+
+const MATERIAL_PRIME_MODULES = [
+  DividerModule,
+  RatingModule,
+  ConfirmPopupModule,
+  CardModule,
+  SplitterModule,
+  ButtonModule,
+  SkeletonModule,
+  MatCardModule,
+  MatIconModule,
+  MatFormFieldModule,
+  MatButtonModule,
+  MatInputModule,
+  CarouselModule,
+  InputTextModule,
+  InputNumberModule,
+  AvatarModule,
+  AvatarGroupModule
+];
+
 @NgModule({
-  exports: [ConfirmPopupModule,CardModule,SplitterModule,ButtonModule,SkeletonModule,MatCardModule, MatIconModule,MatFormFieldModule, MatButtonModule, MatInputModule,CarouselModule,InputTextModule,InputNumberModule],
+  imports: [CommonModule, ...MATERIAL_PRIME_MODULES],
+  exports: MATERIAL_PRIME_MODULES,
 })
 export class MaterialModule {}

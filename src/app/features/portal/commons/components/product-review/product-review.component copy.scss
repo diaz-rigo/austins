@@ -1,0 +1,135 @@
+.product-reviews {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.columns {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.left-column, .right-column {
+  flex: 1;
+  min-width: 300px;
+}
+
+.review {
+  border-bottom: 1px solid #ddd;
+  padding: 15px 0;
+  margin-bottom: 15px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.profile-photo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.initials {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 20px;
+  margin-right: 10px;
+  background-color: #007bff; /* Color por defecto */
+}
+
+.user-details p {
+  margin: 0;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+}
+
+.rating p-rating {
+  margin-right: 5px;
+}
+
+.p-rating .p-rating-icon {
+  color: #ffa500; /* Color de las estrellas */
+}
+
+.p-rating .p-rating-icon.p-rating-icon-active {
+  color: #ff4500; /* Color de las estrellas activas */
+}
+
+.review-date {
+  font-size: 12px;
+  color: #888;
+  margin-top: 5px;
+}
+
+.card {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+
+.submit-review-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.submit-review-button:hover {
+  background-color: #218838;
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  resize: vertical;
+}
+
+input[pInputText] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+p-rating {
+  margin-bottom: 10px;
+}
+
+p-button {
+  margin-top: 10px;
+}
+
+.form-container {
+  max-width: 800px; /* Ajusta según tu necesidad */
+  margin: auto;
+  padding: 20px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}

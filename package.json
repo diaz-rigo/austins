@@ -25,6 +25,7 @@
 		"@angular/service-worker": "^17.2.2",
 		"@auth0/angular-jwt": "^5.2.0",
 		"@fortawesome/fontawesome-svg-core": "^6.5.1",
+		"@google/generative-ai": "^0.15.0",
 		"@material/snackbar": "^14.0.0",
 		"aos": "^2.3.4",
 		"chart.js": "^4.4.2",

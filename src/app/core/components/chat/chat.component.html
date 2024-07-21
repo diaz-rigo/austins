@@ -21,14 +21,6 @@
     <mat-icon>{{ chatOpen ? "close" : "cancel" }}</mat-icon>
   </div>
 
-
-  <!-- <div *ngFor="let message of chatHistory" class="message-container">
-    <div class="mesasjes">
-      <div [ngClass]="message.role === 'user' ? 'user-message' : 'assistant-message'">
-        {{ message.content }}
-      </div>
-    </div>
-  </div> -->
   <div *ngFor="let message of chatHistory" class="message-container">
     <div class="mesasjes">
       <div [ngClass]="message.role === 'user' ? 'user-message' : 'assistant-message'">
@@ -71,7 +63,6 @@
       data-aos-duration="500"
     />
     <button class="send-button" (click)="sendMessage()">
-      <!-- <mat-icon>send</mat-icon> -->
       <i class="pi pi-send"></i>
     </button>
   </div>
