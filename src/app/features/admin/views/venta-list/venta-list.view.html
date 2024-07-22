@@ -1,51 +1,52 @@
 <div class="container">
-    <div class="subcontenido">
-      <h1 class="view-title">Pedidos</h1>
+  <div class="subcontenido">
+    <h1 class="view-title">Pedidos</h1>
 
-      <div>
-        <form class="form">
-          <mat-form-field class="form-field">
-            <input matInput placeholder="Buscar" formControlName="query" />
-          </mat-form-field>
-        </form>
-      </div>
-      <br>
+    <div>
+      <form class="form">
+        <mat-form-field class="form-field">
+          <input matInput placeholder="Buscar" formControlName="query" />
+        </mat-form-field>
+      </form>
+    </div>
+    <br>
 
-      <div *ngFor="let venta of ventas" class="info-container">
-        <p-panel [toggleable]="true" [collapsed]="true">
-          <ng-template pTemplate="header">
-            <div class="order-header">
-                <li *ngFor="let user of venta.userInfo">
-              <span class="order-id">{{ user.name }}</span>
-              <span class="order-status">{{ venta.status }}</span>
-            </div>
-          </ng-template>
-          <ng-template pTemplate="content">
-            <div class="order-details">
-              <span class="order-id">Venta #{{ venta._id }}</span>
-              <p><strong>Fecha de Entrega:</strong> {{ venta.deliveryDate }}</p>
-              <p><strong>Total:</strong> {{ venta.totalAmount }}</p>
-              <p><strong>Tipo de Entrega:</strong> {{ venta.deliveryType }}</p>
-              <p><strong>Instrucción:</strong> {{ venta.instrucion }}</p>
-              <p><strong>Fecha de Creación:</strong> {{ venta.createdAt | date }}</p>
-              <p><strong>Productos:</strong></p>
-              <ul class="order-items">
-                <li *ngFor="let product of venta.products">
-                  <span><strong>Producto:</strong> {{ product.product }}</span>
-                  <span><strong>Cantidad:</strong> {{ product.quantity }}</span>
-                </li>
-              </ul>
-              <p><strong>Información del Usuario:</strong></p>
-              <ul class="user-info">
-                <li *ngFor="let user of venta.userInfo">
-                  <span><strong>Nombre:</strong> {{ user.name }}</span>
-                  <span><strong>Email:</strong> {{ user.email }}</span>
-                  <span><strong>Teléfono:</strong> {{ user.phone }}</span>
-                </li>
-              </ul>
-            </div>
-          </ng-template>
-        </p-panel>
-      </div>
+    <div *ngFor="let venta of ventas" class="info-container">
+      <p-panel [toggleable]="true" [collapsed]="true">
+        <ng-template pTemplate="header">
+          <div class="order-header">
+            <span class="order-id">{{ venta.userInfo[0]?.name || 'Sin Nombre' }}</span>
+            <span class="order-status">{{ venta.status }}</span>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="content">
+          <div class="order-details">
+            <p><strong>Venta #:</strong> {{ venta._id }}</p>
+            <p><strong>Fecha de Entrega:</strong> {{ venta.deliveryDate | date }}</p>
+            <p><strong>Total:</strong> {{ venta.totalAmount | currency }}</p>
+            <p><strong>Tipo de Entrega:</strong> {{ venta.deliveryType }}</p>
+            <p><strong>Instrucción:</strong> {{ venta.instrucion }}</p>
+            <p><strong>Fecha de Creación:</strong> {{ venta.createdAt | date }}</p>
+            <p><strong>Productos:</strong></p>
+            <ul class="order-items">
+              <li *ngFor="let product of venta.products">
+                <span><strong>Producto:</strong> {{ product.product }}</span>
+                <span><strong>Cantidad:</strong> {{ product.quantity }}</span>
+              </li>
+            </ul>
+            <p><strong>Información del Usuario:</strong></p>
+            <ul class="user-info">
+              <li *ngFor="let user of venta.userInfo">
+                <span><strong>Nombre:</strong> {{ user.name }}</span>
+                <span><strong>Email:</strong> {{ user.email }}</span>
+                <span><strong>Teléfono:</strong> {{ user.phone }}</span>
+                <img src="{{ user.profilePhoto }}" alt="Foto de Perfil" class="profile-photo">
+
+              </li>
+            </ul>
+          </div>
+        </ng-template>
+      </p-panel>
     </div>
   </div>
+</div>

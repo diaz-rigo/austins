@@ -33,6 +33,7 @@ export class VentaListView {
   consultarPedidosPeriodicamente(): void {
     this.ordersService.getAllVentas().subscribe((orders: any) => {
       this.ventas = orders.ventas;
+      console.log( this.ventas)
     });
   }
 }

@@ -9,6 +9,7 @@ import { OpenDeleteConfirmationComponent } from '../../commons/components/open-d
 import { MatDialog } from '@angular/material/dialog';
 import { EditProductComponentComponent } from '../../commons/components/edit-product-component/edit-product-component.component';
 import { CreateProductComponentComponent } from '../../commons/components/create-product-component/create-product-component.component';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-product-list',
@@ -35,7 +36,9 @@ export class ProductListView implements OnInit {
   @Input()
   images!: string[];
   srcMain!: string;
-  constructor(
+  isMobile: boolean = false;
+
+  constructor(private breakpointObserver: BreakpointObserver,
     private productService: ProductService,
     private fb: FormBuilder,
     private dialog: MatDialog
@@ -54,6 +57,10 @@ export class ProductListView implements OnInit {
       });
   }
   ngOnInit(): void {
+    this.breakpointObserver.observe([Breakpoints.Handset])
+    .subscribe(result => {
+      this.isMobile = result.matches;
+    });
     this.loadProducts();
   }
 

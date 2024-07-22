@@ -1,91 +1,38 @@
-/* Estilos generales */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f9;
-  margin: 0;
-  padding: 20px;
-}
-
-h2 {
-  color: #333;
-  margin-bottom: 10px;
-}
-
-p {
-  color: #666;
-}
-
-/* Estilos para las tablas */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-}
-
-thead {
-  background-color: #4CAF50;
-  color: white;
-}
-
-th, td {
-  padding: 10px;
-  text-align: left;
-  border: 1px solid #ddd;
-}
-
-tbody tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-tbody tr:hover {
-  background-color: #e9e9e9;
-}
-
-/* Estilos para los botones */
-button {
-  padding: 5px 10px;
-  margin-right: 5px;
-  border: none;
-  cursor: pointer;
-  border-radius: 3px;
-}
-
-button:hover {
-  opacity: 0.8;
-}
-
-button:active {
-  transform: scale(0.98);
-}
-
-button.edit {
-  background-color: #2196F3;
-  color: white;
-}
-
-button.delete {
-  background-color: #f44336;
-  color: white;
-}
-
-/* Contenedor de tablas */
+/* Estilo para contenedores de tablas */
 .table-container {
-  margin-bottom: 40px;
-  background: #fff;
-  padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 2rem 0;
+}
+
+/* Estilo para contenedores de tablas */
+.table-responsive {
+  overflow-x: auto;
+  margin-bottom: 2rem;
+}
+
+/* Contenedor de tarjetas */
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+/* Estilo de cada tarjeta */
+.card {
+  border: 1px solid #ccc;
   border-radius: 8px;
+  padding: 1rem;
+  flex: 1 1 calc(50% - 2rem);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilos para la foto de perfil y la inicial */
-.profile-photo {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
+/* Estilo de los títulos en las tarjetas */
+.card h3 {
+  margin-top: 0;
 }
 
-.initial-circle {
+/* Estilo común para círculos iniciales y fotos de perfil */
+.initial-circle, .profile-photo {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -93,6 +40,63 @@ button.delete {
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 18px;
   font-weight: bold;
+}
+
+/* Color de fondo por defecto para los círculos iniciales */
+.initial-circle {
+  background-color: #ccc; /* Ejemplo de color por defecto */
+}
+
+/* Estilo adicional para fotos de perfil */
+.profile-photo {
+  border-radius: 50%;
+}
+
+/* Contenedor de acciones */
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+/* Ajuste de tarjetas para pantallas pequeñas */
+@media (max-width: 768px) {
+  .card {
+    flex: 1 1 100%;
+  }
+}
+
+/* Estilo de la tabla */
+p-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Estilo de las celdas y cabeceras de la tabla */
+p-table th, p-table td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Ajuste de tablas para pantallas pequeñas */
+@media (max-width: 768px) {
+  p-table th, p-table td {
+    display: block;
+    text-align: right;
+  }
+
+  p-table th::before, p-table td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+  }
+
+  p-table td {
+    border: none;
+    border-bottom: 1px solid #ddd;
+    position: relative;
+    padding-left: 50%;
+  }
 }

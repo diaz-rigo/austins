@@ -17,10 +17,11 @@ import { CatalogoComponent } from './catalogo/catalogo.component';
 import { CatalogoVista2Component } from './catalogo-vista2/catalogo-vista2.component';
 import { PostComponent } from './post/post.component';
 import { ProductReviewComponent } from './product-review/product-review.component';
-const COMPONENTS = [ProductComponent,DetailImgComponent, DetailInfoComponent,CatalogoComponent,CatalogoVista2Component,PostComponent,ProductReviewComponent]; // Agrega los componentes
+import { ContactoComponent } from './contacto/contacto.component';
+const COMPONENTS = [ProductComponent,DetailImgComponent, DetailInfoComponent,CatalogoComponent,CatalogoVista2Component,PostComponent,ProductReviewComponent,ContactoComponent]; // Agrega los componentes
 
 @NgModule({
-  declarations: [...COMPONENTS,FilterPipe,  ],
+  declarations: [...COMPONENTS,FilterPipe  ],
   exports: [...COMPONENTS],
   imports: [
     FormsModule,

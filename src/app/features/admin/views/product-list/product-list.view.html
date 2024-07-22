@@ -1,114 +1,95 @@
 <div class="container">
   <div class="subcontenido">
-    <h1 class="view-title"> Productos</h1>
+    <h1 class="view-title">Productos</h1>
+    <form [formGroup]="searchForm" class="form">
+      <mat-form-field class="form-field">
+        <input matInput placeholder="Buscar" formControlName="query" />
+      </mat-form-field>
+    </form>
+    <button mat-raised-button class="create-button" (click)="openCreateModal()">
+      <mat-icon>add</mat-icon>
+      Crear Nuevo Producto
+    </button>
 
-    <div>
-      <form [formGroup]="searchForm" class="form">
-        <mat-form-field class="form-field">
-          <input matInput placeholder="Buscar" formControlName="query" />
-        </mat-form-field>
-      </form>
-      <button
-        mat-raised-button
-        class="create-button"
-        (click)="openCreateModal()"
-      >
-        <mat-icon>add</mat-icon>
-        Crear Nuevo Producto
-      </button>
+    <!-- Table for larger screens -->
+    <div class="table-container" *ngIf="!isMobile">
+      <mat-table [dataSource]="products" class="mat-table" matSort>
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
+            <mat-icon>label</mat-icon> Nombre
+          </mat-header-cell>
+          <mat-cell *matCellDef="let product">{{ product.name }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="image">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
+            <mat-icon>image</mat-icon> Imagen
+          </mat-header-cell>
+          <mat-cell *matCellDef="let product">
+            <img [src]="product.images[0] ? product.images[0] : 'defaultImg'" alt="Imagen del producto" class="product-image" />
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="price">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
+            <mat-icon>monetization_on</mat-icon> Precio
+          </mat-header-cell>
+          <mat-cell *matCellDef="let product">{{ product.price }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="weight">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
+            <mat-icon>pie_chart</mat-icon> Peso
+          </mat-header-cell>
+          <mat-cell *matCellDef="let product">{{ product.weight }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="category">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
+            <mat-icon>category</mat-icon> Categoría
+          </mat-header-cell>
+          <mat-cell *matCellDef="let product">{{ product.category }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
+          <mat-cell *matCellDef="let product" [ngClass]="{'active': product.status === 'ACTIVE', 'deactive': product.status === 'INACTIVE'}">
+            {{ product.status }}
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
+          <mat-cell *matCellDef="let product" class="actions-cell">
+            <button mat-icon-button class="edit-button" (click)="openEditModal(product)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button class="delete-button" (click)="openDeleteConfirmation(product)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns" class="mat-row"></mat-row>
+      </mat-table>
     </div>
-    <mat-table [dataSource]="products" class="mat-table" matSort>
-      <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>
-          <mat-icon>label</mat-icon> Nombre
-        </mat-header-cell>
-        <mat-cell *matCellDef="let product">{{ product.name }}</mat-cell>
-      </ng-container>
 
-      <ng-container matColumnDef="image">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>
-          <mat-icon>image</mat-icon> Imagen
-        </mat-header-cell>
-        <mat-cell *matCellDef="let product">
+    <!-- Card list for smaller screens -->
+    <div class="card-container" *ngIf="isMobile">
+      <div class="product-card" *ngFor="let product of products">
+        <img [src]="product.images[0] ? product.images[0] : 'defaultImg'" alt="Imagen del producto" class="product-image" />
+        <div class="product-details">
+          <h3>{{ product.name }}</h3>
+          <p>{{ product.price }}</p>
+          <p>{{ product.weight }}</p>
+          <p>{{ product.category }}</p>
+          <p [ngClass]="{'active': product.status === 'ACTIVE', 'deactive': product.status === 'INACTIVE'}">{{ product.status }}</p>
+          <div class="actions">
+            <button mat-icon-button class="edit-button" (click)="openEditModal(product)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button class="delete-button" (click)="openDeleteConfirmation(product)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
-          <img
-          [src]="product.images[0] ? product.images[0] : 'defaultImg'"
-            alt="Imagen del producto"
-            width="50"
-            height="50"
-            class="product-image"
-          />
-          <!-- <img [src]="product.images[0] ? product.images[0] : 'defaultImg'" [alt]="product.name"> -->
-
-        </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="price">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>
-          <mat-icon>monetization_on</mat-icon> Precio
-        </mat-header-cell>
-        <mat-cell *matCellDef="let product">{{ product.price }}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="weight">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>
-          <mat-icon>pie_chart</mat-icon> Peso
-        </mat-header-cell>
-        <mat-cell *matCellDef="let product">{{ product.weight }}</mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="category">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>
-          <mat-icon>category</mat-icon> Categoria
-        </mat-header-cell>
-        <mat-cell *matCellDef="let product">{{ product.category }}</mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="status">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>
-          Estado
-        </mat-header-cell>
-        <mat-cell
-          *matCellDef="let product"
-          [ngClass]="{'active': product.status === 'ACTIVE', 'deactive': product.status === 'INACTIVE'}"
-        >
-          {{ product.status }}
-        </mat-cell>
-      </ng-container>
-
-      <!-- ... Otras columnas existentes ... -->
-
-      <ng-container matColumnDef="actions">
-        <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
-        <mat-cell *matCellDef="let product" class="actions-cell">
-          <button
-            mat-icon-button
-            class="edit-button"
-            (click)="openEditModal(product)"
-          >
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button
-            mat-icon-button
-            class="delete-button"
-            (click)="openDeleteConfirmation(product)"
-          >
-            <mat-icon>delete</mat-icon>
-          </button>
-        </mat-cell>
-      </ng-container>
-
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row
-        *matRowDef="let row; columns: displayedColumns"
-        class="mat-row"
-      ></mat-row>
-    </mat-table>
-
-    <mat-paginator
-      [length]="totalProducts"
-      [pageSize]="pageSize"
-      [pageSizeOptions]="pageSizeOptions"
-      (page)="onPageChange($event)"
-      class="paginator"
-    ></mat-paginator>
+    <mat-paginator [length]="totalProducts" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChange($event)" class="paginator"></mat-paginator>
   </div>
 </div>

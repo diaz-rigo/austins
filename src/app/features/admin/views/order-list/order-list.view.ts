@@ -63,7 +63,7 @@ export class OrderListView {
       switchMap(() => this.ordersService.getAllOrders())
     ).subscribe(
       (response: any) => {
-        // console.log(response)
+        console.log(response)
         this.pedidos = response.pedidos; // Actualizar los pedidos con la respuesta del servicio
       },
       (error) => {

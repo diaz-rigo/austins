@@ -9,7 +9,6 @@
         <th>Estado</th>
         <th>Teléfono</th>
         <!-- <th>Acciones</th> -->
-
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-admin>
@@ -17,12 +16,13 @@
         <td>{{ admin.name }} {{ admin.paternalLastname }} {{ admin.maternalLastname }}</td>
         <td>{{ admin.email }}</td>
         <td>{{ admin.rol }}</td>
-        <td><p-tag [value]="admin.status" [severity]="getSeverity(admin.status)" [rounded]="true"></p-tag></td>
+        <td>
+          <p-tag [value]="admin.status" [severity]="getSeverity(admin.status)" [rounded]="true"></p-tag>
+        </td>
         <td>{{ admin.phone }}</td>
         <!-- <td>
-          <p-button icon="pi pi-pencil"  severity="success"  (click)="editUser(admin)" [outlined]="true" />
-          <p-button icon="pi pi-trash" severity="danger"  (click)="deleteUser(admin._id)" [outlined]="true" />
-
+          <p-button icon="pi pi-pencil" severity="success" (click)="editUser(admin)" [outlined]="true"></p-button>
+          <p-button icon="pi pi-trash" severity="danger" (click)="deleteUser(admin._id)" [outlined]="true"></p-button>
         </td> -->
       </tr>
     </ng-template>
@@ -42,6 +42,7 @@
         <th>Rol</th>
         <th>Estado</th>
         <th>Teléfono</th>
+        <th>Foto de Perfil</th>
         <th>Acciones</th>
       </tr>
     </ng-template>
@@ -50,15 +51,23 @@
         <td>{{ client.name }} {{ client.paternalLastname }} {{ client.maternalLastname }}</td>
         <td>{{ client.email }}</td>
         <td>{{ client.rol }}</td>
-        <td><p-tag [value]="client.status" [severity]="getSeverity(client.status)" [rounded]="true"></p-tag></td>
+        <td>
+          <p-tag [value]="client.status" [severity]="getSeverity(client.status)" [rounded]="true"></p-tag>
+        </td>
         <td>{{ client.phone }}</td>
         <td>
-          <p-button icon="pi pi-pencil"  severity="success"  (click)="editUser(client)"  [outlined]="true" />
-          <p-button icon="pi pi-trash" severity="danger" (click)="deleteUser(client._id)" [outlined]="true" />
-
-
-          <!-- <button pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-success" (click)="editUser(client)" ></button>
-          <button pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger" (click)="deleteUser(client._id)"></button> -->
+          <ng-container *ngIf="client.profilePhoto; else noPhoto">
+            <img [src]="client.profilePhoto" alt="Profile Photo" class="profile-photo">
+          </ng-container>
+          <ng-template #noPhoto>
+            <div class="initial-circle" [ngStyle]="{'background-color': getRandomColor(client._id)}">
+              {{ getInitial(client.name) }}
+            </div>
+          </ng-template>
+        </td>
+        <td>
+          <p-button icon="pi pi-pencil" severity="success" (click)="editUser(client)" [outlined]="true"></p-button>
+          <p-button icon="pi pi-trash" severity="danger" (click)="deleteUser(client._id)" [outlined]="true"></p-button>
         </td>
       </tr>
     </ng-template>

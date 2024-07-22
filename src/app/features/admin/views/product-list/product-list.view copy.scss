@@ -1,0 +1,180 @@
+/* Estilos generales para el componente */
+.container {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+  font-family: "Arial", sans-serif;
+  color: #333;
+
+  .subcontenido {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .view-title {
+      text-align: center;
+      // justify-content: ;
+      font-size: 24px;
+      margin-bottom: 16px;
+      color: #333;
+      width: 100%;
+    }
+
+    .form {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .create-button {
+      margin-bottom: 20px;
+      background-color: #00b050;
+      color: #ffffff;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #008040;
+      }
+    }
+  }
+}
+
+/* Tabla y Celdas */
+.mat-table {
+  // width: 100%;
+  overflow-x: auto;
+
+  .mat-row {
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #f5f5f5;
+    }
+  }
+
+  /* Imágenes */
+  .product-image {
+    max-width: 100%;
+    height: auto;
+    max-height: 50px;
+  }
+}
+
+/* Botones y Acciones */
+.mat-raised-button {
+  margin-bottom: 20px;
+  background-color: #00b050;
+  color: #ffffff;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #008040;
+  }
+
+  .delete-button {
+    &:hover {
+      color: red;
+    }
+  }
+
+  .edit-button {
+    &:hover {
+      color: green;
+    }
+  }
+}
+
+/* Responsividad en Dispositivos Móviles */
+@media (max-width: 600px) {
+  .container {
+    margin-left: 10%;
+    // width: 100%; /* Ajusta el ancho de la tabla al 100% del contenedor */
+    .form{
+      font-size: 14px;
+      margin-top: 8px; /* Ajusta el margen superior de los botones según tus preferencias */
+      margin-left: 20px; /* Ajusta el margen superior de los botones según tus preferencias */
+    }
+  }
+  .mat-table {
+    overflow-x: auto;
+    display: block; /* Cambia la visualización a bloque para permitir el desplazamiento horizontal */
+  }
+
+  .mat-table {
+    width: 100%; /* Ajusta el ancho de la tabla al 100% del contenedor */
+    // font-size: 3px;
+  }
+
+  .mat-header-cell,
+  .mat-cell {
+    // display: flex;
+    align-items: center;
+    padding: 8px; /* Ajusta el espacio interno de las celdas */
+    box-sizing: border-box;
+    flex: 1;
+    word-wrap: break-word; /* Rompe la palabra si es necesario */
+  }
+
+  .mat-column-actions {
+    flex-basis: 80px; /* Ajusta el ancho de la columna de acciones según tus necesidades */
+  }
+
+  .product-image {
+    max-width: 50px;
+    max-height: 50px;
+    margin-right: 8px; /* Ajusta el margen entre la imagen y el texto según tus preferencias */
+  }
+
+  .create-button {
+    font-size: 14px;
+    margin-top: 8px; /* Ajusta el margen superior de los botones según tus preferencias */
+    margin-left: 20px; /* Ajusta el margen superior de los botones según tus preferencias */
+  }
+
+  // .create-button,
+  .edit-button,
+  .delete-button {
+    font-size: 14px;
+    margin-top: 8px; /* Ajusta el margen superior de los botones según tus preferencias */
+  }
+
+  .actions-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Ocultar columnas en dispositivos móviles */
+  .mat-column-category,
+  .mat-column-weight {
+    display: none;
+  }
+}
+
+/* Estados y Paginator */
+
+.active {
+  color: #00b050;
+  &::before {
+    margin-bottom: 3%;
+    content: " ● ";
+    color: #00b050;
+    font-size: 1.3rem;
+  }
+}
+
+.deactive {
+  color: rgb(255, 0, 0);
+  &::before {
+    margin-bottom: 3%;
+    content: " ● ";
+    color: rgb(255, 0, 0);
+    font-size: 1.3rem;
+  }
+}
+
+.paginator {
+  margin-top: 16px;
+}

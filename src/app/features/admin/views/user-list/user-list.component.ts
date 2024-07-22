@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { UserService } from '../../commons/services/user.service';
 
 @Component({
@@ -10,7 +10,7 @@ export class UserListComponent implements OnInit {
 
   admins: any[] = [];
   clients: any[] = [];
-
+  isWeb = true;
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
@@ -21,7 +21,14 @@ export class UserListComponent implements OnInit {
       // console.log('Clients:', this.clients);
     });
   }
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.checkScreenSize();
+  }
 
+  checkScreenSize() {
+    this.isWeb = window.innerWidth > 768;
+  }
   editUser(user: any): void {
     // Lógica para editar el usuario
     console.log('Edit user:', user);

@@ -35,8 +35,14 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { SidebarModule } from 'primeng/sidebar';
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { TagModule } from 'primeng/tag';
+import { FieldsetModule } from 'primeng/fieldset';
+import { ChipModule } from 'primeng/chip';
+import { ChipsModule } from 'primeng/chips';
 @NgModule({
   exports: [
+    ChipsModule,
+    ChipModule,
+    FieldsetModule,
     TagModule,
     ContextMenuModule,
     SidebarModule,
