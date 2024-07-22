@@ -1,0 +1,78 @@
+<div *ngIf="admins.length > 0" class="table-container">
+  <h2>Lista de Administradores</h2>
+  <p-table [value]="admins">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Nombre</th>
+        <th>Correo Electrónico</th>
+        <th>Rol</th>
+        <th>Estado</th>
+        <th>Teléfono</th>
+        <!-- <th>Acciones</th> -->
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-admin>
+      <tr>
+        <td>{{ admin.name }} {{ admin.paternalLastname }} {{ admin.maternalLastname }}</td>
+        <td>{{ admin.email }}</td>
+        <td>{{ admin.rol }}</td>
+        <td>
+          <p-tag [value]="admin.status" [severity]="getSeverity(admin.status)" [rounded]="true"></p-tag>
+        </td>
+        <td>{{ admin.phone }}</td>
+        <!-- <td>
+          <p-button icon="pi pi-pencil" severity="success" (click)="editUser(admin)" [outlined]="true"></p-button>
+          <p-button icon="pi pi-trash" severity="danger" (click)="deleteUser(admin._id)" [outlined]="true"></p-button>
+        </td> -->
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+<div *ngIf="admins.length === 0" class="table-container">
+  <p>No hay administradores disponibles.</p>
+</div>
+
+<div *ngIf="clients.length > 0" class="table-container">
+  <h2>Lista de Clientes</h2>
+  <p-table [value]="clients">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Nombre</th>
+        <th>Correo Electrónico</th>
+        <th>Rol</th>
+        <th>Estado</th>
+        <th>Teléfono</th>
+        <th>Foto de Perfil</th>
+        <th>Acciones</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-client>
+      <tr>
+        <td>{{ client.name }} {{ client.paternalLastname }} {{ client.maternalLastname }}</td>
+        <td>{{ client.email }}</td>
+        <td>{{ client.rol }}</td>
+        <td>
+          <p-tag [value]="client.status" [severity]="getSeverity(client.status)" [rounded]="true"></p-tag>
+        </td>
+        <td>{{ client.phone }}</td>
+        <td>
+          <ng-container *ngIf="client.profilePhoto; else noPhoto">
+            <img [src]="client.profilePhoto" alt="Profile Photo" class="profile-photo">
+          </ng-container>
+          <ng-template #noPhoto>
+            <div class="initial-circle" [ngStyle]="{'background-color': getRandomColor(client._id)}">
+              {{ getInitial(client.name) }}
+            </div>
+          </ng-template>
+        </td>
+        <td>
+          <p-button icon="pi pi-pencil" severity="success" (click)="editUser(client)" [outlined]="true"></p-button>
+          <p-button icon="pi pi-trash" severity="danger" (click)="deleteUser(client._id)" [outlined]="true"></p-button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+<div *ngIf="clients.length === 0" class="table-container">
+  <p>No hay clientes disponibles.</p>
+</div>

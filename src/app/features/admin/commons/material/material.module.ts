@@ -32,8 +32,14 @@ import { DividerModule } from 'primeng/divider';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 // import { TableModule } from 'primeng/table';
+import { SidebarModule } from 'primeng/sidebar';
+import { ContextMenuModule } from 'primeng/contextmenu';
+import { TagModule } from 'primeng/tag';
 @NgModule({
   exports: [
+    TagModule,
+    ContextMenuModule,
+    SidebarModule,
     InputTextareaModule,
     InputTextModule,
     DividerModule,

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SessionService } from 'src/app/core/services/session.service';
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-admin-menu',
@@ -8,38 +9,54 @@ import { SessionService } from 'src/app/core/services/session.service';
   styleUrls: ['./admin-menu.component.scss']
 })
 export class AdminMenuComponent implements OnInit {
-  userName: string | undefined; // Declarar una variable para almacenar el nombre del usuario
-  rol: string | undefined; // Declarar una variable para almacenar el nombre del usuario
-
+  userName: string | undefined;
+  rol: string | undefined;
+  sidenav = { opened: false };
+  productosMenuItems: MenuItem[] = [];
 
   constructor(
     private router: Router,
     private sessionService: SessionService
-  ) {
-
-  }
+  ) {}
 
   ngOnInit() {
     const userData = this.sessionService.getUserData();
     if (userData) {
-      this.userName = userData.name; // Asignar el nombre del usuario a la variable
-      this.rol = userData.rol; // Asignar el nombre del usuario a la variable
+      this.userName = userData.name;
+      this.rol = userData.rol;
     }
-    const isAuthenticated = this.sessionService.isAutenticated();
-  }
-  redirectTo(route: string): void {
-    this.router.navigate(['/admin', route]); // Utiliza la navegación de Angular
+
+    this.productosMenuItems = [
+      {
+        label: 'Ver Productos',
+        icon: 'pi pi-eye',
+        command: () => {
+          this.toggleSidebar();
+          this.redirectTo('products-list');
+        }
+      },
+      {
+        label: 'Editar Productos',
+        icon: 'pi pi-pencil'
+      },
+      {
+        label: 'Dar de Alta Producto',
+        icon: 'pi pi-plus'
+      }
+    ];
   }
 
+  toggleSidebar(): void {
+    this.sidenav.opened = !this.sidenav.opened;
+  }
+
+  redirectTo(route: string): void {
+    this.router.navigate(['/admin', route]);
+  }
 
   logout(): void {
-    // Elimina el token de autenticación del almacenamiento local
-    // this.sessionService.removeToken(); // Si ya tienes un método removeToken en tu servicio, úsalo
-    localStorage.removeItem('token'); // O elimina directamente el token del almacenamiento local aquí
-
-    // Navega a la ruta principal ('/')
+    localStorage.removeItem('token');
     this.router.navigate(['/']).then(() => {
-      // Recarga la página después de navegar a la ruta principal
       window.location.reload();
     });
   }

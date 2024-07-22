@@ -27,22 +27,6 @@ export class ProductService {
 
     return this.http.put(url, formData);
   }
-  // Actualiza el producto con múltiples imágenes
-  // updateProductImages(category: string, productId: string, files: File[]): Observable<string[]> {
-  //   const uploadObservables: Observable<string>[] = [];
-  //   const formData: FormData = new FormData();
-
-  //   files.forEach((file, index) => {
-  //     formData.append('images', file);
-  //     formData.append('positions', index.toString());
-  //   });
-
-  //   const url = `${environment.api}/product/${category}/${productId}/images`;
-
-  //   // Envia la solicitud para subir todas las imágenes a la vez
-  //   return this.http.post<any>(url, formData);
-  // }
-
 
   getAll(): Observable<Product[]> {
     // debugger

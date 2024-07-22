@@ -7,6 +7,7 @@ import { InicioAdView } from './views/incio-ad/incio-ad.view';
 import { OrderListView } from './views/order-list/order-list.view';
 import { VentaListView } from './views/venta-list/venta-list.view';
 import { DataGraficaView } from './views/data-grafica/data-grafica.view';
+import { UserListComponent } from './views/user-list/user-list.component';
 const routes: Routes = [
   {
     path:'',redirectTo:'inicio' ,pathMatch:'full'
@@ -38,6 +39,11 @@ const routes: Routes = [
           title:"data|",
         path: 'ventas-grafica',
         component: DataGraficaView,
+      },
+      {
+          title:"users|",
+        path: 'users',
+        component: UserListComponent,
       },
 
     ],

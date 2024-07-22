@@ -14,7 +14,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { OrderListView } from './views/order-list/order-list.view'
 import { VentaListView } from './views/venta-list/venta-list.view'
 
-import { DataGraficaView } from './views/data-grafica/data-grafica.view'
+import { DataGraficaView } from './views/data-grafica/data-grafica.view';
+import { UserListComponent } from './views/user-list/user-list.component'
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { DataGraficaView } from './views/data-grafica/data-grafica.view'
     OrderListView,
     VentaListView,
     DataGraficaView,
+    UserListComponent,
   ],
   imports: [
     ReactiveFormsModule,

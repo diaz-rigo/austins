@@ -1,0 +1,170 @@
+:host{
+  *{
+        // outline: 1px solid red;
+//
+  }
+}
+
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+}
+.mat-nav-list {
+  padding: 0;
+}
+.user-info img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+.mat-nav-list {
+  padding: 0;
+}
+.mat-list-item {
+
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+.mat-list-item:hover {
+  background-color: #555;
+}
+mat-icon {
+  margin-right: 10px;
+  font-size: 24px;
+  color: rgb(28, 0, 154); /* Cambia el color del icono */
+}
+span {
+  font-size: 16px;
+}
+.mat-sidenav {
+  z-index: 999;
+  max-width: 250px;
+}
+
+
+// .mat-sidenav-content {
+//   display: flex;
+//   justify-content: center; /* Centra horizontalmente el contenido */
+//   align-items: center; /* Centra verticalmente el contenido */
+//   height: 100%; /* Asegura que el contenido ocupe toda la altura disponible */
+//   width: 100%; /* Asegura que el contenido ocupe toda la anchura disponible */
+//   // background-color: #000000; /* Color de fondo opcional */
+// }
+.mat-sidenav-content {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente el contenido */
+  align-items: center; /* Centra verticalmente el contenido */
+  height: 100%; /* Asegura que el contenido ocupe toda la altura disponible */
+  width: 100%; /* Asegura que el contenido ocupe toda la anchura disponible */
+  background-color: transparent; /* Establece el fondo como transparente o elimina esta propiedad */
+}
+
+.dropdown-icon {
+  margin-left: auto;
+  font-size: 24px;
+}
+.mat-menu-content {
+  padding-left: 0;
+}
+.mat-menu-item {
+  cursor: pointer;
+  padding: 10px;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
+.mat-menu-item:hover {
+  background-color: #555;
+}
+.show-menu-button {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0; /* Alinea el botón en la parte superior del área de contenido principal */
+  left: 0; /* Alinea el botón a la izquierda del área de contenido principal */
+  padding: 10px;
+  // background-color: #333; /* Color de fondo del botón */
+  color: #fff; /* Color del icono */
+  transition: background-color 0.3s ease;
+}
+.show-menu-button:hover {
+
+}
+.menu-icons {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  background-color: #333;
+}
+
+.menu-icons mat-icon {
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.menu-icons mat-icon:hover {
+  background-color: #555;
+}
+
+
+
+
+
+
+
+.bubble-container {
+  margin-top: 1%;
+  margin-left: 0.2%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  box-shadow: 0px 1px 4px 1px rgba(0, 0, 0, 0.2);
+  background-color: rgb(247, 247, 247); /* Color de fondo */
+  border-radius: 50%; /* Esto crea la forma circular */
+  transition: background-color 0.3s ease; /* Transición para el cambio de color */
+  cursor: pointer;
+  transform: scale(1); /* Escala inicial */
+}
+
+.bubble-container:hover {
+  // background-color: #b1fcb3; /* Cambio de color al pasar el puntero */
+}
+
+.bubble-icon {
+  font-size: 24px;
+  color: #00a486; /* Color del icono */
+}
+
+.bubble-icon:hover {
+  animation: spin 1.2s linear infinite; /* Aplicar la animación en el estado hover */
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
