@@ -202,35 +202,35 @@ export class ProductListView implements OnInit {
     const averageRating = totalRating / reviewCount;
   
     // Mapear los datos del producto a un formato adecuado
-    return {
-      price: 460.1,
-      quantity_sold: 74,
-      customer_rating: 5,
-      review_count: 4,
-      category: 'pastry',
-      store_location: 'urban',
-      discount_offered: 0.0918089775,
-      customer_age_group: 'child',
-      purchase_day: 'Tuesday',
-      promotion_applied: 1,
-      payment_method: 'credit_card',
-      delivery_method: 'home_delivery'
-    };
-    
     // return {
-    //   price: product.price,
-    //   quantity_sold: Number(product.quantity), // Asegúrate de convertir a número
-    //   customer_rating: Math.round(averageRating), // Ajustar a un número entero similar al ejemplo
-    //   review_count: reviewCount,
-    //   category: this.mapCategory(product.category), // Ajustar el nombre de la categoría si es necesario
-    //   store_location: 'urban', // Esto puede variar según tu contexto
-    //   discount_offered: 0.0918089775, // Ejemplo fijo, ajustar según sea necesario
-    //   customer_age_group: 'child', // Ejemplo fijo, ajustar según sea necesario
-    //   purchase_day: 'Tuesday', // Ejemplo fijo, ajustar según sea necesario
-    //   promotion_applied: 1, // Ejemplo fijo, ajustar según sea necesario
-    //   payment_method: 'credit_card', // Ejemplo fijo, ajustar según sea necesario
-    //   delivery_method: 'home_delivery' // Ejemplo fijo, ajustar según sea necesario
+    //   price: 460.1,
+    //   quantity_sold: 74,
+    //   customer_rating: 5,
+    //   review_count: 4,
+    //   category: 'pastry',
+    //   store_location: 'urban',
+    //   discount_offered: 0.0918089775,
+    //   customer_age_group: 'child',
+    //   purchase_day: 'Tuesday',
+    //   promotion_applied: 1,
+    //   payment_method: 'credit_card',
+    //   delivery_method: 'home_delivery'
     // };
+    
+    return {
+      price: product.price,
+      quantity_sold: Number(product.quantity), // Asegúrate de convertir a número
+      customer_rating: Math.round(averageRating), // Ajustar a un número entero similar al ejemplo
+      review_count: reviewCount,
+      category: this.mapCategory(product.category), // Ajustar el nombre de la categoría si es necesario
+      store_location: 'urban', // Esto puede variar según tu contexto
+      discount_offered: 0.0918089775, // Ejemplo fijo, ajustar según sea necesario
+      customer_age_group: 'child', // Ejemplo fijo, ajustar según sea necesario
+      purchase_day: 'Tuesday', // Ejemplo fijo, ajustar según sea necesario
+      promotion_applied: 1, // Ejemplo fijo, ajustar según sea necesario
+      payment_method: 'credit_card', // Ejemplo fijo, ajustar según sea necesario
+      delivery_method: 'home_delivery' // Ejemplo fijo, ajustar según sea necesario
+    };
   }
   
   private mapCategory(category: string): string {
