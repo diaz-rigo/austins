@@ -164,7 +164,6 @@ export class ProductListView implements OnInit {
       }
     );
   }
-
   predecir(product: Product): void {
     console.log('Product data:', product);
 
@@ -174,10 +173,17 @@ export class ProductListView implements OnInit {
         this.reviews = reviews;
         console.log('List of reviews:', this.reviews);
 
+        // Verificar si hay reseñas
+        if (this.reviews.length === 0) {
+          console.log('No reviews found for this product.');
+          this.messageService.add({severity: 'info', summary: 'No Reviews', detail: 'This product has no reviews and is not popular.'});
+          return; // Salir de la función si no hay reseñas
+        }
+
         // Obtener la reseña principal
         this.topReview = this.getTopReview(reviews);
         console.log('Top review:', this.topReview);
-        
+
         // Preparar los datos para la predicción
         const predictionData = this.preparePredictionData(product, this.reviews);
         this.predictionService.predict(predictionData).subscribe(

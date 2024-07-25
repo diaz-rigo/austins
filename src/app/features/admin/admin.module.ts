@@ -16,7 +16,7 @@ import { VentaListView } from './views/venta-list/venta-list.view'
 
 import { DataGraficaView } from './views/data-grafica/data-grafica.view';
 import { UserListComponent } from './views/user-list/user-list.component'
-
+import { ToastModule } from 'primeng/toast';
 @NgModule({
   declarations: [
     AdminComponent,
@@ -27,6 +27,7 @@ import { UserListComponent } from './views/user-list/user-list.component'
     UserListComponent,
   ],
   imports: [
+    ToastModule,
     DialogModule,
     ReactiveFormsModule,
     FormsModule,
