@@ -12,11 +12,14 @@ import { CreateProductComponentComponent } from '../../commons/components/create
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { ReviewService } from '../../commons/services/review.service';
 import { PredictionServiceService } from '../../commons/services/prediction-service.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.view.html',
   styleUrls: ['./product-list.view.scss'],
+  providers: [MessageService]  // Asegúrate de incluir MessageService si usas PrimeNG para mensajes
+
 })
 export class ProductListView implements OnInit {
   products: Product[] = [];
@@ -44,10 +47,14 @@ export class ProductListView implements OnInit {
   isMobile: boolean = false;
   reviews: any[] = [];
   topReview: any;
+  predictionResult: string = '';
+  displayDialog: boolean = false;
+
   constructor(private breakpointObserver: BreakpointObserver,
     private productService: ProductService,
     private fb: FormBuilder,
-    private dialog: MatDialog,    private reviewService: ReviewService,    private predictionService: PredictionServiceService
+    private dialog: MatDialog,    private reviewService: ReviewService,    private predictionService: PredictionServiceService,    private messageService: MessageService
+
 
 
   ) {
@@ -160,26 +167,30 @@ export class ProductListView implements OnInit {
 
   predecir(product: Product): void {
     console.log('Product data:', product);
-    
+
     // Obtener las reseñas del producto
     this.reviewService.getProductReviews(product._id).subscribe(
       (reviews) => {
         this.reviews = reviews;
         console.log('List of reviews:', this.reviews);
-        
+
         // Obtener la reseña principal
         this.topReview = this.getTopReview(reviews);
         console.log('Top review:', this.topReview);
         
         // Preparar los datos para la predicción
         const predictionData = this.preparePredictionData(product, this.reviews);
-        console.log('Prediction Data:', predictionData);
         this.predictionService.predict(predictionData).subscribe(
           (response) => {
             console.log('Prediction result:', response);
+            this.predictionResult = response.prediction;
+            this.displayDialog = true;  // Mostrar el diálogo
           },
           (error) => {
+            this.predictionResult = error;
+            this.displayDialog = true;
             console.error('Error predicting:', error);
+            this.messageService.add({severity: 'error', summary: 'Error', detail: 'Error predicting data.'});
           }
         );
 
@@ -200,7 +211,7 @@ export class ProductListView implements OnInit {
     const reviewCount = reviews.length;
     const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
     const averageRating = totalRating / reviewCount;
-  
+
     // Mapear los datos del producto a un formato adecuado
     // return {
     //   price: 460.1,
@@ -216,7 +227,7 @@ export class ProductListView implements OnInit {
     //   payment_method: 'credit_card',
     //   delivery_method: 'home_delivery'
     // };
-    
+
     return {
       price: product.price,
       quantity_sold: Number(product.quantity), // Asegúrate de convertir a número
@@ -232,17 +243,17 @@ export class ProductListView implements OnInit {
       delivery_method: 'home_delivery' // Ejemplo fijo, ajustar según sea necesario
     };
   }
-  
+
   private mapCategory(category: string): string {
     // Define el tipo del mapa de categorías
     const categoryMap: { [key: string]: string } = {
       'PastelFinos': 'pastry',
       // Agrega otros mapeos si es necesario
     };
-  
+
     return categoryMap[category] || category; // Retorna la categoría mapeada o la original si no se encuentra
   }
-  
+
 
   openEditModal(product: Product): void {
     const isMobile = window.innerWidth < 480;

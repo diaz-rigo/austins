@@ -107,3 +107,10 @@
     <mat-paginator [length]="totalProducts" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChange($event)" class="paginator"></mat-paginator>
   </div>
 </div>
+<!-- Diálogo de PrimeNG para mostrar el resultado -->
+<p-dialog header="Prediction Result" [(visible)]="displayDialog" [modal]="true" [closable]="true">
+  <p>{{ predictionResult }}</p>
+  <p-footer>
+    <button type="button" pButton icon="pi pi-check" (click)="displayDialog = false" label="Close"></button>
+  </p-footer>
+</p-dialog>

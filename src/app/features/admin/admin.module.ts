@@ -10,7 +10,7 @@ import { AdminComponentModule } from './commons/components/components.module'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MatIconModule } from '@angular/material/icon'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-
+import { DialogModule } from 'primeng/dialog';
 import { OrderListView } from './views/order-list/order-list.view'
 import { VentaListView } from './views/venta-list/venta-list.view'
 
@@ -27,6 +27,7 @@ import { UserListComponent } from './views/user-list/user-list.component'
     UserListComponent,
   ],
   imports: [
+    DialogModule,
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
