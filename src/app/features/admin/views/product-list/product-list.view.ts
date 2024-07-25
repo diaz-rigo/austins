@@ -10,6 +10,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { EditProductComponentComponent } from '../../commons/components/edit-product-component/edit-product-component.component';
 import { CreateProductComponentComponent } from '../../commons/components/create-product-component/create-product-component.component';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { ReviewService } from '../../commons/services/review.service';
+import { PredictionServiceService } from '../../commons/services/prediction-service.service';
 
 @Component({
   selector: 'app-product-list',
@@ -19,6 +21,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 export class ProductListView implements OnInit {
   products: Product[] = [];
   producto: Product;
+
   displayedColumns: string[] = [
     'name',
     'image',
@@ -26,6 +29,8 @@ export class ProductListView implements OnInit {
     'weight',
     'category',
     'status',
+    'predict',
+
     'actions',
   ];
   pageSizeOptions: number[] = [3, 10, 25];
@@ -37,11 +42,14 @@ export class ProductListView implements OnInit {
   images!: string[];
   srcMain!: string;
   isMobile: boolean = false;
-
+  reviews: any[] = [];
+  topReview: any;
   constructor(private breakpointObserver: BreakpointObserver,
     private productService: ProductService,
     private fb: FormBuilder,
-    private dialog: MatDialog
+    private dialog: MatDialog,    private reviewService: ReviewService,    private predictionService: PredictionServiceService
+
+
   ) {
     this.producto = new Product();
 
@@ -87,7 +95,16 @@ export class ProductListView implements OnInit {
       .getProducts(skip, limit, filters)
       .subscribe((data: Product[]) => {
         this.products = data;
+        this.products.forEach(product => {
+          this.reviewService.getProductReviews(product._id).subscribe(reviews => {
+          });
+        });
       });
+  }
+  isProductPopular(reviews: any[]): boolean {
+    if (reviews.length === 0) return false;
+    const averageRating = reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length;
+    return averageRating >= 4; // Define el umbral para popularidad
   }
 
   searchProducts(): void {
@@ -140,29 +157,93 @@ export class ProductListView implements OnInit {
       }
     );
   }
-  // Nueva función para abrir el modal de edición
-  // openEditModal(product: Product): void {
-  //   const isMobile = window.innerWidth < 480;
-  //   const dialogRef = this.dialog.open(EditProductComponentComponent, {
-  //     width: isMobile ? '120vw' : '800px',
-  //     height: isMobile ? '700px' : '600px',
-  //     maxWidth: isMobile ? 'auto' : 'auto',
-  //     maxHeight: isMobile ? '100vh' : 'auto',
-  //     panelClass: isMobile
-  //       ? ['mat-dialog', 'no-padding', 'mobile-dialog']
-  //       : ['mat-dialog', 'no-padding', 'web-dialog'],
-  //     // data: {},
-  //     data: { product }, // Pasa el producto al modal
-  //   });
 
-  //   dialogRef.afterClosed().subscribe((result) => {
-  //     if (result) {
-  //       // Lógica para manejar la actualización del producto aquí
-  //       this.updateProduct(result); // Llama a la función de actualización con los datos editados
-  //       console.log(result);
-  //     }
-  //   });
-  // }
+  predecir(product: Product): void {
+    console.log('Product data:', product);
+    
+    // Obtener las reseñas del producto
+    this.reviewService.getProductReviews(product._id).subscribe(
+      (reviews) => {
+        this.reviews = reviews;
+        console.log('List of reviews:', this.reviews);
+        
+        // Obtener la reseña principal
+        this.topReview = this.getTopReview(reviews);
+        console.log('Top review:', this.topReview);
+        
+        // Preparar los datos para la predicción
+        const predictionData = this.preparePredictionData(product, this.reviews);
+        console.log('Prediction Data:', predictionData);
+        this.predictionService.predict(predictionData).subscribe(
+          (response) => {
+            console.log('Prediction result:', response);
+          },
+          (error) => {
+            console.error('Error predicting:', error);
+          }
+        );
+
+      },
+      (error) => {
+        console.error('Error fetching reviews:', error);
+      }
+    );
+  }
+
+  private getTopReview(reviews: any[]): any {
+    // Encuentra la reseña con la mejor calificación (puedes ajustar esta lógica según sea necesario)
+    return reviews.reduce((top, review) => review.rating > top.rating ? review : top, reviews[0]);
+  }
+
+  private preparePredictionData(product: Product, reviews: any[]): any {
+    // Extraer los datos necesarios
+    const reviewCount = reviews.length;
+    const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
+    const averageRating = totalRating / reviewCount;
+  
+    // Mapear los datos del producto a un formato adecuado
+    return {
+      price: 460.1,
+      quantity_sold: 74,
+      customer_rating: 5,
+      review_count: 4,
+      category: 'pastry',
+      store_location: 'urban',
+      discount_offered: 0.0918089775,
+      customer_age_group: 'child',
+      purchase_day: 'Tuesday',
+      promotion_applied: 1,
+      payment_method: 'credit_card',
+      delivery_method: 'home_delivery'
+    };
+    
+    // return {
+    //   price: product.price,
+    //   quantity_sold: Number(product.quantity), // Asegúrate de convertir a número
+    //   customer_rating: Math.round(averageRating), // Ajustar a un número entero similar al ejemplo
+    //   review_count: reviewCount,
+    //   category: this.mapCategory(product.category), // Ajustar el nombre de la categoría si es necesario
+    //   store_location: 'urban', // Esto puede variar según tu contexto
+    //   discount_offered: 0.0918089775, // Ejemplo fijo, ajustar según sea necesario
+    //   customer_age_group: 'child', // Ejemplo fijo, ajustar según sea necesario
+    //   purchase_day: 'Tuesday', // Ejemplo fijo, ajustar según sea necesario
+    //   promotion_applied: 1, // Ejemplo fijo, ajustar según sea necesario
+    //   payment_method: 'credit_card', // Ejemplo fijo, ajustar según sea necesario
+    //   delivery_method: 'home_delivery' // Ejemplo fijo, ajustar según sea necesario
+    // };
+  }
+  
+  private mapCategory(category: string): string {
+    // Define el tipo del mapa de categorías
+    const categoryMap: { [key: string]: string } = {
+      'PastelFinos': 'pastry',
+      // Agrega otros mapeos si es necesario
+    };
+  
+    return categoryMap[category] || category; // Retorna la categoría mapeada o la original si no se encuentra
+  }
+  
+
   openEditModal(product: Product): void {
     const isMobile = window.innerWidth < 480;
     const dialogRef = this.dialog.open(EditProductComponentComponent, {
@@ -209,4 +290,22 @@ export class ProductListView implements OnInit {
       }
     });
   }
+
+  // getProductReviews(product: Product) {
+  //   this.reviewService.getProductReviews(product._id).subscribe(
+  //     (reviews) => {
+  //       this.reviews = reviews;
+  //       this.topReview = this.getTopReview(reviews);
+  //       console.log("Top review:", this.topReview);
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching reviews:', error);
+  //     }
+  //   );
+  // }
+
+  // getTopReview(reviews: any[]): any {
+  //   if (reviews.length === 0) return null;
+  //   return reviews.reduce((top, current) => (current.rating > top.rating ? current : top), reviews[0]);
+  // }
 }

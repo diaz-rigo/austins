@@ -7,20 +7,18 @@
       class="product-image"
     />
     <div class="product-details">
+
       <h3 class="product-name">{{ product.name | slice:0:23 }}{{ product.name.length > 23 ? '...' : '' }}</h3>
+
       <p class="product-description">{{ product.description | slice:0:50 }}{{ product.description.length > 50 ? '...' : '' }}</p>
       <div>
         <div class="product-price">{{ product.price | currency }}</div>
       </div>
-      <button class="add-to-cart-button" (click)="add()">Agregar al Carrito</button>
+      <button class="add-to-cart-button" (click)="add()">
+        Agregar al Carrito
+      </button>
 
-      <div *ngIf="topReview" class="review-container">
-        <h4>Mejor Reseña:</h4>
-        <p class="review-comment">{{ topReview.comment }}</p>
-        <div class="review-rating">
-          <span *ngFor="let star of [1, 2, 3, 4, 5]" class="star" [class.filled]="star <= topReview.rating">★</span>
-        </div>
-      </div>
+      
     </div>
   </div>
 </div>

@@ -564,7 +564,9 @@
       data-aos-anchor-placement="bottom-center"
       data-aos-duration="900"
     >
-      <button class="menu-btn" (click)="redirectTo('home')"><span class="pi pi-home"></span> home</button>
+      <button class="menu-btn" (click)="redirectTo('home')">
+        <span class="pi pi-home"></span> home
+      </button>
 
       <!-- <button class="menu-btn" >cotizar otro diseño</button> -->
       <button
@@ -572,13 +574,13 @@
         (click)="sidebarVisible4 = true"
         *ngIf="!userName"
       >
-      <span class="pi pi-book"></span>  Seguimiento -pedidos
+        <span class="pi pi-book"></span> Seguimiento -pedidos
       </button>
       <button class="menu-btn" (click)="abrePedido()" *ngIf="userName">
         pedidos
       </button>
       <button [matMenuTriggerFor]="productsMenu" class="menu-btn">
-        <span class="pi pi-gift"></span>  catalogo
+        <span class="pi pi-gift"></span> catalogo
       </button>
       <mat-menu
         style="background-color: transparent"
@@ -634,7 +636,6 @@
           *ngIf="foto"
           image="{{ foto }}"
           styleClass="mr-2"
-
           shape="circle"
         />
         <div *ngIf="!foto"><i class="pi pi-user"></i> {{ userName }}</div>
@@ -655,8 +656,9 @@
           data-aos="fade-up"
           data-aos-anchor-placement="bottom-center"
           data-aos-duration="900"
+          (click)="abreCompra()"
         >
-          <span class="pi pi-shopping-bag" (click)="abreCompra()"></span> mis
+          <span class="pi pi-shopping-bag" ></span> mis
           compras
         </div>
         <div mat-menu-item class="mobile-menu-item_b1" (click)="logout()">

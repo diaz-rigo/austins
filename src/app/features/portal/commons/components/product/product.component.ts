@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartService } from 'src/app/core/services/cart.service';
+import { ReviewService } from 'src/app/features/admin/commons/services/review.service';
 import { Product } from 'src/app/features/admin/models/Product.models';
 import { CartItem } from 'src/app/shared/models/cart.model';
 import { SearchService } from 'src/app/shared/services/search-service.service';
@@ -13,25 +14,29 @@ import { environment } from 'src/environments/environment';
 })
 export class ProductComponent implements OnInit {
 
-
   @Input() product!: Product;
   hasSearchResults = true;
   filterPost = '';
   items: number = 0;
+  reviews: any[] = [];
+  topReview: any;
+
   get cartItem(): CartItem {
     return this.setCartItem();
   }
+
   constructor(
     private router: Router,
     private cartService: CartService,
-    private searchService: SearchService // Inyecta el servicio de búsqueda
+    private reviewService: ReviewService,
+    private searchService: SearchService
   ) {}
 
   ngOnInit(): void {
-
+    this.getProductReviews();
   }
+
   setCartItem(): CartItem {
-    // console.log('set car', this.product);
     const cartItem: CartItem = {
       id: this.product._id,
       name: this.product.name,
@@ -57,8 +62,26 @@ export class ProductComponent implements OnInit {
   decrement(): void {
     this.cartService.remove(this.cartItem);
   }
+
   goToDetail(): void {
     this.router.navigateByUrl(`portal/detail/${this.product._id}`);
   }
 
+  getProductReviews() {
+    this.reviewService.getProductReviews(this.product._id).subscribe(
+      (reviews) => {
+        this.reviews = reviews;
+        this.topReview = this.getTopReview(reviews);
+        console.log("Top review:", this.topReview);
+      },
+      (error) => {
+        console.error('Error fetching reviews:', error);
+      }
+    );
+  }
+
+  getTopReview(reviews: any[]): any {
+    if (reviews.length === 0) return null;
+    return reviews.reduce((top, current) => (current.rating > top.rating ? current : top), reviews[0]);
+  }
 }

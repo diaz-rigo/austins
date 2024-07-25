@@ -162,13 +162,13 @@ export class CreateProductComponentComponent {
         // console.log('Producto creado con éxito. ID:', result._id);
         const uploadObservables = this.selectedImages.map((image: File) => {
           const position = product.images.length; // Ajustar la posición según tu lógica
-          // console.log(
-          //   'creando.. ',
-          //   product.category,
-          //   result._id,
-          //   position,
-          //   image
-          // );
+          console.log(
+            'creando.. ',
+            product.category,
+            result._id,
+            position,
+            image
+          );
           return this.productService.updateProductImage(
             product.category,
             result._id,
