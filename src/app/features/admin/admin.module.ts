@@ -10,13 +10,13 @@ import { AdminComponentModule } from './commons/components/components.module'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MatIconModule } from '@angular/material/icon'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { DialogModule } from 'primeng/dialog';
+
 import { OrderListView } from './views/order-list/order-list.view'
 import { VentaListView } from './views/venta-list/venta-list.view'
 
 import { DataGraficaView } from './views/data-grafica/data-grafica.view';
 import { UserListComponent } from './views/user-list/user-list.component'
-import { ToastModule } from 'primeng/toast';
+
 @NgModule({
   declarations: [
     AdminComponent,
@@ -27,8 +27,6 @@ import { ToastModule } from 'primeng/toast';
     UserListComponent,
   ],
   imports: [
-    ToastModule,
-    DialogModule,
     ReactiveFormsModule,
     FormsModule,
     CommonModule,

@@ -52,15 +52,6 @@
             {{ product.status }}
           </mat-cell>
         </ng-container>
-        <ng-container matColumnDef="predict">
-          <mat-header-cell *matHeaderCellDef> Popular </mat-header-cell>
-          <mat-cell *matCellDef="let product">
-            <button mat-raised-button (click)="predecir(product)">
-              Predecir
-            </button>
-          </mat-cell>
-        </ng-container>
-
         <ng-container matColumnDef="actions">
           <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
           <mat-cell *matCellDef="let product" class="actions-cell">
@@ -87,12 +78,6 @@
           <p>{{ product.weight }}</p>
           <p>{{ product.category }}</p>
           <p [ngClass]="{'active': product.status === 'ACTIVE', 'deactive': product.status === 'INACTIVE'}">{{ product.status }}</p>
-          <p>
-            <!-- Parte del HTML donde quieres mostrar el icono de popularidad -->
-
-            <!-- <mat-icon *ngIf="product.isPopular">star</mat-icon>
-            <mat-icon *ngIf="!product.isPopular">star_border</mat-icon> -->
-          </p>
           <div class="actions">
             <button mat-icon-button class="edit-button" (click)="openEditModal(product)">
               <mat-icon>edit</mat-icon>
@@ -104,14 +89,7 @@
         </div>
       </div>
     </div>
+
     <mat-paginator [length]="totalProducts" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChange($event)" class="paginator"></mat-paginator>
   </div>
 </div>
-<!-- Diálogo de PrimeNG para mostrar el resultado -->
-<p-dialog header="Prediction Result" [(visible)]="displayDialog" [modal]="true" [closable]="true">
-  <p>{{ predictionResult }}</p>
-  <p-footer>
-    <button type="button" pButton icon="pi pi-check" (click)="displayDialog = false" label="Close"></button>
-  </p-footer>
-</p-dialog>
-<p-toast />

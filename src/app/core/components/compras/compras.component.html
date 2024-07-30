@@ -23,12 +23,6 @@
     </div>
   </div>
   <ng-template #noCompras>
-    <p-dialog header="No se encontraron compras" [(visible)]="displayNoCompras" [modal]="true"  [closable]="false" [dismissableMask]="true">
-      <div class="no-compras-dialog">
-        <p>No se encontraron compras para este usuario.</p>
-        <p>Podrás hacer compras usando nuestro Skill de Alexa, pero ten en cuenta que los pagos no se pueden realizar a través de Alexa.</p>
-        <button pButton type="button" (click)="cerrar()" label="Cerrar"></button>
-      </div>
-    </p-dialog>
+    <p>No se encontraron compras para este usuario.</p>
   </ng-template>
 </div>

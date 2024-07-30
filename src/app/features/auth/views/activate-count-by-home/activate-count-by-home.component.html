@@ -17,13 +17,16 @@
         El correo electrónico no es válido.
       </div>
       <div *ngIf="activateAccountForm.get('email')?.hasError('notFound')" class="error-message">
-        El correo electrónico no está registrado o no está en estado inactivo.
+        El correo electrónico no está registrado
       </div>
     </div>
     <button type="submit" [disabled]="!activateAccountForm.valid" class="activate-button">Activar Cuenta</button>
   </form>
   <div *ngIf="showRecoverLink">
     <p>¿Olvidaste tu contraseña? <a (click)="hideActivationForm()" routerLink="/auth/Recupera">Recupérala aquí</a></p>
+  </div>
+  <div *ngIf="showRegister">
+    <p>¿No tienes una cuenta?<a (click)="hideActivationForm()" routerLink="/auth/sign-up">Crear una cuenta</a></p>
   </div>
 </div>
 <p-toast position="top-center"></p-toast>

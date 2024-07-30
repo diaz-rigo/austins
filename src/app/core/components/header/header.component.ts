@@ -256,8 +256,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     const userData = this.sessionService.getUserData()
     // const carData = this.storageService.getCarrito();
-    // this.carData = this.storageService.getCarrito();t
-    this.compras=false
+    // this.carData = this.storageService.getCarrito();
+
     // console.log(this.carData);
     // console.log(this.sidebarVisible2);
     if (userData) {

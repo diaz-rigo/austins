@@ -7,7 +7,7 @@
 <!-- Agrega el componente de PrimeNG para el input -->
 <p-sidebar [(visible)]="sidebarVisible4" [fullScreen]="true">
   <p-toast position="top-center"></p-toast>
-  <h3 class="titulo">Consulta orden</h3>
+  <h3 class="titulo">Consulta Orden</h3>
   <div class="card flex justify-content-center busquedacode">
     <input
       class="txtcode"
@@ -110,7 +110,7 @@
 
   <!--
 
-<!<!-- venta -->
+<! -- venta -->
 
   <div *ngIf="mostrardatos2">
     <div *ngIf="pedidoInfo2">
@@ -261,10 +261,10 @@
     (click)="sidebarVisible4 = true; sidebarVisible = false"
     *ngIf="!userName"
   >
-    <span class="pi pi-book"></span> Seguimiento -pedidos
+    <span class="pi pi-book"></span> Seguimiento -Pedidos
   </div>
   <div class="mobile-menu-item" (click)="abrePedido()" *ngIf="userName">
-    <span class="pi pi-book"></span> pedidos
+    <span class="pi pi-book"></span> Pedidos
   </div>
   <div class="mobile-menu-item" (click)="abreperil()" *ngIf="userName">
     <span class="pi pi-user"></span> Perfil
@@ -346,7 +346,7 @@
       class="mobile-menu-item"
       (click)="openActivateCount()"
     >
-      <span class="pi pi-verified"></span> Activar *cuenta
+      <span class="pi pi-verified"></span> Activar Cuenta
     </div>
     <div *ngIf="userName" class="mobile-menu-item" (click)="logout()">
       <span class="pi pi-sign-out"></span> Logout
@@ -437,7 +437,7 @@
       </div>
     </div>
     <ng-template #emptyCart>
-      <div class="empty-cart-message">Tu carrito está vacío</div>
+      <div class="empty-cart-message">Tu Carrito Está Vacío</div>
     </ng-template>
     <button
       pButton
@@ -485,8 +485,6 @@
         class="filter-slider"
       ></p-slider>
 
-      <!-- <input type="range" id="price" [(ngModel)]="selectedPrice" min="0" max="100" step="1" /> -->
-      <!-- <span>{{ rangeValues | currency }}</span> -->
     </div>
 
     <!-- Filtro por color -->
@@ -497,7 +495,7 @@
     <!-- Botón para aplicar filtros -->
 
     <ng-template #emptyCart>
-      <div class="empty-cart-message">Tu carrito está vacío</div>
+      <div class="empty-cart-message">Tu Carrito Está Vacío</div>
     </ng-template>
 
     <div
@@ -506,7 +504,7 @@
       data-aos-anchor-placement="bottom-bottom"
     >
       <button class="btn-finish" (click)="finishPurchase()">
-        aplicar filtros
+        Aplicar Filtros
       </button>
     </div>
   </div>
@@ -565,7 +563,8 @@
       data-aos-duration="900"
     >
       <button class="menu-btn" (click)="redirectTo('home')">
-        <span class="pi pi-home"></span> home
+        <!-- <span class="pi pi-home"></span> Home -->
+        Home
       </button>
 
       <!-- <button class="menu-btn" >cotizar otro diseño</button> -->
@@ -574,13 +573,13 @@
         (click)="sidebarVisible4 = true"
         *ngIf="!userName"
       >
-        <span class="pi pi-book"></span> Seguimiento -pedidos
+      Seguimiento -Pedidos
       </button>
       <button class="menu-btn" (click)="abrePedido()" *ngIf="userName">
-        pedidos
+        Pedidos
       </button>
       <button [matMenuTriggerFor]="productsMenu" class="menu-btn">
-        <span class="pi pi-gift"></span> catalogo
+   Catalogo
       </button>
       <mat-menu
         style="background-color: transparent"
@@ -594,22 +593,19 @@
           class="mobile-menu-item_b1"
           (click)="redirectTo('acercade')"
         >
-          promosiones
+          Promosiones
         </div>
         <div
           mat-menu-item
           class="mobile-menu-item_b1"
           (click)="redirectTo('home')"
         >
-          acerca de
+          Acerca De
         </div>
       </mat-menu>
-      <!--
-      <button *ngIf="!userName" class="menu-btn" (click)="openSignInModal()">
-        <mat-icon class="material-icons2 primary">account_circle</mat-icon>
-      </button> -->
+
       <button class="menu-btn" *ngIf="!userName" (click)="openActivateCount()">
-        <span class="pi pi-verified"></span> Activar *cuenta
+         Activar Cuenta
       </button>
       <button *ngIf="!userName" class="menu-btn" (click)="openSignInModal()">
         <mat-icon class="material-icons2 primary">
@@ -624,18 +620,13 @@
       >
         <!-- HTML -->
         <div class="profile-picture">
-          <!-- <img src="ruta/a/tu/foto-de-perfil.jpg" alt="Profile Picture"> -->
-          <!-- <img
-            *ngIf="foto"
-            [src]="foto"
-            alt="Profile Picture"
-            class="profile-picture"
-          /> -->
+
         </div>
         <p-avatar
           *ngIf="foto"
           image="{{ foto }}"
           styleClass="mr-2"
+
           shape="circle"
         />
         <div *ngIf="!foto"><i class="pi pi-user"></i> {{ userName }}</div>
@@ -648,7 +639,7 @@
         yPosition="below"
       >
         <div mat-menu-item class="mobile-menu-item_b1" (click)="abreperil()">
-          perfil
+          Perfil
         </div>
         <div
           mat-menu-item
@@ -656,13 +647,12 @@
           data-aos="fade-up"
           data-aos-anchor-placement="bottom-center"
           data-aos-duration="900"
-          (click)="abreCompra()"
         >
-          <span class="pi pi-shopping-bag" ></span> mis
-          compras
+          <span class="pi pi-shopping-bag" (click)="abreCompra()"></span> Mis
+          Compras
         </div>
         <div mat-menu-item class="mobile-menu-item_b1" (click)="logout()">
-          <span><span class="pi pi-sign-out"></span> Cerrar sesión</span>
+          <span><span class="pi pi-sign-out"></span> Cerrar Sesión</span>
         </div>
       </mat-menu>
     </div>
@@ -700,7 +690,7 @@
   >
     <label for="categoryFilter">Categoría:</label>
     <button (click)="sidebarVisible3 = true">
-      filtrar
+      Filtrar
       <mat-icon>filter_alt</mat-icon>
     </button>
 
