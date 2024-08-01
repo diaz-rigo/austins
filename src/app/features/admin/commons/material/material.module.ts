@@ -31,6 +31,7 @@ import { SplitterModule } from 'primeng/splitter'
 import { DividerModule } from 'primeng/divider';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { InputNumberModule } from 'primeng/inputnumber';
 // import { TableModule } from 'primeng/table';
 import { SidebarModule } from 'primeng/sidebar';
 import { ContextMenuModule } from 'primeng/contextmenu';
@@ -38,8 +39,14 @@ import { TagModule } from 'primeng/tag';
 import { FieldsetModule } from 'primeng/fieldset';
 import { ChipModule } from 'primeng/chip';
 import { ChipsModule } from 'primeng/chips';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { CheckboxModule } from 'primeng/checkbox';
+import { HTTP_INTERCEPTORS } from '@angular/common/http'
+import { ErrorInterceptor } from 'src/app/shared/interceptor/error.interceptor'
+import { ToastModule } from 'primeng/toast';
+import { CardModule } from 'primeng/card';
 @NgModule({
-  exports: [
+  exports: [ProgressSpinnerModule,InputNumberModule,CheckboxModule,ToastModule,CardModule,
     ChipsModule,
     ChipModule,
     FieldsetModule,
@@ -73,6 +80,8 @@ import { ChipsModule } from 'primeng/chips';
     MatOptionModule,
     MatChipsModule,
     MatProgressSpinnerModule,
+  ],  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
 })
 export class MaterialModule {}

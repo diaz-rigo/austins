@@ -26,11 +26,11 @@ import { ProductService } from '../services/product.service';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { OpenDeleteConfirmationComponent } from './open-delete-confirmation/open-delete-confirmation.component';
-import { EditProductComponentComponent } from './edit-product-component/edit-product-component.component';
 import { CreateProductComponentComponent } from './create-product-component/create-product-component.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DefaultImgModule } from 'src/app/shared/pipes/default-img/default-img.module';
-const COMPONENTS = [AdminHeaderComponent,AdminMenuComponent,OpenDeleteConfirmationComponent, EditProductComponentComponent, CreateProductComponentComponent];
+
+const COMPONENTS = [AdminHeaderComponent,AdminMenuComponent,OpenDeleteConfirmationComponent, CreateProductComponentComponent];
 
 @NgModule({
   declarations: [...COMPONENTS, ],

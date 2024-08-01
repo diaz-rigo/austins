@@ -1,71 +1,64 @@
 <div class="container">
   <div class="subcontenido">
     <h1 class="view-title">Productos</h1>
+
+
     <form [formGroup]="searchForm" class="form">
-      <mat-form-field class="form-field">
-        <input matInput placeholder="Buscar" formControlName="query" />
-      </mat-form-field>
+      <!-- <p-inputText placeholder="Buscar" formControlName="query"></p-inputText> -->
+      <!-- <input placeholder="Buscar" formControlName="query"> -->
+      <input pInputText placeholder="Buscar" formControlName="query"/>
+      <p-button [outlined]="true" type="button" label="Crear Nuevo Producto" icon="pi pi-plus"  (click)="createprod()" severity="success" ></p-button>
     </form>
-    <button mat-raised-button class="create-button" (click)="openCreateModal()">
-      <mat-icon>add</mat-icon>
-      Crear Nuevo Producto
-    </button>
 
     <!-- Table for larger screens -->
     <div class="table-container" *ngIf="!isMobile">
-      <mat-table [dataSource]="products" class="mat-table" matSort>
-        <ng-container matColumnDef="name">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>
-            <mat-icon>label</mat-icon> Nombre
-          </mat-header-cell>
-          <mat-cell *matCellDef="let product">{{ product.name }}</mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="image">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>
-            <mat-icon>image</mat-icon> Imagen
-          </mat-header-cell>
-          <mat-cell *matCellDef="let product">
-            <img [src]="product.images[0] ? product.images[0] : 'defaultImg'" alt="Imagen del producto" class="product-image" />
-          </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="price">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>
-            <mat-icon>monetization_on</mat-icon> Precio
-          </mat-header-cell>
-          <mat-cell *matCellDef="let product">{{ product.price }}</mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="weight">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>
-            <mat-icon>pie_chart</mat-icon> Peso
-          </mat-header-cell>
-          <mat-cell *matCellDef="let product">{{ product.weight }}</mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="category">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>
-            <mat-icon>category</mat-icon> Categoría
-          </mat-header-cell>
-          <mat-cell *matCellDef="let product">{{ product.category }}</mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="status">
-          <mat-header-cell *matHeaderCellDef> Estado </mat-header-cell>
-          <mat-cell *matCellDef="let product" [ngClass]="{'active': product.status === 'ACTIVE', 'deactive': product.status === 'INACTIVE'}">
-            {{ product.status }}
-          </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="actions">
-          <mat-header-cell *matHeaderCellDef> Acciones </mat-header-cell>
-          <mat-cell *matCellDef="let product" class="actions-cell">
-            <button mat-icon-button class="edit-button" (click)="openEditModal(product)">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-icon-button class="delete-button" (click)="openDeleteConfirmation(product)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </mat-cell>
-        </ng-container>
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns" class="mat-row"></mat-row>
-      </mat-table>
+      <p-table [value]="products" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10, 20, 50]" [totalRecords]="totalProducts" (onPage)="onPageChange($event)" class="p-table"  styleClass="p-datatable-gridlines"  severity="warning">
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="name">
+              <i class="pi pi-tag"></i> Nombre <p-sortIcon field="name"></p-sortIcon>
+            </th>
+            <th pSortableColumn="image">
+              <i class="pi pi-image"></i> Imagen <p-sortIcon field="image"></p-sortIcon>
+            </th>
+            <th pSortableColumn="price">
+              <i class="pi pi-dollar"></i> Precio <p-sortIcon field="price"></p-sortIcon>
+            </th>
+            <th pSortableColumn="weight">
+              <i class="pi pi-chart-bar"></i> Peso <p-sortIcon field="weight"></p-sortIcon>
+            </th>
+            <th pSortableColumn="category">
+              <i class="pi pi-th-large"></i> Categoría <p-sortIcon field="category"></p-sortIcon>
+            </th>
+            <th>
+              Estado
+            </th>
+            <th>
+              Acciones
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+          <tr>
+            <td>{{ product.name }}</td>
+            <td>
+              <img [src]="product.images[0] ? product.images[0] : 'defaultImg'" alt="Imagen del producto" class="product-image" />
+            </td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.weight }}</td>
+            <td>{{ product.category }}</td>
+            <td>   <p-tag [value]="checarsta(product.status)" [severity]="getSeverity(checarsta(product.status))"  [icon]="geIcon(checarsta(product.status))"/>
+            </td>
+            <!-- <td [ngClass]="{'active': product.status === 'ACTIVE', 'deactive': product.status === 'INACTIVE'}">
+              {{ product.status }}
+            </td> -->
+            <td class="actions-cell">
+              <p-button type="button" icon="pi pi-pencil" class="edit-button"     (click)="editprod(product)" [outlined]="true"></p-button>
+              <p-button type="button" icon="pi pi-trash" class="delete-button" (click)="openDeleteConfirmation(product)" [outlined]="true"></p-button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
     </div>
 
     <!-- Card list for smaller screens -->
@@ -77,19 +70,15 @@
           <p>{{ product.price }}</p>
           <p>{{ product.weight }}</p>
           <p>{{ product.category }}</p>
-          <p [ngClass]="{'active': product.status === 'ACTIVE', 'deactive': product.status === 'INACTIVE'}">{{ product.status }}</p>
+          <p-tag [value]="product.status" [severity]="getSeverity(product.status)" />
+
+          <!-- <p [ngClass]="{'active': product.status === 'ACTIVE', 'deactive': product.status === 'INACTIVE'}">{{ product.status }}</p> -->
           <div class="actions">
-            <button mat-icon-button class="edit-button" (click)="openEditModal(product)">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-icon-button class="delete-button" (click)="openDeleteConfirmation(product)">
-              <mat-icon>delete</mat-icon>
-            </button>
+            <p-button type="button" icon="pi pi-pencil" class="edit-button"   (click)="editprod(product)" [outlined]="true"></p-button>
+            <p-button type="button" icon="pi pi-trash" class="delete-button" (click)="openDeleteConfirmation(product)" [outlined]="true"></p-button>
           </div>
         </div>
       </div>
     </div>
-
-    <mat-paginator [length]="totalProducts" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" (page)="onPageChange($event)" class="paginator"></mat-paginator>
   </div>
 </div>

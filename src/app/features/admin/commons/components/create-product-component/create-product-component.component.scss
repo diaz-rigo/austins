@@ -1,107 +1,111 @@
-// /* Estilos para el componente EditProductComponentComponent */
-
-:host {
-  display: block;
-  // margin: 0 auto;
-  max-width: 800px;
-  padding: 30px;
-  background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-}
-// :host {
-//   display: block;
-//   margin: 0 auto;
-//   max-width: 1000px; /* Ajusta el tamaño máximo según tus necesidades */
-//   padding: 30px; /* Padding general para el contenedor */
-//   background-color: #ffffff;
-//   border-radius: 10px;
-//   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-// }
-
-h2 {
-  font-size: 18px;
-  margin-bottom: 20px;
+.form-container {
+  max-width: 800px; /* Ajusta según tu necesidad */
+  margin: auto;
+  padding: 20px;
 }
 
-/* Estilos para las filas del formulario */
-.form-row {
+.row {
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
 }
 
-/* Estilos para los campos del formulario */
-.form-group {
-  flex: 1;
-  margin-right: 10px;
+.form-field {
+  display: flex;
+  flex-direction: column;
+  width: 48%; /* Ajusta para que dos campos entren en una fila */
+
 }
 
-.form-group:last-child {
-  margin-right: 0;
-}
-
-/* Estilos para los campos de entrada */
-mat-form-field {
+.form-field.full-width {
   width: 100%;
 }
+input[type="text"],
+input[type="time"],
+input[type="email"],
+input[type="tel"],
+input[type="date"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 5px;
+}
 
-/* Estilos para el campo de selección de imagen */
-.custom-file-upload {
-  background-color: #007bff;
-  color: #fff;
-  padding: 10px 20px;
-  border-radius: 5px;
+label {
+  font-weight: bold;
+}
+.pi {
+  font-size: 1.5rem;
+}
+
+.btn {
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+}
+
+.btn-finish {
+  width: 100%;
+  background-color: #038535;
+  border: 2px solid transparent;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
   cursor: pointer;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
 }
 
-.custom-file-upload:hover {
-  background-color: #0056b3;
+.btn-finish:hover::after {
+  border: 2px solid #00c403;
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #ffffff;
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
 }
 
-/* Estilos para la imagen del producto */
+.btn-finish:hover::after {
+  transform: scaleX(1);
+}
+
+.image-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.image-container {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
 .product-image {
-  margin-top: 20px;
-  display: block;
-  max-width: 100%;
-  border: 1px solid #ddd;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
-/* Estilos para los checkbox de Angular Material */
-.mat-checkbox-layout {
-  margin-right: 10px; /* Espacio entre el checkbox y el texto */
-}
+.remove-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: rgba(255, 132, 0, 0.913);
+  border-radius: 70%;
+  // padding: 2px;
 
-/* Estilos para la etiqueta del checkbox */
-.mat-checkbox-label {
-  margin-left: 5px; /* Espacio entre el checkbox y el texto */
-}
-
-/* Estilos para el contenedor del checkbox */
-.mat-checkbox-container {
-  display: flex;
-  align-items: center;
-}
-
-/* Estilos para el botón de guardar cambios */
-button[type="submit"] {
-  background-color: #007bff;
-  color: #fff;
-}
-
-/* Estilos para el botón de cancelar */
-button[type="button"] {
-  background-color: #ccc;
-  color: #333;
-  margin-left: 10px;
-}
-
-/* Estilos para el contenedor de los botones */
-.form-actions {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 20px;
-  align-items: center; /* Alinea los botones verticalmente al centro */
+  cursor: pointer;
 }

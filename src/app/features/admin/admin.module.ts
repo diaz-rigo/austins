@@ -16,9 +16,16 @@ import { VentaListView } from './views/venta-list/venta-list.view'
 
 import { DataGraficaView } from './views/data-grafica/data-grafica.view';
 import { UserListComponent } from './views/user-list/user-list.component'
+import { PaginatorModule } from 'primeng/paginator';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { InputTextModule } from 'primeng/inputtext';
+import { InicioAdView } from './views/incio-ad/incio-ad.view'
 
 @NgModule({
   declarations: [
+    InicioAdView ,
     AdminComponent,
     ProductListView,
     OrderListView,
@@ -26,7 +33,8 @@ import { UserListComponent } from './views/user-list/user-list.component'
     DataGraficaView,
     UserListComponent,
   ],
-  imports: [
+  imports: [ToastModule,ConfirmPopupModule,ConfirmDialogModule,InputTextModule,
+    PaginatorModule,
     ReactiveFormsModule,
     FormsModule,
     CommonModule,

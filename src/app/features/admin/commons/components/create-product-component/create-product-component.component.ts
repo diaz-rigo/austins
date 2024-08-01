@@ -1,335 +1,342 @@
-import { Product } from '../../../models/Product.models';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ProductService } from '../../services/product.service';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { MatChipEditedEvent, MatChipInputEvent } from '@angular/material/chips';
-import { environment } from 'src/environments/environment';
-import { forkJoin } from 'rxjs';
-import { DomSanitizer } from '@angular/platform-browser';
-
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpErrorResponse } from '@angular/common/http';
+import { Component, ChangeDetectorRef, Input, OnInit } from '@angular/core'
 import {
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  Inject,
-  inject,
-} from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
-import { IproductResponse } from '../../../interfaces/Product.interface';
-import { CategoryService } from '../../services/category.service';
-import { Categoria } from '../../../models/Category.models';
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormArray,
+  FormControl,
+} from '@angular/forms'
+import { HttpErrorResponse } from '@angular/common/http'
+import { Router } from '@angular/router'
+import { MatSnackBar } from '@angular/material/snack-bar'
+import { ProductService } from '../../services/product.service'
+import { CategoryService } from '../../services/category.service'
+import { COMMA, ENTER } from '@angular/cdk/keycodes'
+import { environment } from 'src/environments/environment'
+import { DomSanitizer } from '@angular/platform-browser'
+import { IproductResponse } from '../../../interfaces/Product.interface'
+import { Product } from '../../../models/Product.models'
+import { Categoria } from '../../../models/Category.models'
+import { MatChipInputEvent, MatChipEditedEvent } from '@angular/material/chips'
+import { ChipsAddEvent, ChipsRemoveEvent } from 'primeng/chips'
+import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog'
+import { ProductListView } from '../../../views/product-list/product-list.view'
+import { NgxUiLoaderService } from 'ngx-ui-loader'
+import { ConfirmationService, MessageService } from 'primeng/api'
+
 @Component({
   selector: 'app-create-product-component',
   templateUrl: './create-product-component.component.html',
   styleUrls: ['./create-product-component.component.scss'],
+  providers: [DialogService, ConfirmationService, MessageService],
 })
-export class CreateProductComponentComponent {
-  createForm: FormGroup;
-  loading = false;
-  separatorKeysCodes = [ENTER, COMMA] as const;
-  chips: any[] = [];
+export class CreateProductComponentComponent implements OnInit {
+  isEditing: boolean = false
+  @Input() product!: Product
+  categories: Categoria[] = []
+  separatorKeysCodes: number[] = [COMMA, ENTER]
+  // productImages: any[] = []
+  // productImages: Array<{ url: string, file: File }> = []; // Para almacenar imágenes y sus archivos
+  productImages: Array<{ url: string, file: File | null }> = [];
 
-  product: Product = {
-    _id: '',
-    sku: '',
-    name: '',
-    description: '',
-    unit: '',
-    expiration: '',
-    model: '',
-    quantity: 0,
-    price: 0,
-    category: '',
-    maker: '',
-    nutritionalInformation: '',
-    weight: 0,
-    isFeatured: false,
-    isVegetarian: false,
-    isGlutenFree: false,
-    ingredients: [],
-    allergens: [],
-    status: '',
-    images: [],
-  };
+  selectedImages: any[] = []
+  loading: boolean = false
 
-  selectedImages: any[] = []; // Asegúrate de tener la definición correcta para 'selectedImages'
-  productImages: any[] = []; // Asegúrate de tener la definición correcta para 'productImages'
-  categories: Categoria[] = [];
+  productForm!: FormGroup
+  idproducEDIT: string = ''
 
   constructor(
-    private dialogRef: MatDialogRef<CreateProductComponentComponent>,
     private fb: FormBuilder,
-    private categoryService: CategoryService,
     private productService: ProductService,
-    private snackBar: MatSnackBar,
+    private categoryService: CategoryService,
     private router: Router,
-    private el: ElementRef
-  ) {
-    this.product.ingredients = this.product.ingredients || [];
-    this.product.allergens = this.product.allergens || [];
+    private snackBar: MatSnackBar,
+    private productListView: ProductListView,
+    private ngxService: NgxUiLoaderService,
+    private cdr: ChangeDetectorRef,
+    private dialogRef: DynamicDialogRef,
+    private messageService: MessageService,  private config: DynamicDialogConfig // Añadir este parámetro
 
-    this.createForm = this.fb.group({
+  ) {
+    this.product = this.config.data.product; // Obtener el producto de los datos del diálogo
+    // console.log(this.product)
+
+    this.loadCategories()
+  }
+  ngOnInit(): void {
+    this.productForm = this.createProductForm()
+    if (this.product) {
+      console.log(this.product)
+      this.isEditing = true
+      this.initializeFormWithProductData(this.product)
+    } else {
+      console.warn('No se han proporcionado datos del producto.')
+    }
+  }
+  createProductForm(): FormGroup {
+    return this.fb.group({
       name: ['', Validators.required],
       sku: ['', Validators.required],
       description: ['', Validators.required],
       unit: ['', Validators.required],
-      expiration: ['', Validators.required],
-      model: ['', Validators.required],
-      quantity: ['', Validators.required],
-      price: ['', Validators.required],
-      category: ['', Validators.required],
+      price: [0, [Validators.required, Validators.min(0)]],
+      quantity: [0, [Validators.required, Validators.min(0)]],
       maker: ['', Validators.required],
       nutritionalInformation: ['', Validators.required],
-      weight: ['', Validators.required],
+      weight: ['', [Validators.required, Validators.min(0)]],
       isFeatured: [false],
       isVegetarian: [false],
       isGlutenFree: [false],
-      ingredients: this.fb.array(this.product.ingredients || []),
-      allergens: this.fb.array(this.product.allergens || []),
+      model: ['', Validators.required],
+      ingredients: new FormControl<string[] | null>(null),
+      allergens: new FormControl<string[] | null>(null),
       status: [false],
-    });
-    this.loadCategories();
-    this.createForm.addControl('ingredientsInput', this.fb.control(''));
-    this.createForm.addControl('allergensInput', this.fb.control(''));
+      category: ['', Validators.required],
+      images: [null], // Asegúrate de que este campo esté en el formulario si se necesita
+    })
   }
 
-  createProduct(): void {
-    if (this.createForm.valid) {
-      // Evitar múltiples clics mientras está en progreso
-      if (this.loading) {
-        return;
-      }
-
-      this.loading = true;
-      const newProduct: Product = {
-        name: this.createForm.value.name,
-        description: this.createForm.value.description,
-        unit: this.createForm.value.unit,
-        expiration: this.createForm.value.expiration,
-        model: this.createForm.value.model,
-        quantity: this.createForm.value.quantity,
-        price: this.createForm.value.price,
-        category: this.createForm.value.category,
-        maker: this.createForm.value.maker,
-        images: [],
-        status: this.createForm.value.status ? 'ACTIVE' : 'INACTIVE',
-        weight: this.createForm.value.weight,
-        ingredients: this.getIngredientsArray(),
-        allergens: this.getAllergensArray(),
-        nutritionalInformation: this.createForm.value.nutritionalInformation,
-        isFeatured: this.createForm.value.isFeatured,
-        isVegetarian: this.createForm.value.isVegetarian,
-        isGlutenFree: this.createForm.value.isGlutenFree,
-        _id: '',
-        sku: this.createForm.value.sku,
-      };
-      this.uploadImagesAndAddToForm(newProduct);
-    } else {
-    }
-  }
-
-  onImagesSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (!input.files || input.files.length === 0) {
+  initializeFormWithProductData(product: Product): void {
+    if (!product) {
+      console.warn('No se han proporcionado datos del producto.');
       return;
     }
-
-    const imageFiles = Array.from(input.files).filter((file) =>
-      file.type.startsWith('image/')
-    );
-
-    if (imageFiles.length > 0) {
-      this.selectedImages = imageFiles;
-      this.updateImagePreview();
-    } else {
-      console.warn('No se seleccionaron imágenes válidas.');
-    }
-  }
-
-  private updateImagePreview(): void {
-    this.productImages = this.selectedImages.map((image: File) => ({
-      name: image.name,
-      url: URL.createObjectURL(image),
-    }));
-  }
-
-  private uploadImagesAndAddToForm(product: Product): void {
-    this.productService.createProduct(product).subscribe(
-      (result: IproductResponse) => {
-        // console.log('Producto creado con éxito. ID:', result._id);
-        const uploadObservables = this.selectedImages.map((image: File) => {
-          const position = product.images.length; // Ajustar la posición según tu lógica
-          // console.log(
-          //   'creando.. ',
-          //   product.category,
-          //   result._id,
-          //   position,
-          //   image
-          // );
-          return this.productService.updateProductImage(
-            product.category,
-            result._id,
-            position,
-            image
-          );
-        });
-
-        forkJoin(uploadObservables).subscribe(
-          (imageURLs: any) => {
-            product.images = product.images.concat(imageURLs);
-            this.createForm.get('images')?.setValue(product.images);
-            this.dialogRef.close(product);
-            // this.createProductAfterImagesUpload(product);
-            this.loading = false;
-          },
-          (error) => {
-            console.error('Error uploading images:', error);
-            this.loading = false;
-          }
-        );
-
-        this.snackBar.open('Producto creado con éxito', 'Cerrar', {
-          duration: 3000,
-        });
-      },
-      (error) => {
-        this.snackBar.open('Error al crear el producto', 'Cerrar', {
-          duration: 3000,
-        });
-        console.error('Error al crear el producto', error);
-      },
-      () => {
-        this.loading = false;
-      }
-    );
-  }
-
-  removeImage(index: number): void {
-    const fullImagePath = this.product.images[index];
-    const imageNameToRemove = fullImagePath.split('/').pop(); // Extracts the file name from the full path
-    if (!imageNameToRemove) {
-      console.error('Error: Image name is undefined');
-      return;
-    }
-    this.product.images.splice(index, 1); // Remove the image from the product's array of images
-
-    // Call the productService's deleteImage method to delete the image on the server
-    this.productService
-      .deleteProductImage(this.product._id, imageNameToRemove)
-      .subscribe(
-        (response) => {
-          // console.log('Image deleted successfully:', response);
-          this.showSuccessSnackBar('Image deleted successfully');
-          // You can perform other actions after deletion if necessary
-          // this.updateProduct(this.product); // Update the product after deleting the image
-        },
-        (error) => {
-          console.error('Error deleting the image:', error);
-        }
-      );
-  }
-  showSuccessSnackBar(message: string): void {
-    this.snackBar.open(message, 'Cerrar', {
-      duration: 3000, // Duración en milisegundos
-      panelClass: ['snackbar-success'], // Clases CSS adicionales para el estilo
+    this.idproducEDIT = product._id;
+    std:Boolean
+    this.productForm.patchValue({
+      name: product.name,
+      sku: product.sku,
+      description: product.description,
+      unit: product.unit,
+      price: product.price,
+      quantity: product.quantity,
+      maker: product.maker,
+      nutritionalInformation: product.nutritionalInformation,
+      weight: product.weight,
+      isFeatured: product.isFeatured,
+      isVegetarian: product.isVegetarian,
+      isGlutenFree: product.isGlutenFree,
+      model: product.model,
+      category: product.category,
+      ingredients:product.ingredients || [],
+      allergens:product.allergens || [],
+      status: this.checarsta(product.status) , // Asigna 'true' si el estado es 'ACTIVE', de lo contrario 'false'
     });
-  }
+    this.loadProductImages(product.images || []);
 
-  /////////////funciones adicionales
+  }
+  checarsta(status: string): boolean {
+    switch (status) {
+      case 'ACTIVE':
+          return true;
+      case 'INACTIVE':
+          return false;
+      case 'true':
+          return true;
+      case 'false':
+          return false;
+      default:
+          return false; // O cualquier otro valor que desees utilizar para los casos no manejados
+  }
+  }
+  setFormArray(arrayName: string, items: string[]): void {
+    const formArray = this.productForm.get(arrayName) as FormArray;
+    items.forEach((item) => formArray.push(this.fb.control(item)));
+  }
+  loadProductImages(images: string[]): void {
+    this.productImages = images.map((url) => ({ url, file: null }));
+  }
   loadCategories() {
     this.categoryService.getAllCategories().subscribe(
       (data: Categoria[]) => {
-        this.categories = data;
+        this.categories = data
       },
       (error) => {
-        console.error('Error al cargar las categorías:', error);
+        console.error('Error al cargar las categorías:', error)
+      },
+    )
+  }
+  // removeExistingImage(index: number): void {
+  //   this.product.images.splice(index, 1);
+  // }
+  EDITARProducto() {
+    if (this.productForm.valid) {
+      const productData = this.productForm.value;
+      const category = productData.category; // Asegúrate de que esto se ajusta según tu modelo de datos
+      this.ngxService.start();
+      console.log('Datos del producto:', productData);
+  
+      // Combina las imágenes existentes y las nuevas imágenes
+      const existingImages = this.product.images || [];
+      const imageFiles = this.productImages
+        .map((img) => img.file)
+        .filter((file): file is File => file !== null);
+  
+      if (imageFiles.length > 0) {
+        // Si hay nuevas imágenes, súbelas
+        this.productService.uploadImages(category, imageFiles).subscribe(
+          (imageData: string[] | { images: string[] }) => {
+            imageData = Array.isArray(imageData) ? imageData : imageData.images;
+            console.log('Datos de las imágenes subidas:', imageData);
+            // Combina las imágenes nuevas con las imágenes existentes, y elimina las imágenes eliminadas
+            const updatedImages = this.getUpdatedImages(existingImages, imageData);
+            productData.images = updatedImages;
+            this.updateProduct(productData);
+          },
+          (error) => {
+            this.ngxService.stop();
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Rechazado',
+              detail: 'Error subiendo imágenes',
+            });
+          }
+        );
+      } else {
+        // Si no hay nuevas imágenes, solo actualiza las imágenes existentes
+        productData.images = existingImages;
+        this.updateProduct(productData);
+      }
+    } else {
+      console.error('Formulario no válido.');
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Rechazado',
+        detail: 'Formulario no válido',
+      });
+    }
+  }
+  
+  getUpdatedImages(existingImages: string[], newImages: string[]): string[] {
+    // Aquí puedes combinar imágenes existentes y nuevas, y eliminar las que fueron eliminadas
+    // En este caso, simplemente combinamos las imágenes nuevas con las existentes
+    // Implementa lógica adicional si es necesario para eliminar imágenes específicas
+    return [...existingImages, ...newImages];
+  }
+ 
+  updateProduct(productData: any) {
+    this.productService.updateProduct(this.idproducEDIT, productData).subscribe(
+      (response) => {
+        this.ngxService.stop();
+        this.dialogRef.close();
+        this.productListView.loadProducts();
+        this.messageService.add({
+          severity: 'info',
+          summary: 'Confirmado',
+          detail: 'Producto actualizado exitosamente',
+        });
+      },
+      (error) => {
+        this.ngxService.stop();
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Rechazado',
+          detail: 'Error al actualizar el producto',
+        });
       }
     );
   }
-
-  removeSelectedImage(selectedImage: File): void {
-    const index = this.selectedImages.indexOf(selectedImage);
-    if (index !== -1) {
-      this.selectedImages.splice(index, 1);
+  
+  onImagesSelected(event: any): void {
+    const files: FileList = event.target.files;
+    this.productImages = []; // Reinicia el array de imágenes
+  
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const reader = new FileReader();
+  
+      reader.onload = (e: any) => {
+        // Almacena la URL de la imagen en productImages
+        this.productImages.push({ url: e.target.result, file: file });
+        this.cdr.markForCheck(); // Para asegurar que Angular detecte los cambios
+      };
+  
+      reader.readAsDataURL(file); // Lee la imagen como una URL de datos
     }
+  }
+  
+  // removeSelectedImage(image: { url: string, file: File | null }): void {
+  //   this.productImages = this.productImages.filter(img => img.file !== image.file);
+  // }
+
+
+  removeSelectedImage(image: { url: string; file: File | null }): void {
+    const index = this.productImages.indexOf(image);
+    if (index >= 0) {
+      this.productImages.splice(index, 1);
+    }
+    if (this.product.images.length > 0) {
+      this.product.images.splice(index, 1);
+    }
+  }
+
+  removeExistingImage(index: number): void {
+    this.product.images.splice(index, 1);
+  }  
+  agregarProducto() {
+    if (this.productForm.valid) {
+      const productData = this.productForm.value
+      const category = productData.category.title // Ajusta según tu modelo de datos
+      this.ngxService.start()
+      const imageFiles = this.productImages
+      .map(img => img.file)
+      .filter((file): file is File => file !== null);
+      this.productService.uploadImages(category, imageFiles).subscribe(
+      // this.productService.uploadImages(category, imageFiles).subscribe(
+        (imageData: string[] | { images: string[] }) => {
+          imageData = Array.isArray(imageData) ? imageData : imageData.images
+          console.log(imageData)
+          productData.images = imageData // Asocia las URLs de las imágenes al producto
+          this.productService.createProduct(productData).subscribe(
+            (response) => {
+          
+              this.ngxService.stop()
+              this.dialogRef.close()
+              this.productListView.loadProducts()
+              this.messageService.add({
+                severity: 'info',
+                summary: 'Confirmado',
+                detail: 'Producto agregado exitosamente',
+              })
+            },
+            (error) => {
+              this.ngxService.stop()
+
+              this.messageService.add({
+                severity: 'error',
+                summary: 'Rechazado',
+                detail: 'Error al agregar el producto',
+              })
+            },
+          )
+        },
+        (error) => {
+          this.ngxService.stop()
+
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Rechazado',
+            detail: 'Error subiendo imágenes',
+          })
+        },
+      )
+    } else {
+      console.error('Formulario no válido.')
+
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Rechazado',
+        detail: 'Formulario no válido',
+      })
+    }
+    // this.messageService.clear();
+
   }
 
   getImages(url: string): string {
-    return `${environment.api}/${url}`;
+    return `${environment.api}/${url}`
   }
-  getIngredientsArray(): string[] {
-    const ingredientsControl = this.createForm.get('ingredients');
-    return ingredientsControl ? ingredientsControl.value : [];
-  }
-  getAllergensArray(): string[] {
-    const allergensControl = this.createForm.get('allergens');
-    return allergensControl ? allergensControl.value : [];
-  }
-  getIngredientsInputValue(): string {
-    const ingredientsInputControl = this.createForm.get('ingredientsInput');
-    return ingredientsInputControl ? ingredientsInputControl.value : '';
-  }
-  getAllergensInputValue(): string {
-    const allergensInputControl = this.createForm.get('allergensInput');
-    return allergensInputControl ? allergensInputControl.value : '';
-  }
-  agregarIngrediente() {
-    const ingredientsArray = this.createForm.get('ingredients') as FormArray;
-    ingredientsArray.push(this.fb.control('Nuevo ingrediente'));
-    console.log('Ingrediente agregado:', this.createForm.value.ingredients);
-  }
-  addChip(event: MatChipInputEvent, controlName: string): void {
-    const value = (event.value || '').trim();
-    if (value) {
-      const control = this.createForm.get(controlName) as FormArray;
-      control.push(this.fb.control(value));
-    }
-    event.chipInput!.clear();
-  }
-  removeIngredient(index: number) {
-    const ingredientsArray = this.createForm.get('ingredients') as FormArray;
-    ingredientsArray.removeAt(index);
-    // console.log('Ingrediente eliminado:', this.createForm.value.ingredients);
-  }
-  removeAllergen(index: number) {
-    const allergensArray = this.createForm.get('allergens') as FormArray;
-    allergensArray.removeAt(index);
-  }
-  removeChip(index: number, type: string) {
-    const formArray = type === 'ingredients' ? 'ingredients' : 'allergens';
-    (this.createForm.get(formArray) as FormArray).removeAt(index);
-  }
-  toggleStatus(): void {
-    const statusControl = this.createForm.get('status');
-    if (statusControl) {
-      const currentStatus = statusControl.value;
-      statusControl.setValue(!currentStatus); // Cambiar el valor del checkbox
-    }
-  }
-  editIngredient(index: number, event: MatChipEditedEvent): void {
-    const value = event.value.trim();
-    if (!value) {
-      this.removeIngredient(index);
-      return;
-    }
-    const ingredientsArray = this.createForm.get('ingredients') as FormArray;
-    ingredientsArray.at(index).setValue(value);
-  }
-  editAllergens(index: number, event: MatChipEditedEvent): void {
-    const value = event.value.trim();
-    if (!value) {
-      // Remove ingredient if it no longer has a name
-      this.removeAllergen(index);
-      return;
-    }
-
-    const AllergensArray = this.createForm.get('allergens') as FormArray;
-    AllergensArray.at(index).setValue(value);
-  }
-  ngAfterViewInit() {
-    this.el.nativeElement.focus();
+  removeImage(index: number) {
+    this.product.images.splice(index, 1)
   }
 }

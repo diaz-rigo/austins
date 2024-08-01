@@ -46,8 +46,6 @@ export class Product {
     this.isVegetarian = data?.isVegetarian ? data.isVegetarian : false;
     this.isGlutenFree = data?.isGlutenFree ? data.isGlutenFree : false;
   }
-  // getNameUpperCase(name: string): string {
-  //   return name.toUpperCase();
-  // }
+
 }
 

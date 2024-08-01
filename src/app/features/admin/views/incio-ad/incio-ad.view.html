@@ -1,39 +1,105 @@
-<div class="container">
+<p-card class="container">
   <div class="header">
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbv6MAjATprVREOPLX9o0sP6jzsk51ygAPSIMQBaXn&s" alt="Logo de la Pastelería Austin's" class="logo">
-    <h1 class="ti">Información del Proyecto</h1>
-    <img src="http://www.uthh.edu.mx/imagenes/carreras/Logos_Carreras/2015061214431910_gal.png" alt="logo 2" class="logo2">
+    <h1 class="ti">Estadísticas del Proyecto</h1>
+    <img src="https://static.wixstatic.com/media/64de7c_29f387abde884a1e8f9df17220933df6~mv2.png/v1/fill/w_834,h_221,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/64de7c_29f387abde884a1e8f9df17220933df6~mv2.png" alt="logo 2" class="logo2">
   </div>
+
+  <p-divider></p-divider>
 
   <div class="info-container">
-    <div class="student-info">
-      <h2><i class="fas fa-user"></i> Ingenieros</h2>
-      <ul>
-        <li>
-          RIGOBERTO DÍAZ HERNÁNDEZ
-          <span class="matricula">MATRÍCULA: 20211036</span>
-        </li>
-        <li>
-          YAHIR HERNÁNDEZ HERNÁNDEZ
-          <span class="matricula">MATRÍCULA: 20211035</span>
-        </li>
-      </ul>
-    </div>
+    <p-card class="statistic-card sales">
+      <h2><i class="fas fa-chart-line"></i> Ventas Totales</h2>
+      <p>$25,000</p>
+    </p-card>
 
-    <div class="grado-info">
-      <h2><i class="fas fa-graduation-cap"></i> Grado y Grupo</h2>
-      <p>8º</p>
-      <p>Grupo "A"</p>
-    </div>
+    <p-card class="statistic-card orders">
+      <h2><i class="fas fa-shopping-cart"></i> Pedidos Realizados</h2>
+      <p>150</p>
+    </p-card>
 
-    <div class="carrera-info">
-      <h2><i class="fas fa-book"></i> Carrera</h2>
-      <p>INGENIERÍA EN DESARROLLO Y GESTIÓN DE SOFTWARE</p>
-    </div>
+    <p-card class="statistic-card users">
+      <h2><i class="fas fa-users"></i> Usuarios Registrados</h2>
+      <p>300</p>
+    </p-card>
 
-    <div class="project-info">
-      <h2><i class="fas fa-project-diagram"></i> Proyecto</h2>
-      <p>Desarrollo de un Sistema de Cotización y Gestión para la Pastelería Austin's.</p>
-    </div>
+    <p-card class="statistic-card comments">
+      <h2><i class="fas fa-comments"></i> Comentarios Recibidos</h2>
+      <p>75</p>
+    </p-card>
   </div>
-</div>
+
+  <p-divider></p-divider>
+
+  <div class="button-container">
+    <p-button label="Ver Pedidos" icon="pi pi-list" styleClass="p-button-success"></p-button>
+    <p-button label="Agregar Producto" icon="pi pi-plus" styleClass="p-button-warning"></p-button>
+    <p-button label="Usuarios" icon="pi pi-users" styleClass="p-button-info"></p-button>
+    <p-button label="Comentarios" icon="pi pi-comment" styleClass="p-button-help"></p-button>
+  </div>
+</p-card>
+
+<style>
+/* Estilos generales para el componente */
+.container {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+
+  .logo {
+    max-width: 100%;
+    margin-right: 20px;
+  }
+
+  .logo2 {
+    max-width: 30%;
+    margin-left: 20px;
+  }
+
+  h1 {
+    font-size: 28px;
+    font-weight: bold;
+    margin: 0;
+    color: #333;
+  }
+}
+
+.info-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  .statistic-card {
+    flex: 1;
+    margin-bottom: 20px;
+    text-align: center;
+
+    h2 {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #555;
+    }
+
+    p {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+    }
+  }
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+</style>

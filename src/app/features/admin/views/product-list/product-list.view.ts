@@ -7,14 +7,16 @@ import { PageEvent } from '@angular/material/paginator';
 import { environment } from 'src/environments/environment';
 import { OpenDeleteConfirmationComponent } from '../../commons/components/open-delete-confirmation/open-delete-confirmation.component';
 import { MatDialog } from '@angular/material/dialog';
-import { EditProductComponentComponent } from '../../commons/components/edit-product-component/edit-product-component.component';
 import { CreateProductComponentComponent } from '../../commons/components/create-product-component/create-product-component.component';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.view.html',
   styleUrls: ['./product-list.view.scss'],
+  providers: [DialogService, ConfirmationService, MessageService],
 })
 export class ProductListView implements OnInit {
   products: Product[] = [];
@@ -37,11 +39,12 @@ export class ProductListView implements OnInit {
   images!: string[];
   srcMain!: string;
   isMobile: boolean = false;
+  ref: DynamicDialogRef | undefined
 
   constructor(private breakpointObserver: BreakpointObserver,
     private productService: ProductService,
     private fb: FormBuilder,
-    private dialog: MatDialog
+    private dialog: MatDialog,    private dialogService: DialogService,
   ) {
     this.producto = new Product();
 
@@ -64,12 +67,74 @@ export class ProductListView implements OnInit {
     this.loadProducts();
   }
 
-  onPageChange(event: PageEvent): void {
-    this.pageIndex = event.pageIndex;
-    this.pageSize = event.pageSize;
-    this.loadProducts();
+  createprod() {
+    this.openProductDialog(false, null);
   }
 
+  editprod(product: Product) { // Cambia 'any' por 'IProduct'
+    console.log(product)
+    this.openProductDialog(true, product);
+  }
+
+  private openProductDialog(isEditing: boolean, product: Product | null) {
+    const isMobile = window.innerWidth < 480
+    console.log(product)
+    this.ref = this.dialogService.open(CreateProductComponentComponent, {
+      header: isEditing ? 'Editar Producto' : 'Nuevo Producto',
+      height: isMobile ? 'auto' : 'auto',
+      style: {
+        'max-width': isMobile ? '110vw' : 'auto',
+        'max-height': isMobile ? 'auto' : '100vh',
+        padding: '0', // Aquí estableces el padding a 0
+      },
+      modal: true,
+      breakpoints: {
+        '960px': '75vw',
+        '640px': '100vw',
+      },
+      data: { product }, // Pasando el objeto product dentro de un objeto con la propiedad 'product'
+
+    })
+  }
+  getSeverity(status: string): string {
+    switch (status) {
+        case 'ACTIVE':
+            return 'success';
+        case 'LOWSTOCK':
+            return 'warning';
+        case 'INACTIVE':
+            return 'danger';
+        default:
+            return 'default'; // O cualquier otro valor que desees utilizar para los casos no manejados
+    }
+}
+  geIcon(status: string): string {
+    switch (status) {
+        case 'ACTIVE':
+            return 'pi pi-check';
+        case 'LOWSTOCK':
+            return 'warning';
+        case 'INACTIVE':
+            return 'pi pi-times';
+        default:
+            return 'default'; // O cualquier otro valor que desees utilizar para los casos no manejados
+    }
+}
+
+  checarsta(status: string): string {
+    switch (status) {
+      case 'ACTIVE':
+          return 'ACTIVE';
+      case 'INACTIVE':
+          return 'INACTIVE';
+      case 'true':
+          return 'ACTIVE';
+      case 'false':
+          return 'INACTIVE';
+      default:
+          return 'default'; // O cualquier otro valor que desees utilizar para los casos no manejados
+  }
+  }
   loadProducts(): void {
     const skip = this.pageIndex * this.pageSize;
     const limit = this.pageSize;
@@ -114,6 +179,8 @@ export class ProductListView implements OnInit {
   }
 
   openDeleteConfirmation(product: Product): void {
+
+    console.log(product)
     const dialogRef = this.dialog.open(OpenDeleteConfirmationComponent, {
       data: { product },
     });
@@ -126,21 +193,13 @@ export class ProductListView implements OnInit {
     });
   }
   // // Función para actualizar un producto
-  updateProduct(product: Product): void {
-    this.productService.updateProduct(product).subscribe(
-      (updatedProduct: Product) => {
-        // Manejar la respuesta actualizada, por ejemplo, mostrar un mensaje de éxito.
-        // console.log('Producto actualizado con éxito', updatedProduct);
-        // Actualiza la lista de productos después de la edición
-        this.loadProducts();
-      },
-      (error) => {
-        // Manejar errores, por ejemplo, mostrar un mensaje de error.
-        console.error('Error al actualizar el producto', error);
-      }
-    );
+
+  onPageChange(event: any): void {
+    this.pageIndex = event.first / event.rows;  // Calcula pageIndex
+    this.pageSize = event.rows;  // Asigna pageSize
+    this.loadProducts();
   }
-  // Nueva función para abrir el modal de edición
+
   // openEditModal(product: Product): void {
   //   const isMobile = window.innerWidth < 480;
   //   const dialogRef = this.dialog.open(EditProductComponentComponent, {
@@ -151,7 +210,6 @@ export class ProductListView implements OnInit {
   //     panelClass: isMobile
   //       ? ['mat-dialog', 'no-padding', 'mobile-dialog']
   //       : ['mat-dialog', 'no-padding', 'web-dialog'],
-  //     // data: {},
   //     data: { product }, // Pasa el producto al modal
   //   });
 
@@ -159,54 +217,33 @@ export class ProductListView implements OnInit {
   //     if (result) {
   //       // Lógica para manejar la actualización del producto aquí
   //       this.updateProduct(result); // Llama a la función de actualización con los datos editados
-  //       console.log(result);
+  //       // console.log(result);
+  //       // Carga nuevamente los productos para reflejar los cambios en la lista
+  //       this.loadProducts();
   //     }
   //   });
   // }
-  openEditModal(product: Product): void {
-    const isMobile = window.innerWidth < 480;
-    const dialogRef = this.dialog.open(EditProductComponentComponent, {
-      width: isMobile ? '120vw' : '800px',
-      height: isMobile ? '700px' : '600px',
-      maxWidth: isMobile ? 'auto' : 'auto',
-      maxHeight: isMobile ? '100vh' : 'auto',
-      panelClass: isMobile
-        ? ['mat-dialog', 'no-padding', 'mobile-dialog']
-        : ['mat-dialog', 'no-padding', 'web-dialog'],
-      data: { product }, // Pasa el producto al modal
-    });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        // Lógica para manejar la actualización del producto aquí
-        this.updateProduct(result); // Llama a la función de actualización con los datos editados
-        // console.log(result);
-        // Carga nuevamente los productos para reflejar los cambios en la lista
-        this.loadProducts();
-      }
-    });
-  }
+  // openCreateModal() {
+  //   const isMobile = window.innerWidth < 480;
 
-  openCreateModal() {
-    const isMobile = window.innerWidth < 480;
+  //   const dialogRef = this.dialog.open(CreateProductComponentComponent, {
+  //     width: isMobile ? '120vw' : '800px',
+  //     height: isMobile ? '700px' : '600px',
+  //     maxWidth: isMobile ? 'auto' : 'auto',
+  //     maxHeight: isMobile ? '100vh' : 'auto',
+  //     panelClass: isMobile
+  //       ? ['mat-dialog', 'no-padding', 'mobile-dialog']
+  //       : ['mat-dialog', 'no-padding', 'web-dialog'],
+  //     // data: {},
+  //     data: {},
+  //   });
 
-    const dialogRef = this.dialog.open(CreateProductComponentComponent, {
-      width: isMobile ? '120vw' : '800px',
-      height: isMobile ? '700px' : '600px',
-      maxWidth: isMobile ? 'auto' : 'auto',
-      maxHeight: isMobile ? '100vh' : 'auto',
-      panelClass: isMobile
-        ? ['mat-dialog', 'no-padding', 'mobile-dialog']
-        : ['mat-dialog', 'no-padding', 'web-dialog'],
-      // data: {},
-      data: {},
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.loadProducts(); // Asegúrate de que loadProducts realiza la lógica adecuada para cargar la lista de productos
-        // console.log('Producto creado con éxito', result);
-      }
-    });
-  }
+  //   dialogRef.afterClosed().subscribe((result) => {
+  //     if (result) {
+  //       this.loadProducts(); // Asegúrate de que loadProducts realiza la lógica adecuada para cargar la lista de productos
+  //       // console.log('Producto creado con éxito', result);
+  //     }
+  //   });
+  // }
 }

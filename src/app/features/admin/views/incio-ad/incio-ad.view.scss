@@ -1,98 +1,98 @@
-/* Estilos generales para el componente */
-.container {
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  padding: 20px;
-  font-family: 'Arial', sans-serif;
-  color: #333;
-  // margin-top: 130px; /* Agrega un margen superior para evitar que el contenido se superponga al encabezado fijo */
+// /* Estilos generales para el componente */
+// .container {
+//   background-color: #f9f9f9;
+//   border: 1px solid #ddd;
+//   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+//   border-radius: 10px;
+//   padding: 20px;
+//   font-family: 'Arial', sans-serif;
+//   color: #333;
+//   // margin-top: 130px; /* Agrega un margen superior para evitar que el contenido se superponga al encabezado fijo */
 
-}
+// }
 
-.header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
+// .header {
+//   display: flex;
+//   align-items: center;
+//   margin-bottom: 20px;
 
-  .logo {
-    max-width: 100%;
-    margin-right: 20px;
-  }
+//   .logo {
+//     max-width: 100%;
+//     margin-right: 20px;
+//   }
 
-  .logo2 {
-    max-width: 10%;
-    margin-left: 20px;
-  }
+//   .logo2 {
+//     max-width: 10%;
+//     margin-left: 20px;
+//   }
 
-  h1 {
-    font-size: 28px;
-    font-weight: bold;
-    margin: 0;
-    color: #333;
-  }
-}
+//   h1 {
+//     font-size: 28px;
+//     font-weight: bold;
+//     margin: 0;
+//     color: #333;
+//   }
+// }
 
-.info-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+// .info-container {
+//   display: flex;
+//   flex-wrap: wrap;
+//   justify-content: space-between;
 
-  .student-info,
-  .grado-info,
-  .carrera-info,
-  .project-info {
-    flex: 1;
-    margin-bottom: 20px;
-    background-color: #fff;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    padding: 20px;
+//   .student-info,
+//   .grado-info,
+//   .carrera-info,
+//   .project-info {
+//     flex: 1;
+//     margin-bottom: 20px;
+//     background-color: #fff;
+//     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+//     border-radius: 5px;
+//     padding: 20px;
 
-    h2 {
-      font-size: 20px;
-      font-weight: bold;
-      margin-bottom: 10px;
-      color: #555;
-    }
+//     h2 {
+//       font-size: 20px;
+//       font-weight: bold;
+//       margin-bottom: 10px;
+//       color: #555;
+//     }
 
-    ul {
-      list-style-type: none;
-      padding: 0;
+//     ul {
+//       list-style-type: none;
+//       padding: 0;
 
-      li {
-        font-size: 18px;
-        margin-bottom: 10px;
-        color: #333;
+//       li {
+//         font-size: 18px;
+//         margin-bottom: 10px;
+//         color: #333;
 
-        i {
-          margin-right: 5px;
-        }
+//         i {
+//           margin-right: 5px;
+//         }
 
-        .matricula {
-          font-weight: bold;
-        }
-      }
-    }
+//         .matricula {
+//           font-weight: bold;
+//         }
+//       }
+//     }
 
-    p {
-      font-size: 18px;
-      margin-bottom: 10px;
-      color: #333;
-    }
-  }
-}
+//     p {
+//       font-size: 18px;
+//       margin-bottom: 10px;
+//       color: #333;
+//     }
+//   }
+// }
 
-/* Estilos para pantallas más pequeñas (menos de 768px de ancho) */
-@media screen and (max-width: 768px) {
-  .logo2 {
-    display: none; /* Ocultar el logo2 en pantallas más pequeñas */
-  }
-  .ti {
-    display: none; /* Ocultar el logo2 en pantallas más pequeñas */
-  }
-  h1 {
-    text-align: center; /* Centrar el texto en lugar de ocultarlo */
-  }
-}
+// /* Estilos para pantallas más pequeñas (menos de 768px de ancho) */
+// @media screen and (max-width: 768px) {
+//   .logo2 {
+//     display: none; /* Ocultar el logo2 en pantallas más pequeñas */
+//   }
+//   .ti {
+//     display: none; /* Ocultar el logo2 en pantallas más pequeñas */
+//   }
+//   h1 {
+//     text-align: center; /* Centrar el texto en lugar de ocultarlo */
+//   }
+// }
