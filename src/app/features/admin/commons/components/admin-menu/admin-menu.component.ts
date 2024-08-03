@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { SessionService } from 'src/app/core/services/session.service';
 import { MenuItem } from 'primeng/api';
@@ -6,7 +6,8 @@ import { MenuItem } from 'primeng/api';
 @Component({
   selector: 'app-admin-menu',
   templateUrl: './admin-menu.component.html',
-  styleUrls: ['./admin-menu.component.scss']
+  styleUrls: ['./admin-menu.component.scss'],
+    // encapsulation: ViewEncapsulation.None,
 })
 export class AdminMenuComponent implements OnInit {
   userName: string | undefined;

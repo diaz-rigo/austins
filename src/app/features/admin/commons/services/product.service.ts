@@ -13,12 +13,7 @@ import { HttpHeaders } from '@angular/common/http'
 export class ProductService {
   constructor(private http: HttpClient) {}
 
-  // updateProduct(product: Product): Observable<Product> {
-  //   return this.http.put<Product>(
-  //     `${environment.api}/product/${product._id}`,
-  //     product,
-  //   )
-  // }
+ 
   updateProduct(id: string, product: Product): Observable<Product> {
     return this.http.put<Product>(
       `${environment.api}/product/${id}`,

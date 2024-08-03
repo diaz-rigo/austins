@@ -111,3 +111,20 @@
     margin-right: 0; /* Elimina el margen derecho en dispositivos móviles */
   }
 }
+@media only screen and (max-width: 767px) {
+
+
+  .logo-container {
+    flex: 1;
+    text-align: left; /* Alinea el logo a la izquierda */
+    margin-right: 20px;
+  }
+  .logo-container img {
+    max-width: 60%;
+  }
+  .logo-container {
+    flex: 100%; /* Ocupa todo el ancho disponible en dispositivos pequeños */
+    // margin-bottom: 10px; /* Añade espacio entre el logo y los demás elementos */
+  }
+
+}

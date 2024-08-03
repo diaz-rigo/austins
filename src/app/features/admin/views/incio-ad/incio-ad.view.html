@@ -1,105 +1,115 @@
-<p-card class="container">
-  <div class="header">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbv6MAjATprVREOPLX9o0sP6jzsk51ygAPSIMQBaXn&s" alt="Logo de la Pastelería Austin's" class="logo">
-    <h1 class="ti">Estadísticas del Proyecto</h1>
-    <img src="https://static.wixstatic.com/media/64de7c_29f387abde884a1e8f9df17220933df6~mv2.png/v1/fill/w_834,h_221,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/64de7c_29f387abde884a1e8f9df17220933df6~mv2.png" alt="logo 2" class="logo2">
+<div class="info-container">
+  <div class="statistic-card sales p-shadow-3 p-p-3 p-mb-3">
+    <h2><i class="pi pi-chart-line p-pr-2"></i> Ventas Totales</h2>
+    <p>{{ sales | currency }}</p>
   </div>
 
-  <p-divider></p-divider>
-
-  <div class="info-container">
-    <p-card class="statistic-card sales">
-      <h2><i class="fas fa-chart-line"></i> Ventas Totales</h2>
-      <p>$25,000</p>
-    </p-card>
-
-    <p-card class="statistic-card orders">
-      <h2><i class="fas fa-shopping-cart"></i> Pedidos Realizados</h2>
-      <p>150</p>
-    </p-card>
-
-    <p-card class="statistic-card users">
-      <h2><i class="fas fa-users"></i> Usuarios Registrados</h2>
-      <p>300</p>
-    </p-card>
-
-    <p-card class="statistic-card comments">
-      <h2><i class="fas fa-comments"></i> Comentarios Recibidos</h2>
-      <p>75</p>
-    </p-card>
+  <div class="statistic-card orders p-shadow-3 p-p-3 p-mb-3">
+    <h2><i class="pi pi-shopping-cart p-pr-2"></i> Ventas registradas</h2>
+    <p>{{ ventas }}</p>
   </div>
 
-  <p-divider></p-divider>
-
-  <div class="button-container">
-    <p-button label="Ver Pedidos" icon="pi pi-list" styleClass="p-button-success"></p-button>
-    <p-button label="Agregar Producto" icon="pi pi-plus" styleClass="p-button-warning"></p-button>
-    <p-button label="Usuarios" icon="pi pi-users" styleClass="p-button-info"></p-button>
-    <p-button label="Comentarios" icon="pi pi-comment" styleClass="p-button-help"></p-button>
+  <div class="statistic-card pending-sales p-shadow-3 p-p-3 p-mb-3">
+    <h2><i class="pi pi-clock p-pr-2"></i> Ventas Pendientes</h2>
+    <p>{{ pendingSales }}</p>
   </div>
-</p-card>
 
-<style>
-/* Estilos generales para el componente */
-.container {
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  padding: 20px;
-  font-family: 'Arial', sans-serif;
-  color: #333;
-}
+  <div class="statistic-card completed-sales p-shadow-3 p-p-3 p-mb-3">
+    <h2><i class="pi pi-check p-pr-2"></i> Ventas Completadas</h2>
+    <p>{{ completedSales }}</p>
+  </div>
+  <div class="statistic-card completed-sales p-shadow-3 p-p-3 p-mb-3">
+    <h2><i class="pi pi-check p-pr-2"></i> Ventas Expirados</h2>
+    <p>{{ ventasExpirados }}</p>
+  </div>
 
-.header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
 
-  .logo {
-    max-width: 100%;
-    margin-right: 20px;
-  }
 
-  .logo2 {
-    max-width: 30%;
-    margin-left: 20px;
-  }
+  <div class="statistic-card orders p-shadow-3 p-p-3 p-mb-3">
+    <h2><i class="pi pi-shopping-cart p-pr-2"></i> Pedidos Realizados</h2>
+    <p>{{ orders }}</p>
+  </div>
 
-  h1 {
-    font-size: 28px;
-    font-weight: bold;
-    margin: 0;
-    color: #333;
-  }
-}
 
-.info-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  <div class="statistic-card pending-orders p-shadow-3 p-p-3 p-mb-3">
+    <h2><i class="pi pi-clock p-pr-2"></i> Pedidos Pendientes</h2>
+    <p>{{ pendingOrders }}</p>
+  </div>
 
-  .statistic-card {
-    flex: 1;
-    margin-bottom: 20px;
-    text-align: center;
+  <div class="statistic-card completed-orders p-shadow-3 p-p-3 p-mb-3">
+    <h2><i class="pi pi-check p-pr-2"></i> Pedidos Completados</h2>
+    <p>{{ completedOrders }}</p>
+  </div>
 
-    h2 {
-      font-size: 20px;
-      font-weight: bold;
-      margin-bottom: 10px;
-      color: #555;
-    }
+  <div class="statistic-card total-order-amount p-shadow-3 p-p-3 p-mb-3">
+    <h2><i class="pi pi-dollar p-pr-2"></i> Monto Total de Pedidos</h2>
+    <p>{{ totalOrderAmount | currency }}</p>
+  </div>
+  <div class="statistic-card users p-shadow-3 p-p-3 p-mb-3">
+    <h2><i class="pi pi-users p-pr-2"></i> Usuarios Registrados</h2>
+    <p>{{ users }}</p>
+  </div>
 
-    p {
-      font-size: 24px;
-      font-weight: bold;
-      color: #333;
-    }
-  }
-}
+  <div class="statistic-card admin-users p-shadow-3 p-p-3 p-mb-3">
+    <h2><i class="pi pi-user p-pr-2"></i> Usuarios ADMIN</h2>
+    <p>{{ users_ADMIN }}</p>
+  </div>
 
-.button-container {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-}
-</style>
+  <div class="statistic-card client-users p-shadow-3 p-p-3 p-mb-3">
+    <h2><i class="pi pi-user p-pr-2"></i> Usuarios CLIENT</h2>
+    <p>{{ users_CLIENT }}</p>
+  </div>
+
+  <div class="statistic-card comments p-shadow-3 p-p-3 p-mb-3">
+    <h2><i class="pi pi-comments p-pr-2"></i> Comentarios Recibidos</h2>
+    <p>{{ comments }}</p>
+  </div>
+
+  <div class="statistic-card inventory p-shadow-3 p-p-3 p-mb-3">
+    <h2><i class="pi pi-box p-pr-2"></i> Productos en Inventario</h2>
+    <p>{{ inventory }}</p>
+  </div>
+
+  <div class="statistic-card coupons p-shadow-3 p-p-3 p-mb-3">
+    <h2><i class="pi pi-tags p-pr-2"></i> Cupones Activos</h2>
+    <p>{{ coupons }}</p>
+  </div>
+</div>
+
+<p-divider></p-divider>
+
+<div class="charts-container">
+  <p-chart type="line" [data]="data" [options]="options" class="p-mb-3"></p-chart>
+  <p-chart type="bar" [data]="data" [options]="options" class="p-mb-3"></p-chart>
+</div>
+
+<p-divider></p-divider>
+
+<div class="orders-container">
+  <p-table [value]="ordersList" class="p-datatable-gridlines p-mb-3">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Pedido ID</th>
+        <th>Cliente</th>
+        <th>Fecha</th>
+        <th>Estado</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-order>
+      <tr>
+        <td>{{ order.id }}</td>
+        <td>{{ order.customer }}</td>
+        <td>{{ order.date }}</td>
+        <td>{{ order.status }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<div class="button-container">
+  <p-button label="Ver Pedidos" icon="pi pi-list" styleClass="p-button-success"></p-button>
+  <p-button label="Agregar Producto" icon="pi pi-plus" styleClass="p-button-warning"></p-button>
+  <p-button label="Usuarios" icon="pi pi-users" styleClass="p-button-info"></p-button>
+  <p-button label="Comentarios" icon="pi pi-comment" styleClass="p-button-help"></p-button>
+  <p-button label="Cupones" icon="pi pi-tags" styleClass="p-button-danger"></p-button>
+</div>

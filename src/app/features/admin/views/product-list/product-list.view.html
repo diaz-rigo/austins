@@ -70,9 +70,7 @@
           <p>{{ product.price }}</p>
           <p>{{ product.weight }}</p>
           <p>{{ product.category }}</p>
-          <p-tag [value]="product.status" [severity]="getSeverity(product.status)" />
-
-          <!-- <p [ngClass]="{'active': product.status === 'ACTIVE', 'deactive': product.status === 'INACTIVE'}">{{ product.status }}</p> -->
+          <p-tag [value]="checarsta(product.status)" [severity]="getSeverity(checarsta(product.status))"  [icon]="geIcon(checarsta(product.status))"/> 
           <div class="actions">
             <p-button type="button" icon="pi pi-pencil" class="edit-button"   (click)="editprod(product)" [outlined]="true"></p-button>
             <p-button type="button" icon="pi pi-trash" class="delete-button" (click)="openDeleteConfirmation(product)" [outlined]="true"></p-button>
