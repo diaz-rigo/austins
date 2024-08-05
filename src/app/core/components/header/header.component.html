@@ -578,6 +578,12 @@
       <button class="menu-btn" (click)="abrePedido()" *ngIf="userName">
         Pedidos
       </button>
+      <button class="menu-btn" (click)="abreCompra()" *ngIf="userName">
+        Mis
+      Compras
+      </button>
+      <!-- <span class="pi pi-shopping-bag" (click)="abreCompra()"></span>* Mis
+      Compras -->
       <button [matMenuTriggerFor]="productsMenu" class="menu-btn">
    Catalogo
       </button>
@@ -641,16 +647,16 @@
         <div mat-menu-item class="mobile-menu-item_b1" (click)="abreperil()">
           Perfil
         </div>
-        <div
+        <!-- <div
           mat-menu-item
           class="mobile-menu-item_b1"
           data-aos="fade-up"
           data-aos-anchor-placement="bottom-center"
           data-aos-duration="900"
         >
-          <span class="pi pi-shopping-bag" (click)="abreCompra()"></span> Mis
+          <span class="pi pi-shopping-bag" (click)="abreCompra()"></span>* Mis
           Compras
-        </div>
+        </div> -->
         <div mat-menu-item class="mobile-menu-item_b1" (click)="logout()">
           <span><span class="pi pi-sign-out"></span> Cerrar Sesión</span>
         </div>
