@@ -8,6 +8,7 @@ import { OrderListView } from './views/order-list/order-list.view';
 import { VentaListView } from './views/venta-list/venta-list.view';
 import { DataGraficaView } from './views/data-grafica/data-grafica.view';
 import { UserListComponent } from './views/user-list/user-list.component';
+import { ClasifiModeloView } from './views/clasifi-modelo/clasifi-modelo.view';
 const routes: Routes = [
   {
     path:'',redirectTo:'inicio' ,pathMatch:'full'
@@ -44,6 +45,11 @@ const routes: Routes = [
           title:"users|",
         path: 'users',
         component: UserListComponent,
+      },
+      {
+          title:"modelo|",
+        path: 'clasifica',
+        component: ClasifiModeloView,
       },
 
     ],

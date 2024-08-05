@@ -1,0 +1,39 @@
+<!-- clasifi-modelo.view.html -->
+<div class="container">
+  <h1>Clientes Clasificados</h1>
+
+  <p-table [value]="clusteredCustomers" [paginator]="true" [rows]="10" [responsive]="true">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Inicial</th>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Municipio</th>
+        <th>Flavor</th>
+        <th>Fecha de Pedido</th>
+        <th>Total Pedidos</th>
+        <th>Total Gastado</th>
+        <th>Calificación</th>
+        <th>Cluster</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-customer>
+      <tr [ngStyle]="{'background-color': getClusterColor(customer.cluster)}">
+        <td>
+          <div class="customer-initial" [ngStyle]="{'background-color': getClusterColor(customer.cluster)}">
+            {{ getInitial(customer.customer_name) }}
+          </div>
+        </td>
+        <td>{{ customer.customer_id }}</td>
+        <td>{{ customer.customer_name }}</td>
+        <td>{{ customer.municipio }}</td>
+        <td>{{ customer.flavor }}</td>
+        <td>{{ customer.order_date | date }}</td>
+        <td>{{ customer.total_orders }}</td>
+        <td>\${{ customer.total_amount_spent }}</td>
+        <td>{{ customer.rating }}</td>
+        <td>{{ customer.cluster }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

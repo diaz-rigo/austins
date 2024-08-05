@@ -21,7 +21,8 @@ import { ToastModule } from 'primeng/toast';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { InputTextModule } from 'primeng/inputtext';
-import { InicioAdView } from './views/incio-ad/incio-ad.view'
+import { InicioAdView } from './views/incio-ad/incio-ad.view';
+import { ClasifiModeloView } from './views/clasifi-modelo/clasifi-modelo.view'
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { InicioAdView } from './views/incio-ad/incio-ad.view'
     VentaListView,
     DataGraficaView,
     UserListComponent,
+    ClasifiModeloView,
   ],
   imports: [ToastModule,ConfirmPopupModule,ConfirmDialogModule,InputTextModule,
     PaginatorModule,
