@@ -10,34 +10,23 @@
       </div>
       <h3 class="compra-title"><i class="pi pi-list p-mr-2"></i>Detalles de la Compra</h3>
       <div *ngFor="let detail of compra.details" class="detail-container p-mt-2">
-        <!-- Añadir aquí la lógica para mostrar un mensaje si el tipo de entrega o fecha de entrega son nulos o vacíos -->
-        <ng-container *ngIf="!detail.deliveryType || !detail.deliveryDate; else deliveryDetails">
-          <p class="alexa-note"><i class="pi pi-alarm p-mr-2"></i><strong>Nota:</strong> Esta compra puede haber sido realizada desde tu skill de Alexa.</p>
-        </ng-container>
+        <p><i class="pi pi-shipping-fast p-mr-2"></i><strong>Tipo de entrega:</strong> {{ detail.deliveryType }}</p>
+        <p><i class="pi pi-calendar-plus p-mr-2"></i><strong>Fecha de entrega:</strong> {{ detail.deliveryDate | date:'short' }}</p>
+        <p-button
+        *ngIf="detail.status === 'PENDING'" (click)="pagar(compra)"
+        label="Pagar"
+        icon="pi pi-credit-card"
 
-        <ng-template #deliveryDetails>
-          <p><i class="pi pi-shipping-fast p-mr-2"></i><strong>Tipo de entrega:</strong> {{ detail.deliveryType }}</p>
-          <p><i class="pi pi-calendar-plus p-mr-2"></i><strong>Fecha de entrega:</strong> {{ detail.deliveryDate | date:'short' }}</p>
-        </ng-template>
-
-        <button
-          *ngIf="detail.status === 'PENDING'"
-          (click)="pagar(compra)"
-          class="shake-button"
-        >
-          <i class="pi pi-credit-card"></i> Pagar
-        </button>
-
+        badgeClass="p-badge-contrast"
+        [outlined]="true" />
         <p><i class="pi pi-info-circle p-mr-2"></i><strong>Estado:</strong>
-          <span [ngClass]="{
-            'status-completed': detail.status === 'PAID',
-            'status-pending': detail.status === 'PENDING',
-            'status-cancelled': detail.status === 'Cancelled'
-          }">
-            {{ detail.status === 'PAID' ? 'Pagado' : detail.status === 'PENDING' ? 'Pendiente' : 'Cancelado' }}
+          <span [ngClass]="{'status-completed': detail.status === 'PAID', 'status-pending': detail.status === 'PENDING', 'status-cancelled': detail.status === 'Cancelled'}">
+            {{ detail.status }}
           </span>
+
+
         </p>
-        <div class="products-header">
+        <div class="products-header ">
           <h4><i class="pi pi-box p-mr-2"></i>Productos</h4>
         </div>
         <div *ngFor="let product of detail.products" class="product-container p-d-flex p-ai-center p-mt-2 p-flex-column-sm">

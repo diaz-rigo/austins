@@ -127,7 +127,7 @@ export class ClasifiModeloView implements OnInit {
     this.municipioChartData = {
       labels: labels,
 
-   
+
       datasets: [
         {
           label: 'Clientes de Alto Valor',
@@ -204,9 +204,9 @@ export class ClasifiModeloView implements OnInit {
 
   getClusterMessage(cluster: number): string {
     const clusterMessages: { [key: number]: string } = {
-      0: ' De Alto Valor',
-      1: ' Frecuentes de Bajo Gasto',
-      2: ' Esporádicos de Alto Gasto'
+      0: ' cliente Alto Valor',
+      1: ' cliente Frecuentes de Bajo Gasto',
+      2: ' cliente Esporádicos de Alto Gasto'
     };
 
     return clusterMessages[cluster] || 'Cluster desconocido';

@@ -12,4 +12,7 @@ export class StripeService {
   createCheckoutSession(body: any): Observable<any> {
     return this.http.post<any>(`${environment.api}/stripe/create-checkout-session`, body);
   }
+  createCheckoutSession2(body: any): Observable<any> {
+    return this.http.post<any>(`${environment.api}/stripe/create-checkout-session2`, body);
+  }
 }

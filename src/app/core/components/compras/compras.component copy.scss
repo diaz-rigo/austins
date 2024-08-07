@@ -1,0 +1,134 @@
+// import { Component, OnInit } from '@angular/core'
+// import { ProfileService } from 'src/app/shared/services/profile.service'
+// import { SessionService } from '../../services/session.service'
+// import { UserProfile } from 'src/app/shared/models/userPROFILE.model'
+// import { ProductService } from 'src/app/features/admin/commons/services/product.service'
+// import { Router } from '@angular/router'
+// import { HeaderComponent } from '../header/header.component'
+// import { HomeViews } from 'src/app/features/portal/views/home/home.views'
+// import { StripeService } from 'src/app/features/payment/commons/services/stripe.service'
+
+// @Component({
+//   selector: 'app-compras',
+//   templateUrl: './compras.component.html',
+//   styleUrls: ['./compras.component.scss'],
+// })
+// export class ComprasComponent implements OnInit {
+//   compras: any[] = []
+//   user: UserProfile | undefined
+//   constructor(
+//     private comprasService: ProfileService,
+//     private productService: ProductService,
+//     private stripeService: StripeService,
+//     private headerComponent: HeaderComponent,
+//     private sessionService: SessionService,  private router: Router,
+//   ) {
+//     const userData = this.sessionService.getUserData()
+//     if (userData) {
+//       this.fetchUserData(userData.id)
+//       this.comprasService.getCompras(userData.id).subscribe(
+//         (data) => {
+//           this.compras = data
+//           this.loadProductDetails()
+//         },
+//         (error) => {
+//           console.error('Error al obtener las compras:', error)
+//         },
+//       )
+//     }
+//   }
+//   fetchUserData(userId: string) {
+//     this.comprasService.getUserById(userId).subscribe(
+//       (data: UserProfile) => {
+//         this.user = data
+//       },
+//       (error) => {
+//         console.error('Error al obtener datos del usuario:', error)
+//       },
+//     )
+//   }
+//   ngOnInit(): void {}
+//   loadProductDetails() {
+//     const productIds = this.compras.flatMap((compra) =>
+//       compra.details.flatMap((detail: { products: any[] }) =>
+//         detail.products.map((product) => product.product),
+//       ),
+//     )
+
+//     this.productService.getMultipleByIds(productIds).subscribe(
+//       (productData) => {
+//         this.compras.forEach((compra) => {
+//           compra.details.forEach((detail: { products: any[] }) => {
+//             detail.products.forEach((product) => {
+//               const productDetail = productData.find(
+//                 (p) => p._id === product.product,
+//               )
+//               // console.log(productDetail)
+//               product.details = productDetail
+//             })
+//           })
+//         })
+//       },
+//       (error) => {
+//         console.error('Error al obtener datos del producto:', error)
+//       },
+//     )
+//   }
+
+//   redirectTo(route: string): void {
+
+//     this.headerComponent.compras=false
+//     const productsSection = document.getElementById('products-section');
+//     if (productsSection) {
+//       productsSection.scrollIntoView({ behavior: 'smooth' });
+//     }
+//     this.router.navigate(['/portal', route]) // Utiliza la navegación de Angular
+//   }
+//   pagar(compra: any) {
+//     // console.log(compra);
+
+//     // Confirmar la acción de pago con el usuario
+//     if (confirm('¿Estás seguro de que quieres proceder con el pago?')) {
+//       // Transformar los datos de la compra al formato adecuado
+//       const purchaseData = {
+//         totalneto: parseFloat(compra.totalAmount).toFixed(2), // Asegúrate de que el total sea una cadena con dos decimales
+//         tipoEntrega: compra.details[0].deliveryType || 'En tienda', // Usa el tipo de entrega de la compra
+//         dateselect: compra.details[0].deliveryDate ? new Date(compra.details[0].deliveryDate).toISOString().split('T')[0] : '', // Usa la fecha de entrega en formato YYYY-MM-DD
+//         productos: compra.details[0].products.map((product: { product: any; details: { name: any; images: any[]; price: any }; quantity: any }) => ({
+//           id: product.product,
+//           name: product.details.name,
+//           image: product.details.images[0], // Usa solo la primera imagen
+//           precio: product.details.price,
+//           cantidad: product.quantity,
+//         })),
+//         datoscliente: {
+//           name: this.user?.name || 'Nombre del Cliente', // Usa datos del usuario si están disponibles
+//           paternalLastname: this.user?.paternalLastname || 'Apellido Paterno',
+//           maternalLastname: this.user?.maternalLastname || 'Apellido Materno',
+//           phone: this.user?.phone || '555-555-5555',
+//           email: this.user?.email || 'cliente@example.com',
+//         },
+//         instruction: 'Por favor, entregar entre 10 y 11 AM.', // Ajusta según sea necesario
+//         success_url: 'https://austins.vercel.app/payment/order-success',
+//         cancel_url: 'https://austins.vercel.app/payment/order-detail',
+//         codigoDeSeguimiento: compra.trackingNumber // Agrega el código de seguimiento
+//       };
+
+//       // console.log(purchaseData);
+
+//       // Llamar al servicio específico para el pago con tarjeta
+//       this.stripeService.createCheckoutSession2(purchaseData).subscribe(
+//         (response: any) => {
+//           // Redireccionar a la URL de pago proporcionada por Stripe
+//           window.location.href = response.url;
+//         },
+//         (error: any) => {
+//           console.error('Error en el pago con tarjeta:', error);
+//           alert('Hubo un problema al procesar el pago. Por favor, inténtalo de nuevo más tarde.');
+//         }
+//       );
+//     }
+//   }
+
+
+// }

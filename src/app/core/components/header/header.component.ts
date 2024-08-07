@@ -1,3 +1,4 @@
+import { SidebarServiceService } from './../../../shared/services/sidebar-service.service';
 import { UserStateService } from '../../../features/admin/commons/services/user-state.service' //
 import { AuthStateService } from './../../../features/auth/commons/services/auth-state.service'
 import { NavigationEnd, Router } from '@angular/router'
@@ -136,6 +137,7 @@ export class HeaderComponent implements OnInit {
   codigoPedido: string = ''
   user: UserProfile | undefined;
   constructor(
+    private SidebarServiceService: SidebarServiceService,
     private pedidoviewService: PedidoviewService,
     public dialog: MatDialog,
     private dialogService: DialogService,
@@ -254,6 +256,15 @@ export class HeaderComponent implements OnInit {
     );
   }
   ngOnInit(): void {
+    this.SidebarServiceService.sidebarVisible2$.subscribe(visible => {
+      const carDataFromStorage = this.storageService.getCarrito()
+
+      // Asignar los datos del carrito al arreglo carData
+      if (carDataFromStorage) {
+        this.carData = carDataFromStorage
+      }
+      this.sidebarVisible2 = visible;
+    });
     const userData = this.sessionService.getUserData()
     // const carData = this.storageService.getCarrito();
     // this.carData = this.storageService.getCarrito();
@@ -353,6 +364,7 @@ export class HeaderComponent implements OnInit {
 
     // console.log('Datos del carrito:', this.carData);
     this.sidebarVisible2 = true
+
     // debugger
     // this.router.navigateByUrl('/payment/cart');
   }

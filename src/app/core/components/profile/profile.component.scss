@@ -8,11 +8,14 @@
 .full-width-container {
   width: 100%;
   padding: 20px;
-  background-color: #f4f4f9;
+  // background-color: #f4f4f9;
   box-sizing: border-box;
-  background-image: url('https://static.wixstatic.com/media/64de7c_bd452d768bdf43498f0e94694ddc7040~mv2.jpg');
+  background-image: url('https://res.cloudinary.com/dfd0b4jhf/image/upload/v1721378674/public__/dsat0x2lvruxm51vlfi6.png');
   background-size: cover;
   background-position: center;
+  // background-image: url('https://static.wixstatic.com/media/64de7c_bd452d768bdf43498f0e94694ddc7040~mv2.jpg');
+  // background-size: cover;
+  // background-position: center;
   position: relative;
 }
 
@@ -24,7 +27,10 @@
   right: 0;
   bottom: 0;
   background: inherit;
-  filter: blur(10px) brightness(0.5);
+  background-image: url('https://res.cloudinary.com/dfd0b4jhf/image/upload/v1721378674/public__/dsat0x2lvruxm51vlfi6.png');
+  background-size: cover;
+  background-position: center;
+  // filter: blur(10px) brightness(0.5);
   z-index: 1;
 }
 
@@ -33,11 +39,14 @@
   z-index: 2;
   max-width: 800px;
   margin: 0 auto;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-image: url('https://res.cloudinary.com/dfd0b4jhf/image/upload/v1721378674/public__/dsat0x2lvruxm51vlfi6.png');
+  background-size: cover;
+  background-position: center;
+  // background-color: rgba(255, 255, 255, 0.9);
   border-radius: 8px;
   overflow: hidden;
   padding: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  // box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .profile-header {

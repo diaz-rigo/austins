@@ -6,6 +6,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ScrollServiceService } from 'src/app/shared/services/scroll-service.service';
 import { CartItem } from 'src/app/shared/models/cart.model';
+import { SidebarServiceService } from 'src/app/shared/services/sidebar-service.service';
 
 @Component({
   selector: 'app-detail-info',
@@ -24,7 +25,7 @@ export class DetailInfoComponent implements OnInit {
 
   @Input() productDetail: ProductDetail | undefined;
 // private scrollService: ScrollServiceService,
-  constructor( private scrollService: ScrollServiceService,private router: Router,private cartService: CartService) {
+  constructor( private scrollService: ScrollServiceService,private router: Router,private cartService: CartService, private SidebarServiceService: SidebarServiceService,  ) {
     this.formGroup = new FormGroup({
       quantity: new FormControl()
     });
@@ -60,6 +61,15 @@ export class DetailInfoComponent implements OnInit {
       };
       this.cartService.add(cartItem);
     }
+       // Mostrar el sidebar después de 1 segundo
+       setTimeout(() => {
+        this.SidebarServiceService.setSidebarVisible2(true);
+        
+        // Ocultar el sidebar después de 3 segundos
+        setTimeout(() => {
+          this.SidebarServiceService.setSidebarVisible2(false);
+        }, 2000); // 3000 milisegundos = 3 segundos
+      }, 1000); // 1000 milisegundos = 1 segundo
   }
 
   redirectTo(route: string): void {

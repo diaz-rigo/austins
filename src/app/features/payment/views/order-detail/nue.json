@@ -1,38 +1,25 @@
 {
-  "categories": [
+  "totalneto": "250.00",
+  "tipoEntrega": "En tienda",
+  "dateselect": "2024-08-29T05:39:23.000Z",
+  "productos": [
     {
-      "_id": "category1_id",
-      "title": "Electrónicos",
-      "parent": null,
-      "path": "/electronicos",
-      "status": "ACTIVE"
-    },
-    {
-      "_id": "category2_id",
-      "title": "Ropa",
-      "parent": null,
-      "path": "/ropa",
-      "status": "ACTIVE"
+      "id": "66916c9262dd33a391dd2648",
+      "name": "Straciateli y Naranja-",
+      "precio": 250,
+      "cantidad": 1,
+      "image": [
+        "https://res.cloudinary.com/dfd0b4jhf/image/upload/v1720806549/PastelFinos/66916c9262dd33a391dd2648/Captura%20de%20pantalla%202024-07-12%20114448.png"
+      ]
     }
   ],
-  "products": [
-    {
-      "_id": "product1_id",
-      "sku": "SKU123",
-      "name": "Smartphone",
-      "description": "Un teléfono inteligente avanzado",
-      "category": "category1_id", // Relacionado con la categoría de Electrónicos
-      "price": 599.99,
-      "status": "ACTIVE"
-    },
-    {
-      "_id": "product2_id",
-      "sku": "SKU456",
-      "name": "Camiseta",
-      "description": "Una camiseta cómoda y elegante",
-      "category": "category2_id", // Relacionado con la categoría de Ropa
-      "price": 29.99,
-      "status": "ACTIVE"
-    }
-  ]
+  "datoscliente": {
+    "name": "rigoberto",
+    "maternalLastname": "Hernandez ",
+    "paternalLastname": "diaz",
+    "phone": "7711512740",
+    "email": "r3152332@gmail.com"
+  },
+  "instrucion": "",
+  "success_url": "https://austins.vercel.app/payment/order-success"
 }

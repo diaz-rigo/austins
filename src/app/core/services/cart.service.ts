@@ -16,7 +16,7 @@ export class CartService {
   totalPrice$: BehaviorSubject<number> = new BehaviorSubject<number>(0); // Definir totalPrice$
 
   constructor(
-    private storegService: StorageService,
+    private storegService: StorageService,  
     private totalPriceService: TotalPriceService // Inyectar el servicio de precio total
   ) {}
 
@@ -55,6 +55,7 @@ export class CartService {
     this.sendQuantity();
     this.updateTotalPrice(); // Actualizar el precio total al agregar un elemento al carrito
     this.storegService.setCarrito(this.cart);
+
   }
 
   decre(cartItem: CartItem): void {

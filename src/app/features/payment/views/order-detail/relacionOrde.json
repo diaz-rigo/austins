@@ -1,345 +1,164 @@
-datos encontrados: {
-  "id": 2093665,
-  "consecutivo": 70614,
-  "anio": 2023,
-  "emailEnviado": false,
-  "motivoRechazo": null,
-  "motivoReasignacion": null,
-  "reingresado": null,
-  "reproceso": null,
-  "reprocesoCalificador": null,
-  "observacionesMotivo": null,
-  "observacionesAclaracion": null,
-  "observaciones": "SE+RELACIONA+CON+LA+ENTRADA+69885-2023-0%2C+SECRETAR%C3%8DA+DE+HACIENDA%2C+AUDITORIA+FISCAL.",
-  "observacion": null,
-  "hashFila": null,
-  "fechaIngreso": "2023-12-04T17:28:55.937+0000",
-  "fechaEnvioFirma": "2023-12-05T16:26:41.776+0000",
-  "fechaBaja": null,
-  "claveConsulta": "43bsig",
-  "municipio": null,
-  "motivo": null,
-  "usuarioSolicitan": {
-    "id": 0,
-    "userName": "administrador_1@yopmail.com",
-    "contrasenia": "$2a$10$gSAhZrxMllrbgj/kkK9UceBPpChGWJA7SYIb1Mqo.n5aNLq1/oRrC",
-    "numEmpleado": null,
-    "enabled": null,
-    "accountNonExpired": false,
-    "credentialsNonExpired": null,
-    "accountNonLocked": null,
-    "motivoBaja": null,
-    "email": "administrador1@yopmail.com",
-    "puesto": null,
-    "p12Password": null,
-    "activo": false,
-    "publicoDF": null,
-    "telefono": null,
-    "persona": {
-      "id": 1,
-      "publica": null,
-      "paterno": "....",
-      "materno": "....",
-      "nombre": "....",
-      "fechaNac": null,
-      "rfc": null,
-      "curp": null,
-      "email": null,
-      "activo": true,
-      "tipoHistorico": null,
-      "hashFila": null,
-      "nuTit": null,
-      "telefonosParaPersonas": null,
-      "tipoPersona": {
-        "id": 1,
-        "nombre": "FISICA"
-      },
-      "nacionalidad": {
-        "id": 87,
-        "nombre": "MEXICANA"
+23:49:13.479
+  {
+    _id: '66b2e4a536b2d4a043736f5f',
+    user: '6694467053f39eebd83990e3',
+    details: [
+      {
+        _id: '66b2e4a436b2d4a043736f5c',
+        user: '6694467053f39eebd83990e3',
+        products: [
+          {
+            product: '65e8244b8811e29da1794ff0',
+            quantity: 1,
+            _id: '66b2e4a436b2d4a043736f5d',
+            details: {
+              _id: '65e8244b8811e29da1794ff0',
+              sku: 'sds',
+              name: 'Cupcakes de Vainilla',
+              description:
+                ' Delicados cupcakes de vainilla decorados con crema de vainilla y chispas de colores.',
+              unit: 'sñldk',
+              expiration: 'lkjdlakj',
+              model: 'slkdj',
+              quantity: '92',
+              price: 230,
+              category: 'PastelCelebracion',
+              maker: 'sk',
+              images: [
+
+                  'https://res.cloudinary.com/dfd0b4jhf/image/upload/v1709712459/PastelCelebracion/65e8244b8811e29da1794ff0/64de7c_87239975fecc4ca3a2eb580f3b40788f%7Emv2_d_1736_2048_s_2.webp',
+                  'https://res.cloudinary.com/dfd0b4jhf/image/upload/v1709712459/PastelCelebracion/65e8244b8811e29da1794ff0/64de7c_87239975fecc4ca3a2eb580f3b40788f%7Emv2_d_1736_2048_s_2.webp',
+
+                  'https://res.cloudinary.com/dfd0b4jhf/image/upload/v1709712483/PastelCelebracion/65e8244b8811e29da1794ff0/64de7c_95296d1126d240abbe01f2949c623ddf%7Emv2.webp'
+              ],
+              status: 'ACTIVE',
+              weight: 12,
+              ingredients: [ 'djkls' ],
+              allergens: [ 'dsm' ],
+              nutritionalInformation: 'ds,.m',
+              isFeatured: true,
+              isVegetarian: false,
+              isGlutenFree: false,
+              createdAt: '2024-03-06T08:07:39.037Z'
+            }
+          }
+        ],
+        totalAmount: 230,
+        status: 'PENDING',
+        createdAt: '2024-08-07T03:06:12.962Z'
       }
-    },
-    "tipoUsuario": {
-      "id": 1,
-      "nombre": "PÚBLICO EN GENERAL",
-      "registro": true,
-      "rol": {
-        "id": 21,
-        "nombre": "PUBLICO EN GENERAL",
-        "cve": "ROLE_PUBLICO_GRAL",
-        "icono": "fa fa-windows",
-        "orden": 21,
-        "nivel": null,
-        "activo": true
+    ],
+    totalAmount: 230,
+    stripeSessionID: null,
+    trackingNumber: '9M61RH',
+    createdAt: '2024-08-07T03:06:13.051Z'
+  }
+23:47:30.947 | +2 min
+  {
+    _id: '66b2e4a536b2d4a043736f5f',
+    user: '6694467053f39eebd83990e3',
+    details: [
+      {
+        _id: '66b2e4a436b2d4a043736f5c',
+        user: '6694467053f39eebd83990e3',
+        products: [
+          {
+            product: '65e8244b8811e29da1794ff0',
+            quantity: 1,
+            _id: '66b2e4a436b2d4a043736f5d',
+            details: {
+              _id: '65e8244b8811e29da1794ff0',
+              sku: 'sds',
+              name: 'Cupcakes de Vainilla',
+              description:
+                ' Delicados cupcakes de vainilla decorados con crema de vainilla y chispas de colores.',
+              unit: 'sñldk',
+              expiration: 'lkjdlakj',
+              model: 'slkdj',
+              quantity: '92',
+              price: 230,
+              category: 'PastelCelebracion',
+              maker: 'sk',
+              images: [
+
+                  'https://res.cloudinary.com/dfd0b4jhf/image/upload/v1709712459/PastelCelebracion/65e8244b8811e29da1794ff0/64de7c_87239975fecc4ca3a2eb580f3b40788f%7Emv2_d_1736_2048_s_2.webp',
+                  'https://res.cloudinary.com/dfd0b4jhf/image/upload/v1709712459/PastelCelebracion/65e8244b8811e29da1794ff0/64de7c_87239975fecc4ca3a2eb580f3b40788f%7Emv2_d_1736_2048_s_2.webp',
+
+                  'https://res.cloudinary.com/dfd0b4jhf/image/upload/v1709712483/PastelCelebracion/65e8244b8811e29da1794ff0/64de7c_95296d1126d240abbe01f2949c623ddf%7Emv2.webp'
+              ],
+              status: 'ACTIVE',
+              weight: 12,
+              ingredients: [ 'djkls' ],
+              allergens: [ 'dsm' ],
+              nutritionalInformation: 'ds,.m',
+              isFeatured: true,
+              isVegetarian: false,
+              isGlutenFree: false,
+              createdAt: '2024-03-06T08:07:39.037Z'
+            }
+          }
+        ],
+        totalAmount: 230,
+        status: 'PENDING',
+        createdAt: '2024-08-07T03:06:12.962Z'
       }
-    },
-    "notario": null,
-    "dependencia": null,
-    "oficina": null,
-    "area": null
-  },
-  "usuarioValPredios": null,
-  "prioridad": {
-    "id": 3,
-    "nombre": "URGENTE"
-  },
-  "notario": null,
-  "oficina": {
-    "id": 11,
-    "nombre": "PACHUCA",
-    "numOficina": "11",
-    "nuRegion": 11,
-    "activo": true,
-    "req_digitalizar": true,
-    "estado": {
-      "id": 14,
-      "nombre": "HIDALGO                ",
-      "numEstado": "14"
-    }
-  },
-  "resultado": {
-    "id": 1,
-    "nombre": "TERMINADO"
-  },
-  "status": {
-    "id": 8,
-    "nombre": "ENTREGADO AL USUARIO",
-    "statusExterno": {
-      "id": 3,
-      "nombre": "TERMINADO "
-    }
-  },
-  "statusAnterior": null,
-  "usuarioNotario": null,
-  "usuarioVentanilla": {
-    "id": 50745,
-    "userName": "ngea_pac_rpp@gmail.com",
-    "contrasenia": "$2a$10$gSAhZrxMllrbgj/kkK9UceBPpChGWJA7SYIb1Mqo.n5aNLq1/oRrC",
-    "numEmpleado": null,
-    "enabled": true,
-    "accountNonExpired": false,
-    "credentialsNonExpired": false,
-    "accountNonLocked": false,
-    "motivoBaja": null,
-    "email": "ngea_pac_rpp@gmail.com",
-    "puesto": null,
-    "p12Password": null,
-    "activo": true,
-    "publicoDF": false,
-    "telefono": null,
-    "persona": {
-      "id": 1202077,
-      "publica": null,
-      "paterno": "GEA",
-      "materno": "CHAVEZ",
-      "nombre": "NOHEMI GUADALUPE",
-      "fechaNac": null,
-      "rfc": null,
-      "curp": "GECN921120MHGXHH02",
-      "email": null,
-      "activo": true,
-      "tipoHistorico": null,
-      "hashFila": null,
-      "nuTit": null,
-      "telefonosParaPersonas": null,
-      "tipoPersona": {
-        "id": 1,
-        "nombre": "FISICA"
-      },
-      "nacionalidad": {
-        "id": 87,
-        "nombre": "MEXICANA"
+    ],
+    totalAmount: 230,
+    stripeSessionID: null,
+    trackingNumber: '9M61RH',
+    createdAt: '2024-08-07T03:06:13.051Z'
+  }
+23:42:44.661 | +6 min
+  {
+    _id: '66b3089487d535751b74f232',
+    user: '6694467053f39eebd83990e3',
+    details: [
+      {
+        _id: '66b3089487d535751b74f22f',
+        user: '6694467053f39eebd83990e3',
+        products: [
+          {
+            product: '66916c9262dd33a391dd2648',
+            quantity: 1,
+            _id: '66b3089487d535751b74f230',
+            details: {
+              _id: '66916c9262dd33a391dd2648',
+              sku: '1',
+              name: 'Straciateli y Naranja-',
+              description: 'Sabor naranja endulzado',
+              unit: '12',
+              expiration: '12/08/2024',
+              model: 'redondo',
+              quantity: '-4',
+              price: 250,
+              category: 'PastelFinos',
+              maker: 'austins',
+              images: [
+
+                  'https://res.cloudinary.com/dfd0b4jhf/image/upload/v1720806549/PastelFinos/66916c9262dd33a391dd2648/Captura%20de%20pantalla%202024-07-12%20114448.png'
+              ],
+              status: 'ACTIVE',
+              weight: 1.23,
+              ingredients: [ 'naranja', 'agua', 'arina' ],
+              allergens: [ 'ninguno', 'otro' ],
+              nutritionalInformation: 'libre de gluten',
+              isFeatured: false,
+              isVegetarian: false,
+              isGlutenFree: true,
+              createdAt: '2024-07-12T17:49:06.841Z'
+            }
+          }
+        ],
+        totalAmount: 250,
+        deliveryType: 'En tienda',
+        deliveryDate: '2024-08-29T05:39:23.000Z',
+        status: 'PENDING',
+        createdAt: '2024-08-07T05:39:32.046Z'
       }
-    },
-    "tipoUsuario": {
-      "id": 8,
-      "nombre": "RPP",
-      "registro": null,
-      "rol": null
-    },
-    "notario": null,
-    "dependencia": null,
-    "oficina": {
-      "id": 11,
-      "nombre": "PACHUCA",
-      "numOficina": "11",
-      "nuRegion": 11,
-      "activo": true,
-      "req_digitalizar": true,
-      "estado": {
-        "id": 14,
-        "nombre": "HIDALGO                ",
-        "numEstado": "14"
-      }
-    },
-    "area": null
-  },
-  "usuarioCoordinador": {
-    "id": 50320,
-    "userName": "sesquerra_pac_rpp@gmail.com",
-    "contrasenia": "$2a$10$Spf.oPMvaf7VoiSlPpsr7uYSCnnfOW8niB8wl4gy.FPQO7gIp0n/S",
-    "numEmpleado": null,
-    "enabled": true,
-    "accountNonExpired": false,
-    "credentialsNonExpired": false,
-    "accountNonLocked": false,
-    "motivoBaja": null,
-    "email": "sesquerra_pac_rpp@gmail.com",
-    "puesto": null,
-    "p12Password": null,
-    "activo": true,
-    "publicoDF": false,
-    "telefono": null,
-    "persona": {
-      "id": 831799,
-      "publica": null,
-      "paterno": "ESQUERRA",
-      "materno": "SANCHEZ",
-      "nombre": "SANDRA",
-      "fechaNac": null,
-      "rfc": null,
-      "curp": "EUSS670331MHGSNN08",
-      "email": null,
-      "activo": true,
-      "tipoHistorico": null,
-      "hashFila": null,
-      "nuTit": null,
-      "telefonosParaPersonas": null,
-      "tipoPersona": {
-        "id": 1,
-        "nombre": "FISICA"
-      },
-      "nacionalidad": {
-        "id": 87,
-        "nombre": "MEXICANA"
-      }
-    },
-    "tipoUsuario": {
-      "id": 8,
-      "nombre": "RPP",
-      "registro": null,
-      "rol": null
-    },
-    "notario": null,
-    "dependencia": null,
-    "oficina": {
-      "id": 11,
-      "nombre": "PACHUCA",
-      "numOficina": "11",
-      "nuRegion": 11,
-      "activo": true,
-      "req_digitalizar": true,
-      "estado": {
-        "id": 14,
-        "nombre": "HIDALGO                ",
-        "numEstado": "14"
-      }
-    },
-    "area": null
-  },
-  "usuarioCalificador": null,
-  "usuarioAnalista": {
-    "id": 50318,
-    "userName": "asanchez_pac_rpp@gmail.com",
-    "contrasenia": "$2a$10$4AvsN2H8cqlRSFsK/TkP4u.Syx/8P0GyRbwj9OEhG/8u9zvggbhrW",
-    "numEmpleado": null,
-    "enabled": true,
-    "accountNonExpired": false,
-    "credentialsNonExpired": false,
-    "accountNonLocked": false,
-    "motivoBaja": null,
-    "email": "asanchez_pac_rpp@gmail.com",
-    "puesto": null,
-    "p12Password": null,
-    "activo": true,
-    "publicoDF": false,
-    "telefono": null,
-    "persona": {
-      "id": 831797,
-      "publica": null,
-      "paterno": "SANCHEZ",
-      "materno": "JUAREZ",
-      "nombre": "ANA MARIA",
-      "fechaNac": null,
-      "rfc": null,
-      "curp": "SAJA720727MHGNRN03",
-      "email": null,
-      "activo": true,
-      "tipoHistorico": null,
-      "hashFila": null,
-      "nuTit": null,
-      "telefonosParaPersonas": null,
-      "tipoPersona": {
-        "id": 1,
-        "nombre": "FISICA"
-      },
-      "nacionalidad": {
-        "id": 87,
-        "nombre": "MEXICANA"
-      }
-    },
-    "tipoUsuario": {
-      "id": 8,
-      "nombre": "RPP",
-      "registro": null,
-      "rol": null
-    },
-    "notario": null,
-    "dependencia": null,
-    "oficina": {
-      "id": 11,
-      "nombre": "PACHUCA",
-      "numOficina": "11",
-      "nuRegion": 11,
-      "activo": true,
-      "req_digitalizar": true,
-      "estado": {
-        "id": 14,
-        "nombre": "HIDALGO                ",
-        "numEstado": "14"
-      }
-    },
-    "area": null
-  },
-  "usuarioCapVal": null,
-  "tipoAclaracion": null,
-  "area": {
-    "id": 3,
-    "nombre": "CERTIFICACIONES",
-    "nombreLargo": null,
-    "leyendaTipoServicio": null,
-    "tipoFolio": {
-      "id": 4,
-      "nombre": "INMOBILIARIO"
-    },
-    "visiblePresencial": true
-  },
-  "tipoBusqueda": null,
-  "fechaProgramadaEntrega": "2023-12-07T17:28:56.368+0000",
-  "tipoAnte": null,
-  "tipoEntrega": 1,
-  "pkcs7": "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",
-  "firma": "0nL8UUv8hsdMRwUXr+SowUMJxTgPGV6OeLZmjWMT8V+ySe1+v4MResTDCy/DOSklOSk9XjhX3b/UdPbmduQoWoyEMJOHS4ykM40JNdTcWzJm56MTp3wjd+EBLzvOsXpO4+vyxQG8Vj2OGmgUvUQG4lLXW/+LFe9bJNGa7RkLMeQ=",
-  "secuencia": 1541560,
-  "politica": null,
-  "digestion": null,
-  "secuenciaTS": 0,
-  "estampilla": null,
-  "tieneTermino": null,
-  "dias": null,
-  "horas": null,
-  "numCapturas": 0,
-  "numPorSistema": 0,
-  "exentoPago": true,
-  "primerRegistro": false,
-  "anteriorAbril81": null,
-  "marcarSuspensivo": false,
-  "es_digitalizado": true,
-  "indEntrega": true,
-  "id_entrada": null,
-  "subindice": 0,
-  "fechaReingreso": null,
-  "vf": null,
-  "prelacionesParaSuspensiones": null,
-  "numero_Entrada_Completo": null
-}
+    ],
+    totalAmount: 250,
+    stripeSessionID:
+      'cs_test_a1tBxUQul66fsUV79AMGobDeLgV6JzfnyuyPHp7HyxnerdIVRMFPeXrWee',
+    trackingNumber: '5JBXYR',
+    createdAt: '2024-08-07T05:39:32.132Z'
+  }

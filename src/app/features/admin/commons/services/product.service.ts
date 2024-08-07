@@ -13,7 +13,13 @@ import { HttpHeaders } from '@angular/common/http'
 export class ProductService {
   constructor(private http: HttpClient) {}
 
- 
+  getById(id: string): Observable<IproductResponse> {
+    return this.http.get<IproductResponse>(`${environment.api}/product/${id}`)
+  }
+  getMultipleByIds(ids: string[]): Observable<IproductResponse[]> {
+    const requests = ids.map(id => this.getById(id));
+    return forkJoin(requests);
+  }
   updateProduct(id: string, product: Product): Observable<Product> {
     return this.http.put<Product>(
       `${environment.api}/product/${id}`,
@@ -45,9 +51,7 @@ export class ProductService {
     )
   }
 
-  getById(id: string): Observable<IproductResponse> {
-    return this.http.get<IproductResponse>(`${environment.api}/product/${id}`)
-  }
+
   // En el servicio de Angular
   getProducts(
     page: number,

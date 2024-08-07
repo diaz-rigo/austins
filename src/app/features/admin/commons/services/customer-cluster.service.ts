@@ -7,8 +7,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class CustomerClusterService {
-  private apiUrl = 'https://proyecto-ins-modelo.onrender.com/cluster';
-  // private apiUrl = 'http://127.0.0.1:5000/cluster';
+  // private apiUrl = 'https://proyecto-ins-modelo.onrender.com/cluster';
+  private apiUrl = 'http://127.0.0.1:5000/cluster';
 
 
   // Obtener todas las órdenes

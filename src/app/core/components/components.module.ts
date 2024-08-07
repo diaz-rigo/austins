@@ -51,6 +51,7 @@ import { PortalModule } from 'src/app/features/portal/portal.module';
 import { ComprasComponent } from './compras/compras.component';
 import { PedidosComponent } from './pedidos/pedidos.component';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { ProductComponent } from 'src/app/features/portal/commons/components/product/product.component';
 @NgModule({
   declarations: [
     ChatComponent,
@@ -62,7 +63,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
     StepsComponent,
     ProgressBarComponent,
     PedidoFloatComponent,
-    PdfGenerateComponent,ProfileComponent, ComprasComponent, PedidosComponent
+    PdfGenerateComponent,ProfileComponent, ComprasComponent, PedidosComponent,
   ],
   exports: [
     TimelineModule ,

@@ -130,7 +130,7 @@ user: User | undefined;
     private stripeService: StripeService,
     private paypalService: PaypalService,
     private mercadoPagoService: MercadoPagoService,
-    private formBuilder: FormBuilder,    private sessionService: SessionService,private profileService: ProfileService,  
+    private formBuilder: FormBuilder,    private sessionService: SessionService,private profileService: ProfileService,
 
   ) {
     this.paymentForm = this.formBuilder.group({
@@ -296,8 +296,8 @@ user: User | undefined;
   }
   selectPaymentMethod(paymentMethod: string): void {
     const purchaseDataString = localStorage.getItem('purchaseData');
-    // console.log(purchaseDataString);
-
+    console.log(purchaseDataString);
+//
     if (purchaseDataString) {
       const purchaseData = JSON.parse(purchaseDataString);
 
