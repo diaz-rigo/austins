@@ -9,6 +9,7 @@ import { VentaListView } from './views/venta-list/venta-list.view';
 import { DataGraficaView } from './views/data-grafica/data-grafica.view';
 import { UserListComponent } from './views/user-list/user-list.component';
 import { ClasifiModeloView } from './views/clasifi-modelo/clasifi-modelo.view';
+import { ComentsView } from './views/coments/coments.view';
 const routes: Routes = [
   {
     path:'',redirectTo:'inicio' ,pathMatch:'full'
@@ -50,6 +51,11 @@ const routes: Routes = [
           title:"modelo|",
         path: 'clasifica',
         component: ClasifiModeloView,
+      },
+      {
+          title:"comentarios|",
+        path: 'comentarios',
+        component: ComentsView,
       },
 
     ],

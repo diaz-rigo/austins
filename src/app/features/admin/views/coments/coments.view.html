@@ -1,0 +1,46 @@
+<!-- coments.view.html -->
+<div class="admin-contact-container">
+  <h1>Mensajes Pendientes</h1>
+
+  <!-- Mostrar mensaje si no hay contactos pendientes -->
+  <p *ngIf="pendingContacts.length === 0" class="no-contacts">
+    No hay mensajes pendientes.
+  </p>
+
+  <p-card *ngFor="let contact of pendingContacts" class="contact-card">
+    <ng-template pTemplate="header">
+      <div class="contact-header">
+        <span class="pi pi-user"></span>
+        <span>{{ contact.name }}</span>
+      </div>
+    </ng-template>
+    <div class="contact-details">
+      <p><strong>Email:</strong> {{ contact.email }}</p>
+      <p><strong>Mensaje:</strong> {{ contact.message }}</p>
+      <p><strong>Fecha de Creación:</strong> {{ contact.createdAt | date:'short' }}</p>
+    </div>
+    <button pButton type="button" label="Aprobar" icon="pi pi-check" class="approve-button" (click)="approveContact(contact._id)"></button>
+  </p-card>
+
+  <h1>Mensajes Aprobados</h1>
+
+  <!-- Mostrar mensaje si no hay contactos aprobados -->
+  <p *ngIf="approvedContacts.length === 0" class="no-contacts">
+    No hay mensajes aprobados.
+  </p>
+
+  <p-card *ngFor="let contact of approvedContacts" class="contact-card approved">
+    <ng-template pTemplate="header">
+      <div class="contact-header">
+        <span class="pi pi-user"></span>
+        <span>{{ contact.name }}</span>
+      </div>
+    </ng-template>
+    <div class="contact-details">
+      <p><strong>Email:</strong> {{ contact.email }}</p>
+      <p><strong>Mensaje:</strong> {{ contact.message }}</p>
+      <p><strong>Fecha de Creación:</strong> {{ contact.createdAt | date:'short' }}</p>
+      <p><strong>Estado:</strong> Aprobado</p>
+    </div>
+  </p-card>
+</div>

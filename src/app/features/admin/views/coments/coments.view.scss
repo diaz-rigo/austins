@@ -1,0 +1,104 @@
+/* admin-contact.component.css */
+.admin-contact-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff5f8;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 26px;
+  font-weight: bold;
+  color: #e25f5f;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.contact-card {
+  margin-bottom: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: none;
+}
+
+.contact-header {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 18px;
+  background-color: #f8e1f4;
+  padding: 12px;
+  color: #d96200;
+}
+
+.contact-header .pi {
+  margin-right: 8px;
+  color: #d96200;
+}
+
+.contact-details {
+  padding: 15px;
+  background-color: #fffaf3;
+}
+
+.contact-details p {
+  margin: 0;
+  padding: 8px 0;
+  color: #555;
+}
+
+.approve-button {
+  width: 100%;
+  background-color: #ffab91;
+  border: none;
+  color: #fff;
+  float: right;
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+.approve-button:hover {
+  background-color: #ff7043;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 600px) {
+  .admin-contact-container {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+
+  .contact-header {
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  .contact-details {
+    padding: 12px;
+  }
+
+  .approve-button {
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+}
+/* coments.view.scss */
+
+/* coments.view.scss */
+.no-contacts {
+  font-size: 16px;
+  color: #999;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.approved .contact-details {
+  background-color: #e0ffe0; /* Fondo verde claro para aprobados */
+}

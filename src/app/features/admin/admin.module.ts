@@ -22,7 +22,8 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { InicioAdView } from './views/incio-ad/incio-ad.view';
-import { ClasifiModeloView } from './views/clasifi-modelo/clasifi-modelo.view'
+import { ClasifiModeloView } from './views/clasifi-modelo/clasifi-modelo.view';
+import { ComentsView } from './views/coments/coments.view'
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ClasifiModeloView } from './views/clasifi-modelo/clasifi-modelo.view'
     DataGraficaView,
     UserListComponent,
     ClasifiModeloView,
+    ComentsView,
   ],
   imports: [ToastModule,ConfirmPopupModule,ConfirmDialogModule,InputTextModule,
     PaginatorModule,

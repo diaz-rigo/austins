@@ -1,6 +1,7 @@
 <div class="contacto-container">
   <h1>Contacto</h1>
 
+  <!-- Información de Contacto -->
   <div class="contact-info p-card p-shadow-4">
     <h2>Información de Contacto</h2>
     <p><i class="pi pi-home"></i> <strong>Dirección:</strong> Avenida Profr. Toribio Reyes 5, Huejutla, Hidalgo, México</p>
@@ -9,30 +10,49 @@
     <p><i class="pi pi-envelope"></i> <strong>Email:</strong> <a href="mailto:info@austins.com.mx">infoaustins.com.mx</a></p>
   </div>
 
+  <!-- Mapa de Ubicación -->
   <div class="contact-map p-card p-shadow-4">
     <h2>Ubicación</h2>
     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3721.1951096604816!2d-98.42263722567871!3d21.144632280533887!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d726eafb0ad9db%3A0x9c429e688f6074d0!2sPasteleria%20Austin&#39;s!5e0!3m2!1ses-419!2smx!4v1721643534770!5m2!1ses-419!2smx" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
   </div>
 
+  <!-- Formulario de Contacto -->
   <div class="contact-form p-card p-shadow-4">
     <h2>Envíanos un mensaje</h2>
-    <form>
+    <form (ngSubmit)="onSubmit()" #contactForm="ngForm">
       <div class="p-field">
         <label for="name">Nombre:</label>
-        <input pInputText type="text" id="name" name="name" required>
+        <input pInputText type="text" id="name" name="name" [(ngModel)]="contact.name" required>
       </div>
 
       <div class="p-field">
         <label for="email">Email:</label>
-        <input pInputText type="email" id="email" name="email" required>
+        <input pInputText type="email" id="email" name="email" [(ngModel)]="contact.email" required>
       </div>
 
       <div class="p-field">
         <label for="message">Mensaje:</label>
-        <textarea pInputTextarea id="message" name="message" rows="5" required></textarea>
+        <textarea pInputTextarea id="message" name="message" [(ngModel)]="contact.message" rows="5" required></textarea>
       </div>
 
-      <button pButton type="submit" label="Enviar" class="p-button-danger"></button>
+      <button pButton type="submit" label="Enviar" class="p-button-danger" [disabled]="contactForm.invalid"></button>
     </form>
+
+    <p *ngIf="submitted" class="success-message">¡Gracias por tu mensaje! Lo hemos recibido.</p>
+  </div>
+
+  <!-- Comentarios Aprobados -->
+  <div *ngIf="approvedContacts.length > 0" class="approved-comments p-card p-shadow-4">
+    <h2>Comentarios</h2>
+    <div *ngFor="let comment of approvedContacts" class="comment">
+      <div class="profile-icon" [ngStyle]="{'background-color': getPastelColor(comment.name)}">
+        {{ comment.name.charAt(0).toUpperCase() }}
+      </div>
+      <div class="comment-content">
+        <p><strong>{{ comment.name }}</strong> dijo:</p>
+        <p>{{ comment.message }}</p>
+        <small>{{ comment.createdAt | date:'longDate' }}</small>
+      </div>
+    </div>
   </div>
 </div>
