@@ -10,6 +10,7 @@ import { DataGraficaView } from './views/data-grafica/data-grafica.view';
 import { UserListComponent } from './views/user-list/user-list.component';
 import { ClasifiModeloView } from './views/clasifi-modelo/clasifi-modelo.view';
 import { ComentsView } from './views/coments/coments.view';
+import { AdminFaqView } from './views/admin-faq/admin-faq.view';
 const routes: Routes = [
   {
     path:'',redirectTo:'inicio' ,pathMatch:'full'
@@ -56,6 +57,11 @@ const routes: Routes = [
           title:"comentarios|",
         path: 'comentarios',
         component: ComentsView,
+      },
+      {
+          title:"preguntas frecuentes|",
+        path: 'AdminFaqView',
+        component: AdminFaqView,
       },
 
     ],

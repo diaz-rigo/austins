@@ -1,3 +1,4 @@
+/* Estilos Generales */
 body {
   font-family: Arial, sans-serif;
   background-color: #f8f8f8;
@@ -11,23 +12,29 @@ body {
   padding: 20px;
 }
 
+/* Títulos */
 h1 {
   text-align: center;
   color: #6a1b9a;
 }
 
-.contact-info, .contact-map, .contact-form {
-  margin-bottom: 20px;
-  padding: 20px;
-}
-
-.contact-info h2, .contact-map h2, .contact-form h2 {
+.contact-info h2, .contact-map h2, .contact-form h2, .approved-comments h2 {
   color: #d32f2f;
   border-bottom: 2px solid #d32f2f;
   padding-bottom: 10px;
   margin-bottom: 20px;
 }
 
+/* Secciones de Contacto */
+.contact-info, .contact-map, .contact-form {
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Información de Contacto */
 .contact-info p, .contact-info a {
   font-size: 1.1em;
   color: #555;
@@ -38,6 +45,7 @@ h1 {
   color: #d32f2f;
 }
 
+/* Formulario de Contacto */
 .contact-form .p-field {
   margin-bottom: 20px;
 }
@@ -54,6 +62,7 @@ h1 {
   margin-top: 20px;
 }
 
+/* Comentarios Aprobados */
 .approved-comments {
   margin-top: 30px;
 }
@@ -71,6 +80,7 @@ h1 {
   padding: 10px;
   border-bottom: 1px solid #ccc;
   margin-bottom: 10px;
+  flex-wrap: wrap; /* Para permitir que se adapte mejor en pantallas pequeñas */
 }
 
 .profile-icon {
@@ -83,6 +93,11 @@ h1 {
   font-size: 1.5em;
   color: white;
   margin-right: 10px;
+  flex-shrink: 0; /* Evita que se comprima el ícono */
+}
+
+.comment-content {
+  flex: 1;
 }
 
 .comment-content p {
@@ -91,4 +106,25 @@ h1 {
 
 .comment-content small {
   color: #999;
+}
+
+/* Media Queries para Responsividad */
+@media (max-width: 768px) {
+  .contact-info, .contact-map, .contact-form, .approved-comments {
+    margin-bottom: 10px;
+    padding: 15px;
+  }
+
+  .contacto-container {
+    padding: 10px;
+  }
+
+  .comment {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .profile-icon {
+    margin-bottom: 10px;
+  }
 }

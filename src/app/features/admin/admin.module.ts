@@ -23,7 +23,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { InicioAdView } from './views/incio-ad/incio-ad.view';
 import { ClasifiModeloView } from './views/clasifi-modelo/clasifi-modelo.view';
-import { ComentsView } from './views/coments/coments.view'
+import { ComentsView } from './views/coments/coments.view';
+import { AdminFaqView } from './views/admin-faq/admin-faq.view'
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { ComentsView } from './views/coments/coments.view'
     UserListComponent,
     ClasifiModeloView,
     ComentsView,
+    AdminFaqView,
   ],
   imports: [ToastModule,ConfirmPopupModule,ConfirmDialogModule,InputTextModule,
     PaginatorModule,
