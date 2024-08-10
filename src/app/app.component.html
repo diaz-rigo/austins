@@ -1,14 +1,15 @@
 
-<app-header></app-header>
 <app-connection-status></app-connection-status>
+<app-header></app-header>
 <div class="content">
   <!-- <app-btn-float></app-btn-float> -->
   <!-- <button class="menu-btn" (click)="showDialog()">cotizar otro diseño</button> -->
   <app-pedido-float
-    (click)="showDialog()"
+  (click)="showDialog()"
   ></app-pedido-float>
   <router-outlet></router-outlet>
 </div>
+
 <!-- <div data-aos="fade-up" data-aos-duration="1500"> -->
 <app-chat
   (chatOpened)="toggleChat($event)"
