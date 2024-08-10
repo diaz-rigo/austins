@@ -6,7 +6,7 @@ import { ConnectionStatusComponent } from './connection-status/connection-status
 
 @NgModule({
   declarations: [
-    ConnectionStatusComponent
+    
   ],
   imports: [
     CommonModule

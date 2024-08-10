@@ -19,12 +19,13 @@ import {
   FacebookLoginProvider
 } from '@abacritt/angularx-social-login';
 import { PedidoFloatComponent } from './core/components/pedido-float/pedido-float.component';
+import { ConnectionStatusComponent } from './shared/components/connection-status/connection-status.component';
 
 
 // import AOS from 'aos'; //AOS - 1
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent,ConnectionStatusComponent
   ],
   imports: [
     SocialLoginModule
@@ -75,7 +76,7 @@ import { PedidoFloatComponent } from './core/components/pedido-float/pedido-floa
 export class AppModule {
 
   constructor(
-    
+
     private ngxLoader: NgxUiLoaderService,
     private PedidoFloatComponent: PedidoFloatComponent,
     ) {
@@ -84,6 +85,6 @@ export class AppModule {
   }
 
   ngOnInit(): void {
-    
+
   }
  }
