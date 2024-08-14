@@ -4,8 +4,7 @@
 
 
     <form [formGroup]="searchForm" class="form">
-      <!-- <p-inputText placeholder="Buscar" formControlName="query"></p-inputText> -->
-      <!-- <input placeholder="Buscar" formControlName="query"> -->
+
       <input pInputText placeholder="Buscar" formControlName="query"/>
       <p-button [outlined]="true" type="button" label="Crear Nuevo Producto" icon="pi pi-plus"  (click)="createprod()" severity="success" ></p-button>
     </form>
@@ -70,7 +69,7 @@
           <p>{{ product.price }}</p>
           <p>{{ product.weight }}</p>
           <p>{{ product.category }}</p>
-          <p-tag [value]="checarsta(product.status)" [severity]="getSeverity(checarsta(product.status))"  [icon]="geIcon(checarsta(product.status))"/> 
+          <p-tag [value]="checarsta(product.status)" [severity]="getSeverity(checarsta(product.status))"  [icon]="geIcon(checarsta(product.status))"/>
           <div class="actions">
             <p-button type="button" icon="pi pi-pencil" class="edit-button"   (click)="editprod(product)" [outlined]="true"></p-button>
             <p-button type="button" icon="pi pi-trash" class="delete-button" (click)="openDeleteConfirmation(product)" [outlined]="true"></p-button>
