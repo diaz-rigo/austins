@@ -10,6 +10,7 @@ import { TerminosCondicionesView } from './views/terminos-condiciones/terminos-c
 import { NotFondViews } from './views/not-fond/not-fond.views';
 import { UnknownView } from './views/unknown/unknown.view';
 import { PreguntasFreqView } from './views/preguntas-freq/preguntas-freq.view';
+import { NoConectView } from './views/no-conect/no-conect.view';
 
 const routes: Routes = [
   {
@@ -69,6 +70,11 @@ const routes: Routes = [
         title:"500",
         path: 'unknown',
         component: UnknownView ,
+      },
+      {
+        title:"500",
+        path: 'NoConectView',
+        component: NoConectView ,
       },
       {
         title:"404",

@@ -1,0 +1,108 @@
+.no-connection-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-image: url("https://static.wixstatic.com/media/64de7c_bd452d768bdf43498f0e94694ddc7040~mv2.jpg");
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  animation: backgroundAnimation 5s infinite alternate;
+  overflow: hidden;
+}
+
+.no-connection-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5); /* Fondo oscuro */
+  z-index: 1;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 90%;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+  background: rgba(0, 0, 0, 0.8); /* Aumenta la opacidad del fondo */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 2; /* Asegura que esté por encima del fondo oscuro */
+}
+
+.icon-container {
+  margin-bottom: 20px;
+  animation: glowOrange 2s infinite alternate;
+}
+
+.no-connection-icon {
+  font-size: 6rem; /* Tamaño aumentado */
+  color: #ff5733; /* Color naranja */
+}
+
+h1.bienve {
+  font-size: 2.5rem;
+  font-family: "cursive";
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(237, 228, 228, 0.5);
+}
+
+p {
+  font-size: 1.25rem;
+  margin: 20px 0;
+  color: #fff;
+}
+
+.owner {
+  text-align: center;
+  margin-top: 20px;
+}
+
+h2 {
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+.contact-owner {
+  background-color: #ff5733;
+  border: none;
+  color: #fff;
+  font-size: 1.25rem;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  margin-top: 20px;
+  animation: colorChangeAnimation 3s infinite alternate;
+}
+
+@keyframes colorChangeAnimation {
+  0%, 100% {
+    background-color: #ff5733;
+  }
+  50% {
+    background-color: #ff3d15;
+  }
+}
+
+.contact-owner:hover {
+  background-color: #ff3d15;
+  transform: scale(1.05);
+}
+
+@keyframes glowOrange {
+  0% {
+    text-shadow: 0 0 2px #ff5733, 0 0 3px #ff5733, 0 0 8px #ff5733, 0 0 10px #ff5733;
+  }
+  100% {
+    text-shadow: 0 0 10px #ff5733, 0 0 20px #ff5733, 0 0 30px #ff5733, 0 0 40px #ff5733;
+  }
+}

@@ -20,8 +20,9 @@ import { PreguntasFreqView } from './views/preguntas-freq/preguntas-freq.view';
 
 import { FieldsetModule } from 'primeng/fieldset';
 import { DefaultImgModule } from 'src/app/shared/pipes/default-img/default-img.module';
+import { NoConectView } from './views/no-conect/no-conect.view';
 @NgModule({
-  declarations: [HomeViews, NotFondViews, DetailViews, AboutViews, PortalComponent, PoliticaPrivView, AcercaDeView, PoliticaCookiesView, TerminosCondicionesView, UnknownView,PreguntasFreqView, ],
+  declarations: [HomeViews, NotFondViews, DetailViews, AboutViews, PortalComponent, PoliticaPrivView, AcercaDeView, PoliticaCookiesView, TerminosCondicionesView, UnknownView,PreguntasFreqView, NoConectView, ],
   imports: [DefaultImgModule,HttpClientModule,CommonModule, PortalRoutingModule, PortalCommonsModule,FieldsetModule],
   exports:[],
   providers: [

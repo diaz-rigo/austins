@@ -21,7 +21,7 @@ import {
 import { PedidoFloatComponent } from './core/components/pedido-float/pedido-float.component';
 import { ConnectionStatusComponent } from './shared/components/connection-status/connection-status.component';
 
-
+import { DialogModule } from 'primeng/dialog';
 // import AOS from 'aos'; //AOS - 1
 @NgModule({
   declarations: [
@@ -29,7 +29,7 @@ import { ConnectionStatusComponent } from './shared/components/connection-status
   ],
   imports: [
     SocialLoginModule
-    ,
+    ,DialogModule,
     NgxCaptchaModule,
     MatSnackBarModule,
     NgxUiLoaderModule,
