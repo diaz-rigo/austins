@@ -1,0 +1,15 @@
+<div class="camera-container">
+  <!-- Video solo se muestra si isCameraOpen es true -->
+  <video #videoElement *ngIf="isCameraOpen" width="100%" height="auto"></video>
+  <!-- <video #videoElement *ngIf="isCameraOpen" width="100%" height="auto"></video> -->
+
+
+  <!-- Botón para abrir la cámara con icono de PrimeNG -->
+  <button pButton class="btn" icon="pi pi-video" label="Abrir Cámara" (click)="startCamera()" *ngIf="!isCameraOpen"></button>
+
+  <!-- Botón para capturar foto, solo visible si la cámara está abierta -->
+  <button pButton class="btn" icon="pi pi-camera" label="Capturar Foto" (click)="capturePhoto()" *ngIf="isCameraOpen"></button>
+
+  <!-- Botón para cerrar la cámara con icono de PrimeNG -->
+  <button pButton class="btn" icon="pi pi-times" label="Cerrar Cámara" (click)="stopCamera()" *ngIf="isCameraOpen"></button>
+</div>
