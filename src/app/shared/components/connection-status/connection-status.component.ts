@@ -99,7 +99,7 @@ export class ConnectionStatusComponent {
 
   showOnlineIndicator() {
     this.isOnlineIndicatorVisible = true;
-    timer(3000).subscribe(() => {
+    timer(5000).subscribe(() => {
       this.isOnlineIndicatorVisible = false;
     });
   }
