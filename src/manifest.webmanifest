@@ -11,8 +11,7 @@
     {
       "src": "images/icons/ic_launcher.png",
       "sizes": "any",
-      "type": "image/png",
-      "purpose": "maskable any"
+      "type": "image/png"
     }
   ]
 }
