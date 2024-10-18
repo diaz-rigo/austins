@@ -98,11 +98,16 @@ export class ConnectionStatusComponent {
   navigateToOffline() {
     this.router.navigate(['/portal/NoConectView']);
   }
-
   showOnlineIndicator() {
     this.isOnlineIndicatorVisible = true;
-    timer(9000).subscribe(() => {
+
+    // Redirige a la vista principal si está de vuelta en línea
+    this.router.navigate(['/portal/home']);
+
+    // Después de 9 segundos, ocultar el indicador
+    timer(5000).subscribe(() => {
       this.isOnlineIndicatorVisible = false;
     });
   }
+
 }

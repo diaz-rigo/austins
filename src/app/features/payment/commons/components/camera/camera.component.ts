@@ -9,7 +9,8 @@ export class CameraComponent implements AfterViewInit {
   @ViewChild('videoElement', { static: false }) videoElement: ElementRef | undefined;
   stream: MediaStream | undefined;
   isCameraOpen: boolean = false;
-  isUsingFrontCamera: boolean = true;  // Para controlar si estamos usando la cámara frontal o trasera
+  isUsingFrontCamera: boolean = true;
+  capturedPhoto: string | null = null;  // Variable para almacenar la imagen capturada
 
   constructor(private elementRef: ElementRef) {}
 
@@ -20,11 +21,11 @@ export class CameraComponent implements AfterViewInit {
   }
 
   startCamera() {
-    this.stopCamera();  // Asegúrate de detener la cámara actual si ya está abierta
+    this.stopCamera();
 
     const constraints = {
       video: {
-        facingMode: this.isUsingFrontCamera ? 'user' : 'environment'  // Cambia entre frontal y trasera
+        facingMode: this.isUsingFrontCamera ? 'user' : 'environment'
       }
     };
 
@@ -42,16 +43,14 @@ export class CameraComponent implements AfterViewInit {
   }
 
   toggleCamera() {
-    // Cambiar entre la cámara frontal y trasera
     this.isUsingFrontCamera = !this.isUsingFrontCamera;
-    this.startCamera();  // Reiniciar la cámara con la nueva configuración
+    this.startCamera();
   }
 
   capturePhoto() {
     if (this.videoElement && this.videoElement.nativeElement) {
       const video = this.videoElement.nativeElement;
 
-      // Asegurarse de que el video se esté reproduciendo
       if (video.readyState === video.HAVE_ENOUGH_DATA) {
         const canvas = document.createElement('canvas');
         canvas.width = video.videoWidth;
@@ -59,14 +58,13 @@ export class CameraComponent implements AfterViewInit {
 
         const ctx = canvas.getContext('2d');
         if (ctx) {
-          // Dibujar la imagen del video en el lienzo
           ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
           // Obtener los datos de la imagen en formato base64
-          const imageData = canvas.toDataURL('image/png');
-          console.log('Foto capturada:', imageData);
+          this.capturedPhoto = canvas.toDataURL('image/png');
+          console.log('Foto capturada:', this.capturedPhoto);
 
-          // Aquí podrías hacer algo con la imagen, como enviarla al servidor
+          // Aquí puedes enviar la imagen al servidor o hacer otras acciones
         } else {
           console.error('Error al obtener el contexto del lienzo.');
         }
@@ -84,7 +82,7 @@ export class CameraComponent implements AfterViewInit {
       tracks.forEach((track: MediaStreamTrack) => track.stop());
       this.isCameraOpen = false;
       if (this.videoElement && this.videoElement.nativeElement) {
-        this.videoElement.nativeElement.srcObject = null; // Detener el stream de video
+        this.videoElement.nativeElement.srcObject = null;
       }
     } else {
       console.warn('Stream no está disponible.');
