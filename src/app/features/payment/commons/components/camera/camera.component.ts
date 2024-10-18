@@ -8,7 +8,8 @@ import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 export class CameraComponent implements AfterViewInit {
   @ViewChild('videoElement', { static: false }) videoElement: ElementRef | undefined;
   stream: MediaStream | undefined;
-  isCameraOpen: boolean = false;  // Variable para controlar la visibilidad de la cámara
+  isCameraOpen: boolean = false;
+  isUsingFrontCamera: boolean = true;  // Para controlar si estamos usando la cámara frontal o trasera
 
   constructor(private elementRef: ElementRef) {}
 
@@ -19,8 +20,16 @@ export class CameraComponent implements AfterViewInit {
   }
 
   startCamera() {
+    this.stopCamera();  // Asegúrate de detener la cámara actual si ya está abierta
+
+    const constraints = {
+      video: {
+        facingMode: this.isUsingFrontCamera ? 'user' : 'environment'  // Cambia entre frontal y trasera
+      }
+    };
+
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+      navigator.mediaDevices.getUserMedia(constraints).then(stream => {
         this.stream = stream;
         if (this.videoElement && this.videoElement.nativeElement) {
           this.videoElement.nativeElement.srcObject = stream;
@@ -28,7 +37,14 @@ export class CameraComponent implements AfterViewInit {
         }
       }).catch(error => console.error('Error al abrir la cámara:', error));
     }
+
     this.isCameraOpen = true;
+  }
+
+  toggleCamera() {
+    // Cambiar entre la cámara frontal y trasera
+    this.isUsingFrontCamera = !this.isUsingFrontCamera;
+    this.startCamera();  // Reiniciar la cámara con la nueva configuración
   }
 
   capturePhoto() {

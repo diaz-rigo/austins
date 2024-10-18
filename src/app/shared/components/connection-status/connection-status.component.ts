@@ -21,8 +21,8 @@ import { Observable, timer } from 'rxjs';
     .offline-banner {
       background: linear-gradient(90deg, #ff4d4d, #ff1a1a);
       color: white;
-      padding: 4px 12px;
-      font-size: 14px;
+      padding: 8px 16px;
+      font-size: 16px;
       text-align: center;
       position: fixed;
       top: 0;
@@ -31,20 +31,20 @@ import { Observable, timer } from 'rxjs';
       max-width: 90%;
       width: auto;
       z-index: 9999;
-      border-radius: 0 0 12px 12px;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+      border-radius: 0 0 16px 16px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      animation: pulseGlow 2s infinite alternate;
+      gap: 12px;
+      animation: pulseGlow 2s infinite alternate ease-in-out;
     }
 
     .online-indicator {
       background-color: #4caf50;
       color: white;
-      padding: 4px 12px;
-      font-size: 14px;
+      padding: 8px 16px;
+      font-size: 16px;
       text-align: center;
       position: fixed;
       top: 0;
@@ -53,23 +53,25 @@ import { Observable, timer } from 'rxjs';
       max-width: 90%;
       width: auto;
       z-index: 9999;
-      border-radius: 0 0 12px 12px;
+      border-radius: 0 0 16px 16px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
-      animation: fadeOut 3s forwards;
+      gap: 12px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+      animation: fadeInOut 5s forwards ease-in-out;
     }
 
     @keyframes pulseGlow {
-      0% { box-shadow: 0 0 8px rgba(255, 77, 77, 0.5); }
-      100% { box-shadow: 0 0 16px rgba(255, 77, 77, 1); }
+      0% { box-shadow: 0 0 10px rgba(255, 77, 77, 0.5); }
+      100% { box-shadow: 0 0 20px rgba(255, 77, 77, 1); }
     }
 
-    @keyframes fadeOut {
-      0% { opacity: 1; }
-      100% { opacity: 0; }
+    @keyframes fadeInOut {
+      0% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+      20% { opacity: 1; transform: translateX(-50%) translateY(0); }
+      80% { opacity: 1; }
+      100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
     }
   `]
 })
@@ -99,7 +101,7 @@ export class ConnectionStatusComponent {
 
   showOnlineIndicator() {
     this.isOnlineIndicatorVisible = true;
-    timer(5000).subscribe(() => {
+    timer(9000).subscribe(() => {
       this.isOnlineIndicatorVisible = false;
     });
   }
