@@ -80,3 +80,32 @@ a{
     color: #fff;
   }
 }
+// ::ng-deep .p-dialog-content {
+//   background: linear-gradient(to bottom right, #ffffff, #f0f8ff);
+//   border-radius: 10px;
+//   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+// }
+// ::ng-deep .p-dialog .p-dialog-header {
+//   background-color: #f7f9fc;
+//   font-size: 1.2rem;
+//   font-weight: bold;
+//   color: #333;
+//   border-top-left-radius: 10px;
+//   border-top-right-radius: 10px;
+// }
+/* Define la animación de escala y opacidad */
+@keyframes scaleIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Aplica la animación solo a este modal */
+.animated-modal {
+  animation: scaleIn 0.4s ease-out;
+}

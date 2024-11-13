@@ -1,0 +1,73 @@
+<!-- Encuesta de satisfacción -->
+<div class="survey-section animated-slide-in">
+  <div data-aos="fade-up-left">
+
+    <h2>Encuesta de Satisfacción</h2>
+  </div>
+
+  <p>Nos gustaría saber cómo fue tu experiencia de compra.</p>
+
+  <!-- Pregunta de facilidad de uso con emojis -->
+  <label for="easeOfUse">¿Qué tan fácil fue el proceso de compra?</label>
+  <div class="emoji-rating">
+    <label>
+      <input type="radio" name="easeOfUse" value="1" [(ngModel)]="easeOfUse">
+      <span role="img" aria-label="Muy difícil" (click)="easeOfUse = 1">😖</span>
+    </label>
+    <label>
+      <input type="radio" name="easeOfUse" value="2" [(ngModel)]="easeOfUse">
+      <span role="img" aria-label="Difícil" (click)="easeOfUse = 2">😟</span>
+    </label>
+    <label>
+      <input type="radio" name="easeOfUse" value="3" [(ngModel)]="easeOfUse">
+      <span role="img" aria-label="Neutral" (click)="easeOfUse = 3">😐</span>
+    </label>
+    <label>
+      <input type="radio" name="easeOfUse" value="4" [(ngModel)]="easeOfUse">
+      <span role="img" aria-label="Fácil" (click)="easeOfUse = 4">😊</span>
+    </label>
+    <label>
+      <input type="radio" name="easeOfUse" value="5" [(ngModel)]="easeOfUse">
+      <span role="img" aria-label="Muy fácil" (click)="easeOfUse = 5">😁</span>
+    </label>
+  </div>
+
+  <!-- Pregunta de satisfacción general con emojis -->
+  <label for="satisfaction">¿Qué tan satisfecho estás con tu experiencia?</label>
+  <div class="emoji-rating">
+    <label>
+      <input type="radio" name="satisfaction" value="1" [(ngModel)]="satisfaction">
+      <span role="img" aria-label="Muy insatisfecho" (click)="satisfaction = 1">😠</span>
+    </label>
+    <label>
+      <input type="radio" name="satisfaction" value="2" [(ngModel)]="satisfaction">
+      <span role="img" aria-label="Insatisfecho" (click)="satisfaction = 2">☹️</span>
+    </label>
+    <label>
+      <input type="radio" name="satisfaction" value="3" [(ngModel)]="satisfaction">
+      <span role="img" aria-label="Neutral" (click)="satisfaction = 3">😐</span>
+    </label>
+    <label>
+      <input type="radio" name="satisfaction" value="4" [(ngModel)]="satisfaction">
+      <span role="img" aria-label="Satisfecho" (click)="satisfaction = 4">😊</span>
+    </label>
+    <label>
+      <input type="radio" name="satisfaction" value="5" [(ngModel)]="satisfaction">
+      <span role="img" aria-label="Muy satisfecho" (click)="satisfaction = 5">😄</span>
+    </label>
+  </div>
+  <div data-aos="fade-down-right">
+    <div class="nps-section">
+      <label for="nps" class="nps-label">¿Qué tan probable es que recomiendes Austins a un amigo o familiar?</label>
+      <div class="nps-slider-container">
+        <input type="range" id="nps" min="0" max="10" class="nps-slider" [(ngModel)]="npsScore">
+        <span class="nps-score">{{ npsScore }}</span>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- Botón de envío de encuesta -->
+  <button class="send-feedback-button" (click)="submitSurvey()">Enviar Feedback</button>
+</div>

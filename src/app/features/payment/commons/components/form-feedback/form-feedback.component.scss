@@ -1,0 +1,122 @@
+.animated-slide-in {
+  animation: slideIn 0.5s ease-out forwards;
+  max-width: 600px;
+  // background: #fff9f0;
+  padding: 1.5rem;
+  border-radius: 16px;
+  // box-shadow: 0 6px 18px rgba(255, 182, 117, 0.3);
+  text-align: center;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.survey-section {
+  margin-top: 1.5rem;
+  text-align: left;
+  color: #b35900;
+}
+.emoji-rating label {
+  display: inline-block;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+.emoji-rating input[type="radio"] {
+  display: none; /* Oculta los inputs de tipo radio */
+}
+
+.emoji-rating span {
+  opacity: 0.5; /* Aparece en gris */
+  color: #808080; /* Color gris inicial */
+  transition: transform 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+}
+
+.emoji-rating span:hover {
+  transform: scale(1.1); /* Agranda el emoji al pasar el cursor */
+}
+
+.emoji-rating input[type="radio"]:checked + span {
+  transform: scale(1.2); /* Agranda el emoji al seleccionarlo */
+  color: #ff704d; /* Cambia el color al seleccionarlo */
+  opacity: 1; /* Haz el emoji completamente visible */
+}
+.nps-section {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.nps-label {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #b35900;
+  margin-bottom: 1rem;
+}
+
+.nps-slider-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.nps-slider {
+  width: 100%;
+  max-width: 300px;
+  background: linear-gradient(90deg, #ffb347 0%, #ffcc33 100%);
+  appearance: none;
+  height: 12px;
+  border-radius: 5px;
+}
+
+.nps-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background-color: #ff704d;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(255, 112, 77, 0.6);
+  transition: transform 0.2s ease;
+}
+
+.nps-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+}
+
+.nps-score {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #ff704d;
+  background-color: #fff5e6;
+  padding: 0.3rem 0.7rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.send-feedback-button {
+  background-color: #ff704d;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  margin-top: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.send-feedback-button:hover {
+  background-color: #ff5733;
+  transform: scale(1.05);
+}

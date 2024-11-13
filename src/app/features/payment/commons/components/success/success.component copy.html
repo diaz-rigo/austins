@@ -1,31 +1,3 @@
-<div class="not-fond-container">
-  <div class="cursor"></div>
-  <div class="content">
-    <div class="text-content">
-      <h1 class="bienve">¡Compra exitosa!</h1>
-      <p>
-        Tu pedido ha sido procesado con éxito y el seguimiento ha sido enviado a
-        tu correo electrónico.
-      </p>
-    </div>
-    <div class="owner">
-      <a class="contact-owner" href="#">Volver</a>
-    </div>
-  </div>
-</div>
-
-<!-- Modal de Feedback -->
-
-<p-dialog
-  header="Feedback"
-  [(visible)]="feedbackVisible"
-  [modal]="true"
-  [style]="{ width: '25rem' }"
->
-  <div data-aos="zoom-in">
-    <app-form-feedback (surveySubmitted)="submitFeedback()"></app-form-feedback>
-  </div>
-</p-dialog>
 <p-dialog
   header="🎉 ¡Gracias por tu Feedback! 🎉"
   [(visible)]="thanksModalVisible"

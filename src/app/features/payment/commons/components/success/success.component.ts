@@ -1,118 +1,93 @@
-import { Component } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-
-import { StorageService } from 'src/app/core/services/storage.service';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { OrderService } from '../../services/order.service';
+import { StorageService } from 'src/app/core/services/storage.service';
 
 @Component({
   selector: 'app-success-form',
   templateUrl: './success.component.html',
-  styleUrls: [
-    './success.component.scss',
-    './scce.scss'
-  ]
+  styleUrls: ['./success.component.scss', './scce.scss'],
 })
-export class SuccessComponent {
-
-  // constructor(private route: ActivatedRoute) {}
-  authToken!: string;
-  token: string='';
+export class SuccessComponent implements OnInit {
+  feedbackVisible = false; // Control de visibilidad del modal de feedback
+  token: string = '';
+  thanksModalVisible = false; // Control de visibilidad del modal de agradecimiento
 
   constructor(
-    public dialog: MatDialog,
     private router: Router,
     private route: ActivatedRoute,
     private storageService: StorageService,
     private orderService: OrderService
-
-
-  ) {
-    router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        // console.log('Ruta actual:', event.url);
-
-      }
-    });
-
-  }
+  ) {}
 
   ngOnInit(): void {
-    // Verificar si la URL actual es la de éxito
-    // console.log('url:', window.location.pathname);
     if (window.location.pathname === '/payment/order-success') {
       this.token = this.route.snapshot.queryParamMap.get('token') || '';
-      // console.log(this.token);
-  //
-      // Obtener la suscripción y enviarla junto con el token del pedido
+
       navigator.serviceWorker.ready.then((registration) => {
         registration.pushManager.getSubscription().then((subscription) => {
           if (subscription) {
-            const p256dhKey = subscription.getKey('p256dh');
-            const authKey = subscription.getKey('auth');
-
-            if (!p256dhKey || !authKey) {
-              console.error(
-                'Las claves p256dh o auth están ausentes en la suscripción.'
-              );
-              return;
-            }
-
-            // Convertir las claves a formato base64
             const subObj = {
               endpoint: subscription.endpoint,
               keys: {
-                p256dh: this.arrayBufferToBase64(p256dhKey),
-                auth: this.arrayBufferToBase64(authKey),
+                p256dh: this.arrayBufferToBase64(subscription.getKey('p256dh')!),
+                auth: this.arrayBufferToBase64(subscription.getKey('auth')!),
               },
             };
-            // console.log(subObj)
-            // console.log(this.token);
-            // Llamar al servicio para actualizar el estado del pedido y enviar la suscripción
             this.orderService.updateOrderStatus(this.token, subObj).subscribe(
               (response) => {
-                // console.log('Respuesta del servidor:', response);
-                              // Vaciar el carrito y los datos de compra en el localStorage
-              localStorage.removeItem('carrito');
-              localStorage.removeItem('purchaseData');
-              // console.log('Carrito y datos de compra vaciados.');
-
-
-                // Realizar cualquier otra acción necesaria después de actualizar el estado del pedido
+                localStorage.removeItem('carrito');
+                localStorage.removeItem('purchaseData');
               },
               (error) => {
                 console.error('Error al actualizar el estado del pedido:', error);
               }
             );
-          } else {
-            console.error('La suscripción no está disponible.');
           }
         });
       });
-    }
-  }
-    // Función para convertir un ArrayBuffer a base64
-    arrayBufferToBase64(buffer: ArrayBuffer): string {
-      let binary = '';
-      const bytes = new Uint8Array(buffer);
-      const len = bytes.byteLength;
-      for (let i = 0; i < len; i++) {
-        binary += String.fromCharCode(bytes[i]);
+
+      // Verificar si el usuario ya ha dado feedback y mostrar el modal tras un tiempo si no
+      const feedbackGiven = localStorage.getItem('feedbackGiven');
+      if (!feedbackGiven) {
+        setTimeout(() => {
+          this.feedbackVisible = true;
+        }, 5000); // Tiempo de espera en ms antes de mostrar el modal
       }
-      return window.btoa(binary);
-    }
-
-  loginWithToken(): void {
-    // Verificar si se ha obtenido el token de autenticación
-    if (this.authToken) {
-      // Almacenar el token en el almacenamiento local
-      this.storageService.setToken(this.authToken);
-      // Redirigir al usuario al home manteniendo el encabezado y el footer
-      this.router.navigate(['/#'], { replaceUrl: true });
-    } else {
-      console.error('No se ha obtenido el token de autenticación');
-      // Manejar la situación si el token no está presente
     }
   }
 
+  // Método para convertir ArrayBuffer a base64
+  arrayBufferToBase64(buffer: ArrayBuffer): string {
+    let binary = '';
+    const bytes = new Uint8Array(buffer);
+    for (let i = 0; i < bytes.byteLength; i++) {
+      binary += String.fromCharCode(bytes[i]);
+    }
+    return window.btoa(binary);
+  }
+
+  // Cerrar el modal sin dar feedback
+  closeFeedbackModal(): void {
+    this.feedbackVisible = false;
+    localStorage.setItem('feedbackGiven', 'true'); // Guardar que el feedback fue mostrado
+  }
+
+  // Enviar el feedback y cerrar el modal
+  submitFeedback(): void {
+    this.feedbackVisible = false;
+    this.thanksModalVisible = true; // Mostrar modal de agradecimiento
+    localStorage.setItem('feedbackGiven', 'true'); // Guardar que el feedback fue enviado
+    
+    setTimeout(() => {
+      this.thanksModalVisible = false; // Ocultar modal de agradecimiento
+      this.router.navigate(['/home']); // Redirigir al inicio
+    }, 5000); // Tiempo en milisegundos para redirigir
+  }
+
+  // handleSurveySubmit() {
+  //   // Guardar la respuesta de la encuesta en el local storage
+  //   localStorage.setItem('surveyAnswered', 'true');
+  //   this.visible = false; // Cerrar el modal
+  // }
 }

@@ -6,10 +6,11 @@ import { DividerModule } from 'primeng/divider';
 import { MaterialModule } from '../material/material.module';
 import { OrderOnSessionComponent } from './order-on-session/order-on-session.component';
 import { CameraComponent } from './camera/camera.component';
+import { FormFeedbackComponent } from './form-feedback/form-feedback.component';
 const COMPONENTES = [SuccessComponent,OrderComponent,OrderOnSessionComponent];
 
 @NgModule({
-  declarations: [...COMPONENTES, CameraComponent],
+  declarations: [...COMPONENTES, CameraComponent, FormFeedbackComponent],
   exports: [...COMPONENTES],
   imports: [CommonModule,MaterialModule],
 })

@@ -27,9 +27,10 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TooltipModule } from 'primeng/tooltip';
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { FileUploadModule } from 'primeng/fileupload';
-
+import { DialogModule } from 'primeng/dialog';
 
 const compo = [
+  DialogModule,
   FileUploadModule,
   ColorPickerModule,
   TooltipModule,
