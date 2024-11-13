@@ -102,7 +102,7 @@ export class ConnectionStatusComponent {
     this.isOnlineIndicatorVisible = true;
 
     // Redirige a la vista principal si está de vuelta en línea
-    this.router.navigate(['/portal/home']);
+    // this.router.navigate(['/portal/home']);
 
     // Después de 9 segundos, ocultar el indicador
     timer(5000).subscribe(() => {
