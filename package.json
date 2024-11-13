@@ -29,7 +29,7 @@
 		"@material/snackbar": "^14.0.0",
 		"aos": "^2.3.4",
 		"chart.js": "^4.4.2",
-		"dotenv": "^16.4.1",
+		"dotenv": "^16.4.5",
 		"file-saver": "^2.0.5",
 		"ng-zorro-antd": "^17.3.0",
 		"ngx-captcha": "^13.0.0",
