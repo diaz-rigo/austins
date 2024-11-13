@@ -1,228 +1,83 @@
-/* Estilos generales */
-.info-container {
-  margin-top: 2rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  background-image: url('https://res.cloudinary.com/dfd0b4jhf/image/upload/v1721378674/public__/dsat0x2lvruxm51vlfi6.png');
-  background-size: cover;
-  background-position: center;
-  height: auto; /* Ajusta la altura automáticamente */
+.admin-stats {
+  // margin-top: 2rem;
+  // display: flex;
+  // flex-wrap: wrap;
+  // justify-content: center;
+  // gap: 1rem;
+  // margin-bottom: 2rem;
+//   background-image: url('https://res.cloudinary.com/dfd0b4jhf/image/upload/v1721378674/public__/dsat0x2lvruxm51vlfi6.png');
+// //   background-image: url('https://res.cloudinary.com/dfd0b4jhf/image/upload/v1721378674/public__/dsat0x2lvruxm51vlfi6.png');
+//   background-size: cover;
+//   background-position: center;
+//   height: auto; /* Ajusta la altura automáticamente */
+//   width: 100%;
+
+
+
+// text-align: center;
+
+  display: grid;
+  // grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(5, 1fr);
+
+  gap: 20px;
+  margin: 0 auto;
+  // margin-right: 123px;
+  right: 21px;
   width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+  justify-content: center;
 }
 
-.statistic-card {
+.stat-card {
+  background: linear-gradient(145deg, #ffffff, #f0f0f0);
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.1), -4px -4px 12px rgba(255, 255, 255, 0.7);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 1.5rem;
-  transition: transform 0.3s;
-  min-width: 250px; /* Ancho mínimo para las tarjetas */
-  flex-shrink: 0; /* Previene que las tarjetas se reduzcan */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
 }
 
-.statistic-card:hover {
+.stat-card:hover {
   transform: translateY(-5px);
+  box-shadow: 6px 6px 16px rgba(0, 0, 0, 0.15), -6px -6px 16px rgba(255, 255, 255, 0.8);
 }
 
-.statistic-card h2 {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
+.stat-card h3 {
+  font-size: 1.1em;
   color: #333;
+  margin-top: 10px;
+  margin-bottom: 15px;
   display: flex;
   align-items: center;
+  gap: 10px;
 }
 
-.statistic-card h2 i {
-  margin-right: 0.5rem;
-  color: #007ad9; /* Icon color */
-  font-size: 2rem; /* Tamaño del icono */
+.stat-card h3 i {
+  font-size: 1.5em;
+  color: #ff5b32;
+  background-color: #fff5e0;
+  padding: 10px;
+  border-radius: 50%;
 }
 
-.statistic-card p {
-  font-size: 1.25rem;
+.stat-value {
+  font-size: 2em;
   font-weight: bold;
-  color: #666;
-}
-
-.statistic-card.sales,
-.statistic-card.completed-sales,
-.statistic-card.completed-orders {
-  border-left: 5px solid #28a745; /* Green border */
-}
-
-.statistic-card.pending-sales,
-.statistic-card.pending-orders {
-  border-left: 5px solid #ffc107; /* Yellow border */
-}
-
-.statistic-card.orders {
-  border-left: 5px solid #17a2b8; /* Blue border */
-}
-
-.statistic-card.users,
-.statistic-card.admin-users,
-.statistic-card.client-users {
-  border-left: 5px solid #007bff; /* Dark blue border */
-}
-
-.statistic-card.comments {
-  border-left: 5px solid #6c757d; /* Grey border */
-}
-
-.statistic-card.inventory {
-  border-left: 5px solid #fd7e14; /* Orange border */
-}
-
-.statistic-card.coupons {
-  border-left: 5px solid #dc3545; /* Red border */
+  color: #007ad9;
+  margin-top: 10px;
 }
 
 .charts-container {
   display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  padding: 1rem;
-}
-
-.charts-container p-chart {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.orders-container {
-  padding: 1rem;
-}
-
-.orders-container .p-table {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.orders-container th {
-  background-color: #007ad9;
-  color: #fff;
-  text-align: left;
-  padding: 0.5rem 1rem;
-}
-
-.orders-container td {
-  padding: 0.5rem 1rem;
-}
-
-.orders-container tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-.button-container {
-  display: flex;
-  justify-content: space-between;
-  padding: 1rem;
-}
-
-.button-container p-button {
-  flex: 1;
-  margin: 0 0.5rem;
-}
-
-.button-container .p-button-success {
-  background-color: #28a745;
-  border-color: #28a745;
-}
-
-.button-container .p-button-warning {
-  background-color: #ffc107;
-  border-color: #ffc107;
-}
-
-.button-container .p-button-info {
-  background-color: #17a2b8;
-  border-color: #17a2b8;
-}
-
-.button-container .p-button-help {
-  background-color: #6c757d;
-  border-color: #6c757d;
-}
-
-.button-container .p-button-danger {
-  background-color: #dc3545;
-  border-color: #dc3545;
-}
-
-/* Media Queries para pantallas de escritorio y móviles */
-@media (min-width: 769px) {
-  .info-container {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .statistic-card {
-    width: calc(33% - 2rem); /* Tres tarjetas por fila en pantallas grandes */
-  }
-
-  .charts-container {
-    padding: 1rem;
-  }
-
-  .orders-container {
-    padding: 1rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .info-container {
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 1rem;
-  }
-
-  .statistic-card {
-    width: calc(50% - 2rem); /* Dos tarjetas por fila en pantallas medianas */
-    margin-bottom: 1rem;
-  }
-
-  .charts-container {
-    padding: 0;
-  }
-
-  .orders-container {
-    padding: 0;
-  }
-
-  .button-container {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .button-container p-button {
-    margin: 0.5rem 0;
-  }
-}
-
-@media (max-width: 480px) {
-  .statistic-card h2 {
-    font-size: 1.25rem;
-  }
-
-  .statistic-card h2 i {
-    font-size: 1.5rem; /* Tamaño del icono en pantallas más pequeñas */
-  }
-
-  .statistic-card p {
-    font-size: 1rem;
-  }
-
-  .statistic-card {
-    width: calc(100% - 2rem); /* Tarjeta completa en pantallas pequeñas */
-    margin-bottom: 1rem;
-  }
+  gap: 20px;
+  margin-top: 30px;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
 }

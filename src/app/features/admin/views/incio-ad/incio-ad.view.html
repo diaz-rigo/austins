@@ -1,115 +1,84 @@
-<div class="info-container">
-  <div class="statistic-card sales p-shadow-3 p-p-3 p-mb-3">
-    <h2><i class="pi pi-chart-line p-pr-2"></i> Ventas Totales</h2>
-    <p>{{ sales | currency }}</p>
+<div class="admin-stats">
+  <div class="stat-card">
+    <h3><i class="pi pi-chart-line"></i> Ventas Totales</h3>
+    <p class="stat-value">{{ sales | currency }}</p>
   </div>
 
-  <div class="statistic-card orders p-shadow-3 p-p-3 p-mb-3">
-    <h2><i class="pi pi-shopping-cart p-pr-2"></i> Ventas registradas</h2>
-    <p>{{ ventas }}</p>
+  <div class="stat-card">
+    <h3><i class="pi pi-shopping-cart"></i> Ventas Registradas</h3>
+    <p class="stat-value">{{ ventas }}</p>
   </div>
 
-  <div class="statistic-card pending-sales p-shadow-3 p-p-3 p-mb-3">
-    <h2><i class="pi pi-clock p-pr-2"></i> Ventas Pendientes</h2>
-    <p>{{ pendingSales }}</p>
+  <div class="stat-card">
+    <h3><i class="pi pi-clock"></i> Ventas Pendientes</h3>
+    <p class="stat-value">{{ pendingSales }}</p>
   </div>
 
-  <div class="statistic-card completed-sales p-shadow-3 p-p-3 p-mb-3">
-    <h2><i class="pi pi-check p-pr-2"></i> Ventas Completadas</h2>
-    <p>{{ completedSales }}</p>
-  </div>
-  <div class="statistic-card completed-sales p-shadow-3 p-p-3 p-mb-3">
-    <h2><i class="pi pi-check p-pr-2"></i> Ventas Expirados</h2>
-    <p>{{ ventasExpirados }}</p>
+  <div class="stat-card">
+    <h3><i class="pi pi-check"></i> Ventas Completadas</h3>
+    <p class="stat-value">{{ completedSales }}</p>
   </div>
 
-
-
-  <div class="statistic-card orders p-shadow-3 p-p-3 p-mb-3">
-    <h2><i class="pi pi-shopping-cart p-pr-2"></i> Pedidos Realizados</h2>
-    <p>{{ orders }}</p>
+  <div class="stat-card">
+    <h3><i class="pi pi-times"></i> Ventas Expiradas</h3>
+    <p class="stat-value">{{ ventasExpirados }}</p>
   </div>
 
-
-  <div class="statistic-card pending-orders p-shadow-3 p-p-3 p-mb-3">
-    <h2><i class="pi pi-clock p-pr-2"></i> Pedidos Pendientes</h2>
-    <p>{{ pendingOrders }}</p>
+  <div class="stat-card">
+    <h3><i class="pi pi-shopping-cart"></i> Pedidos Realizados</h3>
+    <p class="stat-value">{{ orders }}</p>
   </div>
 
-  <div class="statistic-card completed-orders p-shadow-3 p-p-3 p-mb-3">
-    <h2><i class="pi pi-check p-pr-2"></i> Pedidos Completados</h2>
-    <p>{{ completedOrders }}</p>
+  <div class="stat-card">
+    <h3><i class="pi pi-clock"></i> Pedidos Pendientes</h3>
+    <p class="stat-value">{{ pendingOrders }}</p>
   </div>
 
-  <div class="statistic-card total-order-amount p-shadow-3 p-p-3 p-mb-3">
-    <h2><i class="pi pi-dollar p-pr-2"></i> Monto Total de Pedidos</h2>
-    <p>{{ totalOrderAmount | currency }}</p>
-  </div>
-  <div class="statistic-card users p-shadow-3 p-p-3 p-mb-3">
-    <h2><i class="pi pi-users p-pr-2"></i> Usuarios Registrados</h2>
-    <p>{{ users }}</p>
+  <div class="stat-card">
+    <h3><i class="pi pi-check"></i> Pedidos Completados</h3>
+    <p class="stat-value">{{ completedOrders }}</p>
   </div>
 
-  <div class="statistic-card admin-users p-shadow-3 p-p-3 p-mb-3">
-    <h2><i class="pi pi-user p-pr-2"></i> Usuarios ADMIN</h2>
-    <p>{{ users_ADMIN }}</p>
+  <div class="stat-card">
+    <h3><i class="pi pi-dollar"></i> Monto Total de Pedidos</h3>
+    <p class="stat-value">{{ totalOrderAmount | currency }}</p>
   </div>
 
-  <div class="statistic-card client-users p-shadow-3 p-p-3 p-mb-3">
-    <h2><i class="pi pi-user p-pr-2"></i> Usuarios CLIENT</h2>
-    <p>{{ users_CLIENT }}</p>
+  <div class="stat-card">
+    <h3><i class="pi pi-users"></i> Usuarios Registrados</h3>
+    <p class="stat-value">{{ users }}</p>
   </div>
 
-  <div class="statistic-card comments p-shadow-3 p-p-3 p-mb-3">
-    <h2><i class="pi pi-comments p-pr-2"></i> Comentarios Recibidos</h2>
-    <p>{{ comments }}</p>
+  <div class="stat-card">
+    <h3><i class="pi pi-user"></i> Usuarios ADMIN</h3>
+    <p class="stat-value">{{ users_ADMIN }}</p>
   </div>
 
-  <div class="statistic-card inventory p-shadow-3 p-p-3 p-mb-3">
-    <h2><i class="pi pi-box p-pr-2"></i> Productos en Inventario</h2>
-    <p>{{ inventory }}</p>
+  <div class="stat-card">
+    <h3><i class="pi pi-user"></i> Usuarios CLIENT</h3>
+    <p class="stat-value">{{ users_CLIENT }}</p>
   </div>
 
-  <div class="statistic-card coupons p-shadow-3 p-p-3 p-mb-3">
-    <h2><i class="pi pi-tags p-pr-2"></i> Cupones Activos</h2>
-    <p>{{ coupons }}</p>
+  <div class="stat-card">
+    <h3><i class="pi pi-comments"></i> Comentarios Recibidos</h3>
+    <p class="stat-value">{{ comments }}</p>
+  </div>
+
+  <div class="stat-card">
+    <h3><i class="pi pi-box"></i> Productos en Inventario</h3>
+    <p class="stat-value">{{ inventory }}</p>
+  </div>
+
+  <div class="stat-card">
+    <h3><i class="pi pi-tags"></i> Cupones Activos</h3>
+    <p class="stat-value">{{ coupons }}</p>
   </div>
 </div>
-
-<p-divider></p-divider>
-
+<app-feedback>
+<!-- Opcional: Agrega gráficos debajo de las estadísticas -->
+<!-- 
 <div class="charts-container">
-  <p-chart type="line" [data]="data" [options]="options" class="p-mb-3"></p-chart>
-  <p-chart type="bar" [data]="data" [options]="options" class="p-mb-3"></p-chart>
-</div>
-
-<p-divider></p-divider>
-
-<div class="orders-container">
-  <p-table [value]="ordersList" class="p-datatable-gridlines p-mb-3">
-    <ng-template pTemplate="header">
-      <tr>
-        <th>Pedido ID</th>
-        <th>Cliente</th>
-        <th>Fecha</th>
-        <th>Estado</th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-order>
-      <tr>
-        <td>{{ order.id }}</td>
-        <td>{{ order.customer }}</td>
-        <td>{{ order.date }}</td>
-        <td>{{ order.status }}</td>
-      </tr>
-    </ng-template>
-  </p-table>
-</div>
-
-<div class="button-container">
-  <p-button label="Ver Pedidos" icon="pi pi-list" styleClass="p-button-success"></p-button>
-  <p-button label="Agregar Producto" icon="pi pi-plus" styleClass="p-button-warning"></p-button>
-  <p-button label="Usuarios" icon="pi pi-users" styleClass="p-button-info"></p-button>
-  <p-button label="Comentarios" icon="pi pi-comment" styleClass="p-button-help"></p-button>
-  <p-button label="Cupones" icon="pi pi-tags" styleClass="p-button-danger"></p-button>
-</div>
+  <p-chart type="line" [data]="data" [options]="options"></p-chart>
+  <p-chart type="bar" [data]="data" [options]="options"></p-chart>
+</div> 
+-->

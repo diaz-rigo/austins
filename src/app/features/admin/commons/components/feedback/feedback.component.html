@@ -1,0 +1,25 @@
+<div *ngIf="feedbackSummary" class="feedback-container">
+  <h2>Total Feedbacks: {{ feedbackSummary.totalFeedbacks }}</h2>
+
+  <!-- Gráfico de barras -->
+  <h3>Average Scores</h3>
+  <div class="chart-container">
+    <canvas
+      baseChart
+      [datasets]="averageScoresChartData"
+      [labels]="averageScoresChartLabels"
+      [options]="averageScoresChartOptions">
+    </canvas>
+  </div>
+
+  <!-- Gráfico de radar -->
+  <h3>Individual Feedback Details</h3>
+  <div class="chart-container">
+    <canvas
+      baseChart
+      [datasets]="feedbackRadarChartData"
+      [labels]="feedbackRadarChartLabels"
+      [options]="feedbackRadarChartOptions">
+    </canvas>
+  </div>
+</div>

@@ -29,13 +29,16 @@ import { OpenDeleteConfirmationComponent } from './open-delete-confirmation/open
 import { CreateProductComponentComponent } from './create-product-component/create-product-component.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DefaultImgModule } from 'src/app/shared/pipes/default-img/default-img.module';
+import { FeedbackComponent } from './feedback/feedback.component';
+import { BaseChartDirective  } from 'ng2-charts';
 
-const COMPONENTS = [AdminHeaderComponent,AdminMenuComponent,OpenDeleteConfirmationComponent, CreateProductComponentComponent];
+const COMPONENTS = [FeedbackComponent,AdminHeaderComponent,AdminMenuComponent,OpenDeleteConfirmationComponent, CreateProductComponentComponent];
 
 @NgModule({
-  declarations: [...COMPONENTS, ],
+  declarations: [...COMPONENTS,  ],
   exports: [...COMPONENTS],
   imports: [
+    BaseChartDirective,
     CommonModule,
     MatSidenavModule,
     MatListModule,

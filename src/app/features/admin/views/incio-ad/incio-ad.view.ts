@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { ReportService } from '../../commons/services/report.service';
 import { interval, Subscription } from 'rxjs';
+import { FeedbackService } from 'src/app/features/payment/commons/services/feedback.service';
+import { FeedbackSummary } from 'src/app/shared/models/feedback.model';
 
 @Component({
   selector: 'app-incio-ad',
@@ -34,13 +36,17 @@ export class InicioAdView implements OnInit, OnDestroy {
   data: any;
   options: any;
   updateSubscription!: Subscription;
+  feedbackSummary: FeedbackSummary | null = null;
 
-  constructor(private reportService: ReportService) {}
+  constructor(
+    private feedbackService: FeedbackService,
+    private reportService: ReportService) {}
 
   ngOnInit() {
     this.loadStatistics();
     this.loadChartData();
     this.updateSubscription = interval(5000).subscribe(() => this.loadStatistics()); // Actualiza cada 5 segundos
+    // this.loadFeedback();
   }
 
   ngOnDestroy() {
@@ -49,6 +55,16 @@ export class InicioAdView implements OnInit, OnDestroy {
     }
   }
 
+  // loadFeedback() {
+  //   this.feedbackService.getFeedback().subscribe(
+  //     (data) => {
+  //       this.feedbackSummary = data;
+  //     },
+  //     (error) => {
+  //       console.error('Error al obtener el feedback:', error);
+  //     }
+  //   );
+  // }
   loadStatistics() {
     this.reportService.getEstadisticas().subscribe(data => {
       this.sales = data.totalVentas || 0;

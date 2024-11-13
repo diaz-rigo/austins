@@ -1,0 +1,87 @@
+<div class="info-container">
+  <div class="statistic-card sales p-shadow-3 p-p-3 p-mb-3">
+    <h2><i class="pi pi-chart-line p-pr-2"></i> Ventas Totales</h2>
+    <p>{{ sales | currency }}</p>
+  </div>
+
+  <div class="statistic-card orders p-shadow-3 p-p-3 p-mb-3">
+    <h2><i class="pi pi-shopping-cart p-pr-2"></i> Ventas registradas</h2>
+    <p>{{ ventas }}</p>
+  </div>
+
+  <div class="statistic-card pending-sales p-shadow-3 p-p-3 p-mb-3">
+    <h2><i class="pi pi-clock p-pr-2"></i> Ventas Pendientes</h2>
+    <p>{{ pendingSales }}</p>
+  </div>
+
+  <div class="statistic-card completed-sales p-shadow-3 p-p-3 p-mb-3">
+    <h2><i class="pi pi-check p-pr-2"></i> Ventas Completadas</h2>
+    <p>{{ completedSales }}</p>
+  </div>
+  <div class="statistic-card completed-sales p-shadow-3 p-p-3 p-mb-3">
+    <h2><i class="pi pi-check p-pr-2"></i> Ventas Expirados</h2>
+    <p>{{ ventasExpirados }}</p>
+  </div>
+
+
+
+  <div class="statistic-card orders p-shadow-3 p-p-3 p-mb-3">
+    <h2><i class="pi pi-shopping-cart p-pr-2"></i> Pedidos Realizados</h2>
+    <p>{{ orders }}</p>
+  </div>
+
+
+  <div class="statistic-card pending-orders p-shadow-3 p-p-3 p-mb-3">
+    <h2><i class="pi pi-clock p-pr-2"></i> Pedidos Pendientes</h2>
+    <p>{{ pendingOrders }}</p>
+  </div>
+
+  <div class="statistic-card completed-orders p-shadow-3 p-p-3 p-mb-3">
+    <h2><i class="pi pi-check p-pr-2"></i> Pedidos Completados</h2>
+    <p>{{ completedOrders }}</p>
+  </div>
+
+  <div class="statistic-card total-order-amount p-shadow-3 p-p-3 p-mb-3">
+    <h2><i class="pi pi-dollar p-pr-2"></i> Monto Total de Pedidos</h2>
+    <p>{{ totalOrderAmount | currency }}</p>
+  </div>
+  <div class="statistic-card users p-shadow-3 p-p-3 p-mb-3">
+    <h2><i class="pi pi-users p-pr-2"></i> Usuarios Registrados</h2>
+    <p>{{ users }}</p>
+  </div>
+
+  <div class="statistic-card admin-users p-shadow-3 p-p-3 p-mb-3">
+    <h2><i class="pi pi-user p-pr-2"></i> Usuarios ADMIN</h2>
+    <p>{{ users_ADMIN }}</p>
+  </div>
+
+  <div class="statistic-card client-users p-shadow-3 p-p-3 p-mb-3">
+    <h2><i class="pi pi-user p-pr-2"></i> Usuarios CLIENT</h2>
+    <p>{{ users_CLIENT }}</p>
+  </div>
+
+  <div class="statistic-card comments p-shadow-3 p-p-3 p-mb-3">
+    <h2><i class="pi pi-comments p-pr-2"></i> Comentarios Recibidos</h2>
+    <p>{{ comments }}</p>
+  </div>
+
+  <div class="statistic-card inventory p-shadow-3 p-p-3 p-mb-3">
+    <h2><i class="pi pi-box p-pr-2"></i> Productos en Inventario</h2>
+    <p>{{ inventory }}</p>
+  </div>
+
+  <div class="statistic-card coupons p-shadow-3 p-p-3 p-mb-3">
+    <h2><i class="pi pi-tags p-pr-2"></i> Cupones Activos</h2>
+    <p>{{ coupons }}</p>
+  </div>
+</div>
+
+<p-divider></p-divider>
+
+<div class="charts-container">
+  <p-chart type="line" [data]="data" [options]="options" class="p-mb-3"></p-chart>
+  <p-chart type="bar" [data]="data" [options]="options" class="p-mb-3"></p-chart>
+</div>
+
+<p-divider></p-divider>
+
