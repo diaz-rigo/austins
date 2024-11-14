@@ -14,10 +14,15 @@ export class FeedbackService {
 
   constructor(private http: HttpClient) {}
 
+  // updateOrderStatus(paypalOrderId: string, subscription: any) {
+  //   const url = `${environment.api}/order/updateStatusOrder`; // Ruta a la que enviar la solicitud POST
+  //   return this.http.post(url, { paypalOrderId, subscription });
+  // }
+
   // Método para enviar feedback a la API
   sendFeedback(feedbackData: any): Observable<any> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post<any>(`${this.apiUrl}/save`, feedbackData, { headers });
+    // const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post<any>(`${this.apiUrl}/save`, feedbackData);
   }
 
   // // Método para obtener feedback de la API
