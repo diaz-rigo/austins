@@ -17,6 +17,8 @@
 <!-- Modal de Feedback -->
 
 <p-dialog
+(onHide)="closeFeedbackModal()"
+
   header="Feedback"
   [(visible)]="feedbackVisible"
   [modal]="true"

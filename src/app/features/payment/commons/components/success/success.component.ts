@@ -9,9 +9,9 @@ import { StorageService } from 'src/app/core/services/storage.service';
   styleUrls: ['./success.component.scss', './scce.scss'],
 })
 export class SuccessComponent implements OnInit {
-  feedbackVisible = false; // Control de visibilidad del modal de feedback
+  feedbackVisible = false;
   token: string = '';
-  thanksModalVisible = false; // Control de visibilidad del modal de agradecimiento
+  thanksModalVisible = false;
 
   constructor(
     private router: Router,
@@ -35,9 +35,7 @@ export class SuccessComponent implements OnInit {
               },
             };
             this.orderService.updateOrderStatus(this.token, subObj).subscribe(
-              (response) => {
-           
-              },
+              (response) => {},
               (error) => {
                 console.error('Error al actualizar el estado del pedido:', error);
               }
@@ -46,17 +44,35 @@ export class SuccessComponent implements OnInit {
         });
       });
 
-      // Verificar si el usuario ya ha dado feedback y mostrar el modal tras un tiempo si no
-      const feedbackGiven = localStorage.getItem('feedbackGiven');
-      if (!feedbackGiven) {
+      // Verificar si el feedback está pendiente y mostrar el modal
+      const feedbackStatus = localStorage.getItem('feedbackGiven');
+      if (feedbackStatus !== 'true') {
         setTimeout(() => {
           this.feedbackVisible = true;
-        }, 5000); // Tiempo de espera en ms antes de mostrar el modal
+        }, 5000); // Espera 5 segundos antes de mostrar el modal
       }
     }
   }
 
-  // Método para convertir ArrayBuffer a base64
+  closeFeedbackModal(): void {
+    this.feedbackVisible = false;
+    localStorage.removeItem('carrito');
+    localStorage.removeItem('purchaseData');
+    localStorage.setItem('feedbackGiven', 'pending'); // Indicar que el feedback está pendiente
+  }
+
+  submitFeedback(): void {
+    this.feedbackVisible = false;
+    this.thanksModalVisible = true; // Mostrar modal de agradecimiento
+    localStorage.setItem('feedbackGiven', 'true'); // Guardar que el feedback fue completado
+    localStorage.removeItem('carrito');
+    localStorage.removeItem('purchaseData');
+    setTimeout(() => {
+      this.thanksModalVisible = false; // Ocultar modal de agradecimiento
+      this.router.navigate(['/home']); // Redirigir al inicio
+    }, 5000); // Espera 5 segundos antes de redirigir
+  }
+
   arrayBufferToBase64(buffer: ArrayBuffer): string {
     let binary = '';
     const bytes = new Uint8Array(buffer);
@@ -65,31 +81,4 @@ export class SuccessComponent implements OnInit {
     }
     return window.btoa(binary);
   }
-
-  // Cerrar el modal sin dar feedback
-  closeFeedbackModal(): void {
-    this.feedbackVisible = false;
-    localStorage.removeItem('carrito');
-    localStorage.removeItem('purchaseData');
-    localStorage.setItem('feedbackGiven', 'true'); // Guardar que el feedback fue mostrado
-  }
-
-  // Enviar el feedback y cerrar el modal
-  submitFeedback(): void {
-    this.feedbackVisible = false;
-    this.thanksModalVisible = true; // Mostrar modal de agradecimiento
-    localStorage.setItem('feedbackGiven', 'true'); // Guardar que el feedback fue enviado
-    localStorage.removeItem('carrito');
-    localStorage.removeItem('purchaseData');
-    setTimeout(() => {
-      this.thanksModalVisible = false; // Ocultar modal de agradecimiento
-      this.router.navigate(['/home']); // Redirigir al inicio
-    }, 5000); // Tiempo en milisegundos para redirigir
-  }
-
-  // handleSurveySubmit() {
-  //   // Guardar la respuesta de la encuesta en el local storage
-  //   localStorage.setItem('surveyAnswered', 'true');
-  //   this.visible = false; // Cerrar el modal
-  // }
 }
