@@ -36,8 +36,7 @@ export class SuccessComponent implements OnInit {
             };
             this.orderService.updateOrderStatus(this.token, subObj).subscribe(
               (response) => {
-                localStorage.removeItem('carrito');
-                localStorage.removeItem('purchaseData');
+           
               },
               (error) => {
                 console.error('Error al actualizar el estado del pedido:', error);
@@ -70,6 +69,8 @@ export class SuccessComponent implements OnInit {
   // Cerrar el modal sin dar feedback
   closeFeedbackModal(): void {
     this.feedbackVisible = false;
+    localStorage.removeItem('carrito');
+    localStorage.removeItem('purchaseData');
     localStorage.setItem('feedbackGiven', 'true'); // Guardar que el feedback fue mostrado
   }
 
@@ -78,7 +79,8 @@ export class SuccessComponent implements OnInit {
     this.feedbackVisible = false;
     this.thanksModalVisible = true; // Mostrar modal de agradecimiento
     localStorage.setItem('feedbackGiven', 'true'); // Guardar que el feedback fue enviado
-    
+    localStorage.removeItem('carrito');
+    localStorage.removeItem('purchaseData');
     setTimeout(() => {
       this.thanksModalVisible = false; // Ocultar modal de agradecimiento
       this.router.navigate(['/home']); // Redirigir al inicio
