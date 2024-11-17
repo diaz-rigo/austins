@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { injectSpeedInsights } from '@vercel/speed-insights';
+import { injectSpeedInsights } from '@vercel/speed-insights'
 
 import { StorageService } from './core/services/storage.service'
 import { Router, NavigationEnd } from '@angular/router'
@@ -58,11 +58,16 @@ export class AppComponent implements OnInit {
       .then((sub) => {
         // console.log('Token de suscripción:', sub.toJSON())
         // Enviar la suscripción al backend
-        this.pushNotificationService.sendSubscription2(sub.toJSON() ,userId).subscribe(
-          (res) => console.log('Suscripción enviada al servidor:', res),
-          (error) =>
-            console.error('Error al enviar la suscripción al servidor:', error),
-        )
+        this.pushNotificationService
+          .sendSubscription2(sub.toJSON(), userId)
+          .subscribe(
+            (res) => console.log('Suscripción enviada al servidor:', res),
+            (error) =>
+              console.error(
+                'Error al enviar la suscripción al servidor:',
+                error,
+              ),
+          )
       })
       .catch((err) =>
         console.error('Could not subscribe to notifications', err),
@@ -79,8 +84,8 @@ export class AppComponent implements OnInit {
     private dialogService: DialogService,
     private confirmationService: ConfirmationService,
     private messageService: MessageService,
-    private cartService: CartService,    private dialogRefService: DialogRefService // Inyectar el servicio
-
+    private cartService: CartService,
+    private dialogRefService: DialogRefService, // Inyectar el servicio
   ) {
     const userData = this.sessionService.getUserData()
     if (userData) {
@@ -103,9 +108,15 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     AOS.init()
     window.addEventListener('load', AOS.refresh)
-    injectSpeedInsights();
+    injectSpeedInsights()
 
-
+    // Inyectar Speed Insights con verificación
+    try {
+      injectSpeedInsights()
+      console.log('Speed Insights initialized successfully.')
+    } catch (error) {
+      console.error('Error initializing Speed Insights:', error)
+    }
   }
 
   isChatOpen = false
@@ -126,8 +137,9 @@ export class AppComponent implements OnInit {
     return this.currentRoute === '/portal/home'
   }
   showDialog() {
-    const isMobile = window.innerWidth < 480;
-    this.dialogRefService.setDialogRef( // Usar el servicio para almacenar la referencia
+    const isMobile = window.innerWidth < 480
+    this.dialogRefService.setDialogRef(
+      // Usar el servicio para almacenar la referencia
       this.dialogService.open(OrderviewView, {
         header: 'Otro diseño',
         height: isMobile ? 'auto' : 'auto',
@@ -142,7 +154,7 @@ export class AppComponent implements OnInit {
           '640px': '100vw',
         },
         data: {},
-      })
-    );
+      }),
+    )
   }
 }
