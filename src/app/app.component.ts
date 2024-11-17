@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core'
+import { injectSpeedInsights } from '@vercel/speed-insights';
+
 import { StorageService } from './core/services/storage.service'
 import { Router, NavigationEnd } from '@angular/router'
 // import AOS from 'aos';
@@ -12,6 +14,7 @@ import { OrderviewView } from './features/payment/views/orderview/orderview.view
 import { CartService } from './core/services/cart.service'
 import { DialogRefService } from './shared/services/dialog-ref.service'
 import { SessionService } from './core/services/session.service'
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -100,6 +103,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     AOS.init()
     window.addEventListener('load', AOS.refresh)
+    injectSpeedInsights();
 
 
   }

@@ -1,7 +1,7 @@
 <div *ngIf="feedbackSummary" class="feedback-container">
   <h2>Total Feedbacks: {{ feedbackSummary.totalFeedbacks }}</h2>
 
-  <!-- Gráfico de barras -->
+  <!-- Gráfico de barras de Puntuaciones Promedio -->
   <h3>Average Scores</h3>
   <div class="chart-container">
     <canvas
@@ -12,7 +12,7 @@
     </canvas>
   </div>
 
-  <!-- Gráfico de radar -->
+  <!-- Gráfico de radar de Feedbacks Individuales -->
   <h3>Individual Feedback Details</h3>
   <div class="chart-container">
     <canvas
@@ -22,4 +22,16 @@
       [options]="feedbackRadarChartOptions">
     </canvas>
   </div>
+
+  <!-- Gráfico de Distribución de NPS Scores -->
+  <h3>Distribución de NPS Scores</h3>
+  <div class="chart-container">
+    <canvas
+      baseChart
+      [datasets]="npsDistributionChartData"
+      [labels]="npsDistributionChartLabels"
+      [options]="npsDistributionChartOptions">
+    </canvas>
+  </div>
+
 </div>

@@ -27,6 +27,7 @@
 		"@fortawesome/fontawesome-svg-core": "^6.5.1",
 		"@google/generative-ai": "^0.15.0",
 		"@material/snackbar": "^14.0.0",
+		"@vercel/speed-insights": "^1.1.0",
 		"aos": "^2.3.4",
 		"chart.js": "^4.4.6",
 		"dotenv": "^16.4.1",
