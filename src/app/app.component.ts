@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { injectSpeedInsights } from '@vercel/speed-insights'
+import { inject } from '@vercel/analytics';
 
 import { StorageService } from './core/services/storage.service'
 import { Router, NavigationEnd } from '@angular/router'
@@ -116,6 +117,12 @@ export class AppComponent implements OnInit {
       console.log('Speed Insights initialized successfully.')
     } catch (error) {
       console.error('Error initializing Speed Insights:', error)
+    }
+    try {
+      inject(); // Inicializa Vercel Analytics
+      console.log('Vercel Analytics initialized successfully.');
+    } catch (error) {
+      console.error('Error initializing Vercel Analytics:', error);
     }
   }
 
