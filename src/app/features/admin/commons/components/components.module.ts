@@ -31,11 +31,12 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DefaultImgModule } from 'src/app/shared/pipes/default-img/default-img.module';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { BaseChartDirective  } from 'ng2-charts';
+import { GrafPastelComponent } from './graf-pastel/graf-pastel.component';
 
-const COMPONENTS = [FeedbackComponent,AdminHeaderComponent,AdminMenuComponent,OpenDeleteConfirmationComponent, CreateProductComponentComponent];
+const COMPONENTS = [GrafPastelComponent,FeedbackComponent,AdminHeaderComponent,AdminMenuComponent,OpenDeleteConfirmationComponent, CreateProductComponentComponent];
 
 @NgModule({
-  declarations: [...COMPONENTS,  ],
+  declarations: [...COMPONENTS,   ],
   exports: [...COMPONENTS],
   imports: [
     BaseChartDirective,

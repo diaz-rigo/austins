@@ -8,17 +8,10 @@
       baseChart
       [datasets]="averageScoresChartData"
       [labels]="averageScoresChartLabels"
-      [options]="averageScoresChartOptions">
+      [options]="averageScoresChartOptions"
+    >
     </canvas>
   </div>
-<p-calendar
-  [(ngModel)]="dateRange"
-  selectionMode="range"
-  dateFormat="yy-mm-dd"
-  placeholder="Seleccione rango de fechas">
-</p-calendar>
-<button pButton label="Filtrar" (click)="filterFeedbacksByDate()"></button>
-
 
   <!-- Gráfico de radar de Feedbacks Individuales -->
   <h3>Individual Feedback Details</h3>
@@ -27,19 +20,10 @@
       baseChart
       [datasets]="feedbackRadarChartData"
       [labels]="feedbackRadarChartLabels"
-      [options]="feedbackRadarChartOptions">
+      [options]="feedbackRadarChartOptions"
+    >
     </canvas>
   </div>
-  <!-- <div class="chart-container">
-    <canvas
-      baseChart
-      [datasets]="feedbackRadarChartData"
-      [labels]="npsDistributionChartLabels"
-      [options]="npsDistributionChartOptions"
-      [type]="'pie'">
-    </canvas>
-  </div> -->
-
 
   <!-- Gráfico de Distribución de NPS Scores -->
   <h3>Distribución de NPS Scores</h3>
@@ -48,7 +32,9 @@
       baseChart
       [datasets]="npsDistributionChartData"
       [labels]="npsDistributionChartLabels"
-      [options]="npsDistributionChartOptions">
+      [options]="npsDistributionChartOptions"
+    >
     </canvas>
   </div>
+
 </div>

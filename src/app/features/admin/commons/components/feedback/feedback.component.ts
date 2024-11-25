@@ -10,6 +10,8 @@ import { ChartDataset, ChartType } from 'chart.js';
 })
 export class FeedbackComponent implements OnInit {
   feedbackSummary: FeedbackSummary | null = null;
+  dateRange: Date[] = []; // Almacena las fechas seleccionadas
+  filteredFeedbacks: Feedback[] = []; // Feedbacks filtrados
 
   // Labels and data for the bar chart
   averageScoresChartLabels = ['Puntaje NPS', 'Facilidad de Uso', 'Satisfacción'];
@@ -21,11 +23,35 @@ export class FeedbackComponent implements OnInit {
     responsive: true,
     scales: { y: { beginAtZero: true } }
   };
+  filterFeedbacksByDate(): void {
+    if (this.dateRange.length === 2) {
+      const [startDate, endDate] = this.dateRange.map(date => {
+        const adjustedDate = new Date(date);
+        return new Date(adjustedDate.getFullYear(), adjustedDate.getMonth(), adjustedDate.getDate()).getTime();
+      });
+
+      // Filtra los feedbacks según las fechas
+      this.filteredFeedbacks = this.feedbackSummary?.feedbacks.filter(feedback => {
+        const feedbackDate = new Date(feedback.createdAt).getTime(); // Asegúrate que `createdAt` es UTC
+        return feedbackDate >= startDate && feedbackDate <= endDate;
+      }) || [];
+
+      console.log("Feedbacks filtrados:", this.filteredFeedbacks);
+
+      // Actualiza los gráficos con los datos filtrados
+      this.updateFeedbackRadarChart(this.filteredFeedbacks);
+      this.updateFeedbackPieChart(this.filteredFeedbacks);
+    } else {
+      console.warn('Debe seleccionar un rango de fechas válido.');
+    }
+  }
+  // feedbackPieChartData: any[];  // Declarar feedbackPieChartData en el componente si realmente es necesario.
 
   // Labels and data for the radar chart
   feedbackRadarChartLabels = ['Puntaje NPS', 'Facilidad de Uso', 'Satisfacción'];
   feedbackRadarChartData: ChartDataset<'radar'>[] = [];
   feedbackRadarChartType: ChartType = 'radar';
+  feedbackPieChartData: ChartDataset<'pie'>[] = [];
   feedbackRadarChartOptions = {
     responsive: true,
     scale: { ticks: { beginAtZero: true } }
@@ -40,10 +66,13 @@ export class FeedbackComponent implements OnInit {
     // averageScoresChartData: ChartDataset<'bar'>[] = [{ data: [], label: 'Puntuaciones Promedio' }];
     // feedbackRadarChartLabels = ['Puntaje NPS', 'Facilidad de Uso', 'Satisfacción'];
     // feedbackRadarChartData: ChartDataset<'radar'>[] = [];
-  
+
     // Nuevas variables para análisis adicional
+     chartColors = ['#FF6384', '#36A2EB', '#FFCE56'];
+
     npsDistributionChartLabels = ['Negativos', 'Neutros', 'Promotores'];
-    npsDistributionChartData: ChartDataset<'pie'>[] = [{ data: [], label: 'Distribución NPS' }];
+    npsDistributionChartData: ChartDataset<'pie'>[] = [{ data: [], label: 'Distribución NPS' ,    backgroundColor: this.chartColors
+    }];
     npsDistributionChartOptions = { responsive: true };
   constructor(private feedbackService: FeedbackService) {}
 
@@ -69,7 +98,8 @@ export class FeedbackComponent implements OnInit {
           data.averageScores.easeOfUse,
           data.averageScores.satisfaction,
         ],
-        label: 'Puntuaciones Promedio'
+        label: 'Puntuaciones Promedio',
+        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'] // Colores personalizados
       }
     ];
   }
@@ -79,6 +109,19 @@ export class FeedbackComponent implements OnInit {
       data: [feedback.npsScore, feedback.easeOfUse, feedback.satisfaction],
       label: `Feedback de ${feedback.datosCliente.name}`
     }));
+  }
+  updateFeedbackPieChart(feedbacks: Feedback[]): void {
+    const satisfied = feedbacks.filter(feedback => feedback.satisfaction === 1).length;   // 1 for "satisfied"
+    const neutral = feedbacks.filter(feedback => feedback.satisfaction === 0).length;     // 0 for "neutral"
+    const dissatisfied = feedbacks.filter(feedback => feedback.satisfaction === -1).length; // -1 for "dissatisfied"
+
+    this.feedbackPieChartData = [
+      {
+        data: [satisfied, neutral, dissatisfied],
+        label: 'Distribución de Satisfacción',
+        backgroundColor: this.chartColors // Using the predefined colors
+      }
+    ];
   }
 
   calculateNPSDistribution(feedbacks: Feedback[]): void {
@@ -97,7 +140,8 @@ export class FeedbackComponent implements OnInit {
     this.npsDistributionChartData = [
       {
         data: [detractors, passives, promoters],
-        label: 'Distribución NPS'
+        label: 'Distribución NPS',
+        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'] // Colores personalizados
       }
     ];
   }

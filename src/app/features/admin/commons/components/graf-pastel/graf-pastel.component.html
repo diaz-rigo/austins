@@ -1,0 +1,31 @@
+<div class="charts-container">
+  <!-- Gráfico de NPS -->
+  <div class="chart">
+    <canvas baseChart
+      [datasets]="[{ data: npsDistributionChartData }]"
+      [labels]="npsDistributionChartLabels"
+      [options]="npsDistributionChartOptions"
+      chartType="pie">
+    </canvas>
+  </div>
+
+  <!-- Gráfico de Facilidad de Uso -->
+  <div class="chart">
+    <canvas baseChart
+      [datasets]="[{ data: easeOfUseChartData }]"
+      [labels]="easeOfUseChartLabels"
+      [options]="easeOfUseChartOptions"
+      chartType="pie">
+    </canvas>
+  </div>
+
+  <!-- Gráfico de Satisfacción -->
+  <div class="chart">
+    <canvas baseChart
+      [datasets]="[{ data: satisfactionChartData }]"
+      [labels]="satisfactionChartLabels"
+      [options]="satisfactionChartOptions"
+      chartType="pie">
+    </canvas>
+  </div>
+</div>
